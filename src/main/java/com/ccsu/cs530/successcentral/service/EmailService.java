@@ -24,7 +24,6 @@ public class EmailService {
 //        props.put("mail.smtp.auth", "true");
 //        props.put("mail.smtp.port", "465");
         String from = "successcentral123@gmail.com";
-//        String password = "ehfltkah21";
         String sub = "Success Central Password Reset";
 
         //get Session
@@ -350,7 +349,7 @@ public class EmailService {
                             "                                            </tr>\n" +
 
                             "                                            <tr style=\"border-collapse:collapse;\">\n" +
-                            "                                                <td align=\"center\" style=\"padding:0;Margin:0;\"> <p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;\"><span class=\"product-description\">You can check the information about your mentee in success central website. <a href=\"http://localhost:8080/home\"><button>Go</button></a></span></p> </td>\n" +
+                            "                                                <td align=\"center\" style=\"padding:0;Margin:0;\"> <p style=\"Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#333333;\"><span class=\"product-description\">You can check the information about your mentee in success central website. <a href=\"https://success-central.appspot.com/home\"><button>Go</button></a></span></p> </td>\n" +
                             "                                            </tr>\n" +
                             "                                        </table>\n" +
                             "                                    </td>\n" +
@@ -714,7 +713,7 @@ public class EmailService {
                 "                                                <td width=\"560\" valign=\"top\" align=\"center\" style=\"padding:0;Margin:0;\">\n" +
                 "                                                    <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;\">\n" +
                 "                                                        <tr style=\"border-collapse:collapse;\">\n" +
-                "                                                            <td align=\"center\" style=\"padding:0;Margin:0;\"> <span class=\"es-button-border\" style=\"border-style:solid;border-color:#3D5CA3;background:#FFFFFF;border-width:2px;display:inline-block;border-radius:4px;width:auto;\"> <a href=\"http://localhost:8080/register?email=" + email;
+                "                                                            <td align=\"center\" style=\"padding:0;Margin:0;\"> <span class=\"es-button-border\" style=\"border-style:solid;border-color:#3D5CA3;background:#FFFFFF;border-width:2px;display:inline-block;border-radius:4px;width:auto;\"> <a href=\"https://success-central.appspot.com/register?email=" + email;
 
 
         msg += "\" class=\"es-button\" target=\"_blank\" style=\"mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;font-size:16px;color:#3D5CA3;border-style:solid;border-color:#FFFFFF;border-width:10px 15px 10px 15px;display:inline-block;background:#FFFFFF;border-radius:4px;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;\">Let's get started »</a> </span> </td>\n" +

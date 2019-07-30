@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #195697;">
-    <a class="navbar-brand" href="/home"><img src="/assests/sc_fulllogo-15x5-white.png" alt="sclogo" width="100" height="33"></a>
+    <a class="navbar-brand" href="/login"><img src="/assests/sc_fulllogo-15x5-white.png" alt="sclogo" width="100" height="33"></a>
     <button class="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -11,7 +11,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <% if (request.getSession().getAttribute("email") != null && request.getSession().getAttribute("isAdmin") == "true") { %>
+            <% if (request.getSession().getAttribute("email") != null && request.getSession().getAttribute("isAdmin").equals("true")) { %>
                 <li class="nav-item">
                     <a class="nav-link" href="mentee_list">
                         Mentee List
@@ -55,7 +55,7 @@
                 <% if (request.getSession().getAttribute("email") != null) { %>
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="foo" role="button" aria-haspopup="true" aria-expanded="false">
                         <%= request.getSession().getAttribute("email") %>
-                        <% if (request.getSession().getAttribute("isAdmin") == "true") { %>
+                        <% if (request.getSession().getAttribute("isAdmin").equals("true")) { %>
                         (Admin)
                         <% } %>
                     </a>

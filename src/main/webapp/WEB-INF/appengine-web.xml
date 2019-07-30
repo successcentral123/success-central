@@ -19,5 +19,9 @@
   <runtime>java8</runtime>
   <threadsafe>true</threadsafe>
   <sessions-enabled>true</sessions-enabled>
+
+  <env-variables>
+    <env-var name="JDBC_URL" value="jdbc:google:mysql://success-central:us-east4:success-central-db/success_central?user=root"/>
+  </env-variables>
 </appengine-web-app>
   <!-- [END config] -->

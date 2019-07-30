@@ -23,7 +23,7 @@ public class DatabaseConnection {
             HikariConfig config = new HikariConfig();
 
             // Configure which instance and what database user to connect with.
-            config.setJdbcUrl("jdbc:google:mysql://success-central:us-east4:success-central-db/success_central?user=root");
+            config.setJdbcUrl(System.getenv("JDBC_URL"));
 
             DataSource pool = new HikariDataSource(config);
             con = pool.getConnection();
@@ -46,7 +46,7 @@ public class DatabaseConnection {
         HikariConfig config = new HikariConfig();
 
         // Configure which instance and what database user to connect with.
-        config.setJdbcUrl("jdbc:google:mysql://success-central:us-east4:success-central-db/success_central?user=root");
+        config.setJdbcUrl(System.getenv("JDBC_URL"));
 
 
         // Initialize the connection pool using the configuration object.

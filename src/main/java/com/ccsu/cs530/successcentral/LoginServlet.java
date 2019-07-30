@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession newSession = req.getSession(true);
                 newSession.setAttribute("email", email);
                 newSession.setAttribute("isAdmin", crud.isAdmin(email)?"true":"false");
-                if (newSession.getAttribute("isAdmin") == "true") {
+                if (newSession.getAttribute("isAdmin").equals("true")) {
                     resp.sendRedirect("mentor_list");
                 } else {
                     resp.sendRedirect("my_mentee_list");
