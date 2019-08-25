@@ -47,7 +47,7 @@
     <% request.getSession().removeAttribute("message");} %>
 
     <% int adminCount;
-        if ((adminCount = new CrudService().getAdminCount()) == 0) { %>
+        if ((adminCount = new CrudService().getAdminCount()) < 1) { %>
     <form name="adminreg" action="setupadmin" method="post" class="form-signin">
         <img class="mb-4"
              src="/assests/ccsulogo.png"
