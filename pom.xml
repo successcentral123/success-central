@@ -34,7 +34,7 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
       <type>jar</type>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
     <!-- [END servlet] -->
 
