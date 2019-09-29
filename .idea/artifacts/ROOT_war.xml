@@ -1,13 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="success-central:war exploded">
-    <output-path>$PROJECT_DIR$/target/success-central-1</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>success-central</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
+  <artifact type="exploded-war" name="ROOT.war">
+    <output-path>$PROJECT_DIR$/out/artifacts/ROOT.war</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -15,13 +8,10 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.google.appengine:appengine-api-1.0-sdk:1.9.69" />
-          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:2.6.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.22" />
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/success-central-1/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="success-central/web/Web" />
     </root>
