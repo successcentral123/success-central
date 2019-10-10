@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="success-central:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>success-central</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="success-central-1.war">
+      <element id="artifact" artifact-name="success-central:war exploded" />
+    </root>
+  </artifact>
+</component>
