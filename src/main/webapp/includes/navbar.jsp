@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #195697;">
-    <a class="navbar-brand" href="/login"><img src="/assests/sc_fulllogo-15x5-white.png" alt="sclogo" width="100" height="33"></a>
+    <a class="navbar-brand" ><img src="/assests/sc_fulllogo-15x5-white.png" alt="sclogo" width="100" height="33"></a>
     <button class="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -38,6 +38,11 @@
                         Mentee List
                     </a>
                 </li>
+            <li class="nav-item">
+                <a class="nav-link" href="session_form">
+                    Session Form
+                </a>
+            </li>
             <% } else { %>
                 <li class="nav-item">
                     <a class="nav-link" href="mentee_form">
@@ -49,7 +54,6 @@
                         Mentor Intake
                   </a>
                </li>
-
             <% } %>
             <li class="nav-item dropdown ">
                 <% if (request.getSession().getAttribute("email") != null) { %>
