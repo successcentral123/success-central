@@ -60,7 +60,7 @@
                     <div class="form-group col-md-6">
                         <label> <span style="color:red">*</span>Session #</label>
                         <input
-                                type="text"
+                                type="number"
                                 class="form-control"
                                 placeholder="Session #"
                                 required=""
@@ -87,11 +87,42 @@
             <fieldset>
                 <legend>Assessment of Prior Session:</legend>
 
+
                 <!-- 17-Sep-2019 CDP Phase 2: Action Steps from last session  -->
-                <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+
                 <!-- Call button -->
                 <br>
                 <button id="previous" type="button" class="btn btn-primary mb-2" onClick="getPreviousActions();">Get Previous Action Steps</button>
+                <br>
+                <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+                <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-check" required="">
+                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1" disabled>
+                            <label class="form-check-label" id="" for="defaultCheck1" ></label></div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" disabled>
+                            <label class="form-check-label" for="defaultCheck2" ></label></div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" disabled>
+                            <label class="form-check-label" for="defaultCheck3" ></label></div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" disabled >
+                            <label class="form-check-label" for="defaultCheck4" ></label></div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" disabled>
+                            <label class="form-check-label" for="defaultCheck5" ></label></div>
+                        <div class="form-check">
+                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" disabled>
+                            <label class="form-check-label" for="defaultCheck6" ></label></div>
+                        <br />
+                    </div>
+                </div>
+
+
+
+
 
                 <br>
                 <br>
@@ -294,6 +325,21 @@
 
 function getPreviousActions(){
     document.getElementById('previous').style.display = 'none';
+
+    document.getElementById('defaultCheck1').disabled = false;
+    document.getElementById('defaultCheck2').disabled = false;
+    document.getElementById('defaultCheck3').disabled = false;
+    document.getElementById('defaultCheck4').disabled = false;
+    document.getElementById('defaultCheck5').disabled = false;
+    document.getElementById('defaultCheck6').disabled = false;
+    document.getElementById('defaultCheck1').innerText = 'Complete my CS 494 Online Test';
+    /* If Session # is greater than 1, then get action steps for 'session # - 1' */
+
+    var sessionNum = document.getElementById('sessionnum');
+    if (sessionNum > 1){
+        var prevSessionNum = sessionNum-1;
+        var action
+    }
 }
 </script>
 </body>
