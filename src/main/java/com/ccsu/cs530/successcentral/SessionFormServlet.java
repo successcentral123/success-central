@@ -19,136 +19,160 @@ public class SessionFormServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        // Need to set attributes for Previous Action Steps
+        // todo Need to set attributes for Previous Action Steps
+
+//        SessionForm sessform = new SessionForm();
+//        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), req.getParameter("sessionnum"));
+//        req.setAttribute("preactionsteps", sessform.getActionStepArray());
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        // validate input
-        boolean valemail = validateEmail(req.getParameter("email"));
-        String email = req.getParameter("email");
-
-        String message;
-        if (crud.getMentor(email).getEmail() != null) {
-            message = "<p class=\"text-danger\">A mentor with this email already exists in the system. This mentor must be deleted before it can be overwritten.</p>";
-            req.getSession().setAttribute("message", message);
-            resp.sendRedirect("mentor_form");
-            return;
-        }
-
-        // Instantiate mentor and then save him/her to database
-        if (valemail) {
-            Mentor mentor = new Mentor();
-            if (req.getParameter("firstname") != null) {
-                mentor.setFirstName(req.getParameter("firstname"));
-            }
-            if (req.getParameter("lastname") != null) {
-                mentor.setLastName(req.getParameter("lastname"));
-            }
-            if (req.getParameter("gender") != null) {
-                mentor.setGender(req.getParameter("gender"));
-            }
-            if (req.getParameter("ethnicity") != null) {
-                String[] ethnicityFromForm = req.getParameterValues("ethnicity");
-                String ethnicityString= "";
-                for (int i = 0; i < ethnicityFromForm.length; i++){
-                    if (ethnicityFromForm[i].equals("Other") && req.getParameter("otherethnicity") != null && !req.getParameter("otherethnicity").equals("")){
-                        ethnicityString += req.getParameter("otherethnicity") + (i < ethnicityFromForm.length - 1?",":"");
-                    } else {
-                        ethnicityString += ethnicityFromForm[i] + (i < ethnicityFromForm.length - 1?",":"");
-                    }
-                }
-
-                mentor.setRace(ethnicityString);
-            }
-            if (req.getParameter("email") != null) {
-                mentor.setEmail(req.getParameter("email"));
-            }
-            if (req.getParameter("ccsuid") != null) {
-                mentor.setStudentId(req.getParameter("ccsuid"));
-            }
-            if (req.getParameter("year") != null) {
-                mentor.setYear(req.getParameter("year"));
-            }
-            if (req.getParameter("major") != null) {
-                mentor.setMajor(req.getParameter("major"));
-            }
-            if (req.getParameter("hometown") != null) {
-                mentor.setCtHometown(req.getParameter("hometown"));
-            }
-            if (req.getParameter("otherhometown") != null) {
-                mentor.setOtherHometown(req.getParameter("otherhometown"));
-            }
-            if (req.getParameter("language") != null) {
-                String[] languageFromForm = req.getParameterValues("language");
-                String languageString= "";
-                for (int i = 0; i < languageFromForm.length; i++){
-                    if (languageFromForm[i].equals("Other") && req.getParameter("otherlanguage") != null && !req.getParameter("otherlanguage").equals("")){
-                        languageString += req.getParameter("otherlanguage") + (i < languageFromForm.length - 1?",":"");
-                    } else {
-                        languageString += languageFromForm[i] + (i < languageFromForm.length - 1?",":"");
-                    }
-                }
-
-                mentor.setLanguage(languageString);
-            } else {
-                mentor.setLanguage("English Only");
-            }
-            if (req.getParameter("generation") != null) {
-                mentor.setParentEducation(req.getParameter("generation").equals("Yes"));
-            }
-            if (req.getParameter("hobbies") != null) {
-                String[] hobbiesFromForm = req.getParameterValues("hobbies");
-                String hobbiesString = "";
-                for (int i = 0; i < hobbiesFromForm.length; i++){
-                    hobbiesString += hobbiesFromForm[i] + (i < hobbiesFromForm.length - 1?",":"");
-                }
-                mentor.setHobbies(hobbiesString);
-            }
-            if (req.getParameter("reason") != null) {
-                mentor.setAttitudeForDifference(req.getParameter("reason"));
-            }
-            if (req.getParameter("mentor_requirement") != null) {
-                mentor.setMentorReq(req.getParameter("mentor_requirement"));
-            }
-            if (req.getParameter("challenge") != null) {
-                mentor.setChallenge(req.getParameter("challenge"));
-            }
-            if (req.getParameter("success") != null) {
-                mentor.setForSuccessfulFirstYear(req.getParameter("success"));
-            }
-
-            // if the user already exists, update 'em
-            if (crud.getUser(mentor.getEmail()).getEmail() != null) {
-                crud.updateUser(mentor);
-            } else {
-                crud.createUser(mentor);
-            }
-            crud.createMentor(mentor);
-//            message = "<p class=\"text-success border border-success\">Mentor successfully created!</p>";
-            req.setAttribute("mentor", "true");
-            req.setAttribute("email", mentor.getEmail());
-            req.getRequestDispatcher("form_success").forward(req, resp);
-        } else {
-            message = "<p class=\"text-danger border border-danger\">One of the fields did not validate. Mentor was not created.</p>";
-            req.getSession().setAttribute("message", message);
-            resp.sendRedirect("mentor_form");
-        }
+        //todo these wont work until model and crud work
+//        SessionForm sessionform = new SessionForm();
+//        if (req.getParameter("firstname") != null) {
+//            sessionform.setFirstName(req.getParameter("firstname"));
+//        }
+//        if (req.getParameter("lastname") != null) {
+//            sessionform.setLastName(req.getParameter("lastname"));
+//        }
+//        if (req.getParameter("sessionnum") != null) {
+//            sessionform.setSessionNum(req.getParameter("sessionnum"));
+//        }
+//        if (req.getParameter("date") != null) {
+//            sessionform.setDate(req.getParameter("date"));
+//        }
 //
-//        req.getSession().setAttribute("message", message);
-//        resp.sendRedirect("mentor_form");
+//        //TODO the preaction steps. decided to send whole array and do the assignment in the model
+//        if (req.getParameter("preactionsteps") != null) {
+//            String[] preActionSteps = req.getParameterValues("preactionsteps");
+//            sessionform.setPreActionSteps(preActionSteps);;
+//
+//            //todo this is the assignmet, should be in the model
+//            String preAction = "";
+//            for (int i = 0; i < preActionSteps.length; i++) {
+//                preAction = preActionSteps[i];
+//                switch (i) {
+//                    case 1:
+//                        sessionform.setPreActionOne(preAction);
+//                        sessionform.setBoolActionOne(true);
+//                        break;
+//                    case 2:
+//                        sessionform.setPreActionTwo(preAction);
+//                        sessionform.setBoolActionTwo(true);
+//                        break;
+//                    case 3:
+//                        sessionform.setPreActionThree(preAction);
+//                        sessionform.setBoolActionThree(true);
+//                        break;
+//                    case 4:
+//                        sessionform.setPreActionFour(preAction);
+//                        sessionform.setBoolActionFour(true);
+//                        break;
+//                    case 5:
+//                        sessionform.setPreActionFive(preAction);
+//                        sessionform.setBoolActionFive(true);
+//                        break;
+//                    case 6:
+//                        sessionform.setPreActionSix(preAction);
+//                        sessionform.setBoolActionSix(true);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        }
+
+//        if (req.getParameter("scale") != null) {
+//            sessionform.setScale(req.getParameter("scale"));
+//        }
+//
+//        //TODO session topics may not work. decided to send whole array and do the assignment in the model
+//        if (req.getParameter("sessiontopics") != null) {
+//            String[] topicsFromForm = req.getParameterValues("sessiontopics");
+//            sessionform.setTopicsForm(topicsFromForm);
+
+//            //todo this is the assignment that should be in the model
+//            String topicsString = "";
+//            for (int i = 0; i < topicsFromForm.length; i++){
+//                topicsString = topicsFromForm[i];
+                    //todo take this out and put it in model
+//                switch (topicsString) {
+//                    case "Campus Involvement":
+//                        seesionform.setCampusInvolement(true);
+//                        break;
+//                    case "Meaningful Relationships":
+//                        sessionform.setMeaningfulRelationships(true);
+//                        break;
+//                    case "Financial Management":
+//                        sessionform.setFinancialManagement(true);
+//                        break;
+//                    case "Outside Responsibilities":
+//                        sessionform.setOutsideResponsibilities(true);
+//                        break;
+//                    case "Study Skills/Time Management":
+//                        sessionform.setStudyTimeManagement(true);
+//                        break;
+//                    case "Academic Engagement":
+//                        sessionform.setAcademicEngagement(true);
+//                        break;
+//                    case "Health & Wellness":
+//                        sessionform.setHealthWellness(true);
+//                        break;
+//                    case "Other":
+//                        sessionform.setOther(true);
+//                        sessionform.setOtherText(req.getParameter("othersesstopic"));
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        }
+//
+//        if (req.getParameter("issues_concerns") != null) {
+//            sessionform.setIssuesConcerns(req.getParameter("issues_concerns"));
+//        }
+//        if (req.getParameter("notes_comments") != null) {
+//            sessionform.setNotesComments(req.getParameter("notes_comments"));
+//        }
+//        if (req.getParameter("firstactionstep") != null) {
+//            sessionform.setFirstActionStep(req.getParameter("firstactionstep"));
+//        }
+//        if (req.getParameter("secondactionstep") != null) {
+//            sessionform.setSecondActionStep(req.getParameter("secondactionstep"));
+//        }
+//        if (req.getParameter("thirdactionstep") != null) {
+//            sessionform.setThirdActionStep(req.getParameter("thirdactionstep"));
+//        }
+//        if (req.getParameter("fourthactionstep") != null) {
+//            sessionform.setFourthActionStep(req.getParameter("fourthactionstep"));
+//        }
+//        if (req.getParameter("fithactionstep") != null) {
+//            sessionform.setFithActionStep(req.getParameter("fithactionstep"));
+//        }
+//        if (req.getParameter("sixthtactionstep") != null) {
+//            sessionform.setSixthActionStep(req.getParameter("sixthtactionstep"));
+//
+//
+//
+//
+//
+//        // if the user already exists, update 'em
+////        if (crud.getSessionForm(mentor.getEmail()).getEmail() != null) {
+////            crud.updateUser(mentor);
+////        } else {
+////            crud.createUser(mentor);
+////        }
+//        crud.createSessionForm(sessionform);
+////            message = "<p class=\"text-success border border-success\">Mentor successfully created!</p>";
+////        req.setAttribute("mentor", "true");
+////        req.setAttribute("email", mentor.getEmail());
+        req.getRequestDispatcher("form_success").forward(req, resp);
+
     }
 
 
-    private boolean validateEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@(my.)?(ccsu.edu)$";
-        Pattern pat = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pat.matcher(email);
-        if (email == null)
-            return false;
-        return matcher.matches();
-    }
 
 }
