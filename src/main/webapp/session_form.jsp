@@ -82,33 +82,19 @@
                 <br />
             </fieldset>
 
+
+
             <fieldset>
                 <legend>Assessment of Prior Session:</legend>
 
                 <!-- 17-Sep-2019 CDP Phase 2: Action Steps from last session  -->
                 <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+                <!-- Call button -->
                 <br>
-                    <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
-                    <div class="form-check" required="">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1">
-                        <label class="form-check-label" for="defaultCheck1"> Previous Action Item #1 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2">
-                        <label class="form-check-label" for="defaultCheck2"> Previous Action Item #2 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3">
-                        <label class="form-check-label" for="defaultCheck3"> Previous Action Item #3 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4">
-                        <label class="form-check-label" for="defaultCheck4"> Previous Action Item #4 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5">
-                        <label class="form-check-label" for="defaultCheck5"> Previous Action Item #5 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6">
-                        <label class="form-check-label" for="defaultCheck6"> Previous Action Item #6 </label></div>
-                <br />
+                <button id="previous" type="button" class="btn btn-primary mb-2" onClick="getPreviousActions();">Get Previous Action Steps</button>
 
+                <br>
+                <br>
                 <!-- 17-Sep-2019 CDP Phase 2: Change Gender to the 1-5 Scale -->
                 <label><span style="color:red">*</span> On a scale of 1 to 5, how happy is the Mentee with the outcome of the action steps from last session? </label>
                 <br>
@@ -304,6 +290,10 @@
         document.getElementById('SessTopicOther').value = '';
         document.getElementById('SessTopicOther').disabled = true;
     }
+}
+
+function getPreviousActions(){
+    document.getElementById('previous').style.display = 'none';
 }
 </script>
 </body>
