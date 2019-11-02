@@ -78,31 +78,31 @@ public class DatabaseSetupPage extends HttpServlet {
             "ENGINE = InnoDB;";
 
     String sessionformTableCreationQuery = "CREATE TABLE 'success_central'.'session_form' (" +
-            " 'first_name' varchar(50) NULL NOT NULL ," +
-            " 'last_name' varchar(50) NULL NOT NULL ," +
+            " 'first_name' varchar(50) NOT NULL ," +
+            " 'last_name' varchar(50) NOT NULL ," +
             " 'session_number' int NOT NULL ," +
             " 'day' date NOT NULL ," +
             " 'pre_action_one' text NOT NULL ," +
             " 'bool_action_one' boolean NOT NULL DEFAULT 0 ," +
             " 'pre_action_two' text NULL DEFAULT NULL ," +
-            " 'bool_action_two' boolean NULL DEFAULT 0 ," +
+            " 'bool_action_two' boolean NOT NULL DEFAULT 0 ," +
             " 'pre_action_three' text NULL DEFAULT NULL ," +
-            " 'bool_action_three' boolean NULL DEFAULT 0 ," +
+            " 'bool_action_three' boolean NOT NULL DEFAULT 0 ," +
             " 'pre_action_four' text NULL DEFAULT NULL ," +
-            " 'bool_action_four' boolean NULL DEFAULT 0 ," +
+            " 'bool_action_four' boolean NOT NULL DEFAULT 0 ," +
             " 'pre_action_five' text NULL DEFAULT NULL ," +
-            " 'bool_action_five' boolean NULL DEFAULT 0 ," +
+            " 'bool_action_five' boolean NOT NULL DEFAULT 0 ," +
             " 'pre_action_six' text NULL DEFAULT NULL ," +
-            " 'bool_action_six' boolean NULL DEFAULT 0 ," +
-            " 'scale' int NULL DEFAULT NULL ," +
-            " 'campus_involvement' boolean NULL DEFAULT 0 ," +
-            " 'meaningful_relationships' boolean NULL DEFAULT 0 ," +
-            " 'financial_management' boolean NULL DEFAULT 0 ," +
-            " 'outside_responsibilities' boolean NULL DEFAULT 0 ," +
-            " 'study_time_management' boolean NULL DEFAULT 0 ," +
-            " 'academic_engagement' boolean NULL DEFAULT 0 ," +
-            " 'health_wellness' boolean NULL DEFAULT 0 ," +
-            " 'other_bool' boolean NULL DEFAULT 0 ," +
+            " 'bool_action_six' boolean NOT NULL DEFAULT 0 ," +
+            " 'scale' int NOT NULL," +
+            " 'campus_involvement' boolean NOT NULL DEFAULT 0 ," +
+            " 'meaningful_relationships' boolean NOT NULL DEFAULT 0 ," +
+            " 'financial_management' boolean NOT NULL DEFAULT 0 ," +
+            " 'outside_responsibilities' boolean NOT NULL DEFAULT 0 ," +
+            " 'study_time_management' boolean NOT NULL DEFAULT 0 ," +
+            " 'academic_engagement' boolean NOT NULL DEFAULT 0 ," +
+            " 'health_wellness' boolean NOT NULL DEFAULT 0 ," +
+            " 'other_bool' boolean NOT NULL DEFAULT 0 ," +
             " 'other_text' varchar(100) NULL DEFAULT NULL ," +
             " 'issues_concerns' text NULL DEFAULT NULL ," +
             " 'notes_comments' text NULL DEFAULT NULL ," +
