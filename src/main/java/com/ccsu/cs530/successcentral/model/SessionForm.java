@@ -40,31 +40,34 @@ public class SessionForm {
     private String action_step_five;
     private String action_step_six;
 
+    private String[] PreActions = new String [6];
+    private String[] SessionTopics = new String [10];
+
 
     public SessionForm(){}
 
-    public String getFirst_name(){
+    public String getFirstName(){
         return first_name;
     }
 
-    public void setFirst_name(String name){
+    public void setFirstName(String name){
         this.first_name = name;
     }
 
-    public String getSecond_name(){
+    public String getLastName(){
         return second_name;
     }
 
-    public void setSecond_name(String name){
+    public void setLastName(String name){
         this.second_name = name;
 
     }
 
-    public int getSession_number() {
+    public int getSessionNum() {
         return session_number;
     }
 
-    public void setSession_number(int session_number) {
+    public void setSessionNum(int session_number) {
         this.session_number = session_number;
     }
 
@@ -76,11 +79,23 @@ public class SessionForm {
         this.date = date;
     }
 
-    public String getPre_action_one() {
+    public void setPreActionSteps(String actions[]){
+
+        for(int i = 0; i < actions.length; i++){
+            PreActions[i] = actions[i];
+        }
+    }
+
+    public String[] getPreActionsSteps(){
+        return PreActions;
+
+    }
+
+    public String getPreActionOne() {
         return pre_action_one;
     }
 
-    public void setPre_action_one(String pre_action_one) {
+    public void setPreActionOne(String pre_action_one) {
         this.pre_action_one = pre_action_one;
     }
 
@@ -88,15 +103,15 @@ public class SessionForm {
         return bool_action_one;
     }
 
-    public void setBool_action_one(boolean bool_action_one) {
+    public void setBoolActionOne(boolean bool_action_one) {
         this.bool_action_one = bool_action_one;
     }
 
-    public String getPre_action_two() {
+    public String getPreActionTwo() {
         return pre_action_two;
     }
 
-    public void setPre_action_two(String pre_action_two) {
+    public void setPreActionTwo(String pre_action_two) {
         this.pre_action_two = pre_action_two;
     }
 
@@ -104,15 +119,15 @@ public class SessionForm {
         return bool_action_two;
     }
 
-    public void setBool_action_two(boolean bool_action_two) {
+    public void setBoolActionTwo(boolean bool_action_two) {
         this.bool_action_two = bool_action_two;
     }
 
-    public String getPre_action_three() {
+    public String getPreActionThree() {
         return pre_action_three;
     }
 
-    public void setPre_action_three(String pre_action_three) {
+    public void setPreActionThree(String pre_action_three) {
         this.pre_action_three = pre_action_three;
     }
 
@@ -120,15 +135,15 @@ public class SessionForm {
         return bool_action_three;
     }
 
-    public void setBool_action_three(boolean bool_action_three) {
+    public void setBoolActionThree(boolean bool_action_three) {
         this.bool_action_three = bool_action_three;
     }
 
-    public String getPre_action_four() {
+    public String getPreActionFour() {
         return pre_action_four;
     }
 
-    public void setPre_action_four(String pre_action_four) {
+    public void setPreActionFour(String pre_action_four) {
         this.pre_action_four = pre_action_four;
     }
 
@@ -136,15 +151,15 @@ public class SessionForm {
         return bool_action_four;
     }
 
-    public void setBool_action_four(boolean bool_action_four) {
+    public void setBoolActionFour(boolean bool_action_four) {
         this.bool_action_four = bool_action_four;
     }
 
-    public String getPre_action_five() {
+    public String getPreActionFive() {
         return pre_action_five;
     }
 
-    public void setPre_action_five(String pre_action_five) {
+    public void setPreActionFive(String pre_action_five) {
         this.pre_action_five = pre_action_five;
     }
 
@@ -152,15 +167,15 @@ public class SessionForm {
         return bool_action_five;
     }
 
-    public void setBool_action_five(boolean bool_action_five) {
+    public void setBoolActionFive(boolean bool_action_five) {
         this.bool_action_five = bool_action_five;
     }
 
-    public String getPre_action_six() {
+    public String getPreActionSix() {
         return pre_action_six;
     }
 
-    public void setPre_action_six(String pre_action_six) {
+    public void setPreActionSix(String pre_action_six) {
         this.pre_action_six = pre_action_six;
     }
 
@@ -168,7 +183,7 @@ public class SessionForm {
         return bool_action_six;
     }
 
-    public void setBool_action_six(boolean bool_action_six) {
+    public void setBoolActionSix(boolean bool_action_six) {
         this.bool_action_six = bool_action_six;
     }
 
@@ -180,11 +195,21 @@ public class SessionForm {
         this.scale = scale;
     }
 
+    public void setTopicsForm(String Topic[]){
+        for(int i = 0; i < Topic.length; i++){
+            SessionTopics[i] = Topic[i];
+        }
+    }
+    public String [] getTopicsForm(){
+        return SessionTopics;
+
+    }
+
     public boolean isCampus_involvement() {
         return campus_involvement;
     }
 
-    public void setCampus_involvement(boolean campus_involvement) {
+    public void setCampusInvolement(boolean campus_involvement) {
         this.campus_involvement = campus_involvement;
     }
 
@@ -192,7 +217,7 @@ public class SessionForm {
         return meaningful_relationships;
     }
 
-    public void setMeaningful_relationships(boolean meaningful_relationships) {
+    public void setMeaningfulRelationships(boolean meaningful_relationships) {
         this.meaningful_relationships = meaningful_relationships;
     }
 
@@ -200,14 +225,15 @@ public class SessionForm {
         return financial_management;
     }
 
-    public void setFinancial_management(boolean financial_management) {
+    public void setFinancialManagement(boolean financialManagement) {
+        this.financial_management = financialManagement;
     }
 
     public boolean isOutside_responsibilities() {
         return outside_responsibilities;
     }
 
-    public void setOutside_responsibilities(boolean outside_responsibilities) {
+    public void setOutsideResponsibilities(boolean outside_responsibilities) {
         this.outside_responsibilities = outside_responsibilities;
     }
 
@@ -215,7 +241,7 @@ public class SessionForm {
         return study_time_management;
     }
 
-    public void setStudy_time_management(boolean study_time_management) {
+    public void setStudyTimeManagement(boolean study_time_management) {
         this.study_time_management = study_time_management;
     }
 
@@ -223,7 +249,7 @@ public class SessionForm {
         return academic_engagement;
     }
 
-    public void setAcademic_engagement(boolean academic_engagement) {
+    public void setAcademicEngagement(boolean academic_engagement) {
         this.academic_engagement = academic_engagement;
     }
 
@@ -231,7 +257,7 @@ public class SessionForm {
         return health_wellness;
     }
 
-    public void setHealth_wellness(boolean health_wellness) {
+    public void setHealthWellness(boolean health_wellness) {
         this.health_wellness = health_wellness;
     }
 
@@ -239,7 +265,7 @@ public class SessionForm {
         return other;
     }
 
-    public void setOther(String other) {
+    public void setOtherText(String other) {
         this.other = other;
     }
 
@@ -247,71 +273,71 @@ public class SessionForm {
         return bool_other;
     }
 
-    public void setBool_other(boolean bool_other) {
+    public void setOther(boolean bool_other) {
         this.bool_other = bool_other;
     }
 
-    public String getIssues_concerns() {
+    public String getIssuesConcerns() {
         return issues_concerns;
     }
 
-    public void setIssues_concerns(String issues_concerns) {
+    public void setIssuesConcerns(String issues_concerns) {
         this.issues_concerns = issues_concerns;
     }
 
-    public String getNotes_comments() {
+    public String getNotesComments() {
         return notes_comments;
     }
 
-    public void setNotes_comments(String notes_comments) {
+    public void setNotesComments(String notes_comments) {
         this.notes_comments = notes_comments;
     }
 
-    public String getAction_step_one() {
+    public String getFirstActionStep() {
         return action_step_one;
     }
 
-    public void setAction_step_one(String action_step_one) {
+    public void setFirstActionStep(String action_step_one) {
         this.action_step_one = action_step_one;
     }
 
-    public String getAction_step_two() {
+    public String getSecondActionStep() {
         return action_step_two;
     }
 
-    public void setAction_step_two(String action_step_two) {
+    public void setSecondActionStep(String action_step_two) {
         this.action_step_two = action_step_two;
     }
 
-    public String getAction_step_three() {
+    public String getThirdActionStep() {
         return action_step_three;
     }
 
-    public void setAction_step_three(String action_step_three) {
+    public void setThirdActionStep(String action_step_three) {
         this.action_step_three = action_step_three;
     }
 
-    public String getAction_step_four() {
+    public String getFourthActionStep() {
         return action_step_four;
     }
 
-    public void setAction_step_four(String action_step_four) {
+    public void setFourthActionStep(String action_step_four) {
         this.action_step_four = action_step_four;
     }
 
-    public String getAction_step_five() {
+    public String getFifthActionStep() {
         return action_step_five;
     }
 
-    public void setAction_step_five(String action_step_five) {
+    public void setFifthActionStep(String action_step_five) {
         this.action_step_five = action_step_five;
     }
 
-    public String getAction_step_six() {
+    public String getSixthActionStep() {
         return action_step_six;
     }
 
-    public void setAction_step_six(String action_step_six) {
+    public void setSixthActionStep(String action_step_six) {
         this.action_step_six = action_step_six;
     }
 }
