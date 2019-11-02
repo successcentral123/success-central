@@ -111,7 +111,7 @@ public class DatabaseSetupPage extends HttpServlet {
             " 'action_three' text NULL DEFAULT NULL ," +
             " 'action_four' text NULL DEFAULT NULL ," +
             " 'action_five' text NULL DEFAULT NULL ," +
-            " 'action_six' text) NULL DEFAULT NULL " +
+            " 'action_six' text NULL DEFAULT NULL) " +
             " ENGINE = InnoDB; ";
 
     @Override
