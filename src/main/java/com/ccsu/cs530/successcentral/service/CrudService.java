@@ -3,6 +3,7 @@ package com.ccsu.cs530.successcentral.service;
 import com.ccsu.cs530.successcentral.model.Mentee;
 import com.ccsu.cs530.successcentral.model.Mentor;
 import com.ccsu.cs530.successcentral.model.User;
+import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -110,6 +111,74 @@ public class CrudService {
             System.out.println("Could not create the user." + e);
         }
     }
+
+    //Stores the information from a current session form into
+    //the database.
+    public void createSessionForm(SessionForm SessionForm){
+
+        try {
+            String qry = "INSERT INTO session_form(first_name," +
+                    "last_name,session_number,day, " +
+                    "campus_involvement,meaningful_relationships," +
+                    "financial_management,outside_responsibilities," +
+                    "study_time_management,academic_engagement," +
+                    "health_wellness,other_bool," +
+                    "other_text,issues_concerns,notes_comments," +
+                    "action_one,action_two,action_three," +
+                    "action_four,action_five,action_six) VALUES (,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setString(1, SessionForm.getFirstName());
+            statement.setString(2, SessionForm.getLastName());
+            statement.setInt(3, SessionForm.getSessionNum());
+            statement.setString(4, SessionForm.getDate());
+
+            statement.setInt(5, SessionForm.getScale());
+
+            statement.setString(6, SessionForm.getPreActionOne());
+            statement.setInt(7, SessionForm.isBool_action_one() ? 1 : 0);
+            statement.setString(8, SessionForm.getPreActionTwo());
+            statement.setInt(9, SessionForm.isBool_action_two() ? 1 : 0 );
+            statement.setString(10, SessionForm.getPreActionThree());
+            statement.setInt(11, SessionForm.isBool_action_three() ? 1 : 0);
+            statement.setString(12, SessionForm.getPreActionFour());
+            statement.setInt(13, SessionForm.isBool_action_four() ? 1 : 0);
+            statement.setString(14, SessionForm.getPreActionFive());
+            statement.setInt(15, SessionForm.isBool_action_five() ? 1 : 0);
+            statement.setString(16, SessionForm.getPreActionSix());
+            statement.setInt(17, SessionForm.isBool_action_six() ? 1 : 0);
+
+            statement.setInt(18, SessionForm.isCampus_involvement()? 1 : 0);
+            statement.setInt(19, SessionForm.isMeaningful_relationships()? 1 : 0);
+            statement.setInt(20, SessionForm.isFinancial_management()? 1 : 0);
+            statement.setInt(21, SessionForm.isOutside_responsibilities()? 1 : 0);
+            statement.setInt(22, SessionForm.isStudy_time_management()? 1 : 0);
+            statement.setInt(23,SessionForm.isAcademic_engagement()? 1 : 0);
+            statement.setInt(24,SessionForm.isHealth_wellness()? 1 : 0);
+            statement.setInt(25, SessionForm.isBool_other()? 1 : 0);
+            statement.setString(26, SessionForm.getOther());
+            statement.setString(27, SessionForm.getIssuesConcerns());
+            statement.setString(28, SessionForm.getNotesComments());
+            statement.setString(29, SessionForm.getFirstActionStep());
+            statement.setString(30, SessionForm.getSecondActionStep());
+            statement.setString(31, SessionForm.getThirdActionStep());
+            statement.setString(32, SessionForm.getFourthActionStep());
+            statement.setString(33, SessionForm.getFifthActionStep());
+            statement.setString(34, SessionForm.getSixthActionStep());
+
+
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("There was a problem placing the session form in the database");
+        }
+
+
+
+
+    }
+
+
+
 
 
 
@@ -1185,4 +1254,6 @@ public class CrudService {
             System.out.println("There was a problem creating the password reset");
         }
     }
+
+
 }
