@@ -149,8 +149,8 @@ public class SessionFormServlet extends HttpServlet {
 //        if (req.getParameter("fourthactionstep") != null) {
 //            sessionform.setFourthActionStep(req.getParameter("fourthactionstep"));
 //        }
-//        if (req.getParameter("fithactionstep") != null) {
-//            sessionform.setFithActionStep(req.getParameter("fithactionstep"));
+//        if (req.getParameter("fifthactionstep") != null) {
+//            sessionform.setFifthActionStep(req.getParameter("fifthactionstep"));
 //        }
 //        if (req.getParameter("sixthtactionstep") != null) {
 //            sessionform.setSixthActionStep(req.getParameter("sixthtactionstep"));
