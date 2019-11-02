@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: clarkpeterson
+  Date: 10/21/19
+  Time: 7:16 PM This is a test for the Commit
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
@@ -45,32 +52,33 @@
                         />
                     </div>
                 </div>
+                <br>
 
                 <!-- 17-Sep-2019 CDP Phase 2: Added a textbox for Session# Date  -->
-                <label><span style="color:red">*</span> Session#</label>
+                <!-- CCSU Info -->
                 <div class="form-row">
-                    <div class="col">
+                    <div class="form-group col-md-6">
+                        <label> <span style="color:red">*</span>Session #</label>
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Session#"
+                                placeholder="Session #"
                                 required=""
                                 name="sessionnum"
                         />
                     </div>
-                    <!-- Name -->
-                    <label><span style="color:red">*</span> Date:</label>
                     <div class="col">
+                        <label><span style="color:red">*</span> Date</label>
                         <input
                                 type="text"
                                 class="form-control"
                                 placeholder="DD-MMM-YYYY"
                                 required=""
                                 name="date"
+
                         />
                     </div>
                 </div>
-
                 <br />
             </fieldset>
 
@@ -80,7 +88,6 @@
                 <!-- 17-Sep-2019 CDP Phase 2: Action Steps from last session  -->
                 <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
                 <br>
-                <div class="col">
                     <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
                     <div class="form-check" required="">
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1">
@@ -100,7 +107,6 @@
                     <div class="form-check">
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6">
                         <label class="form-check-label" for="defaultCheck6"> Previous Action Item #6 </label></div>
-                </div>
                 <br />
 
                 <!-- 17-Sep-2019 CDP Phase 2: Change Gender to the 1-5 Scale -->
@@ -232,73 +238,73 @@
             <fieldset>
                 <legend>New Action Steps:</legend>
                 <label><span style="color:red">*</span> New Action Step(s) to address Issues/Concerns: </label>
-                <div class="form-row">
                     <div class="col">
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Action Step"
+                                placeholder="1st Action Step"
                                 required=""
                                 name="firstactionstep"
                         />
-                    </div>
-                    <div class="col">
+                        <br>
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Action Step"
+                                placeholder="2nd Action Step"
                                 required=""
                                 name="secondactionstep"
                         />
-                    </div>
-
-                    <div class="col">
+                        <br>
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Action Step"
+                                placeholder="3rd Action Step"
                                 required=""
                                 name="thirdactionstep"
                         />
-                    </div>
-                    <div class="col">
+                        <br>
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Action Step"
+                                placeholder="4th Action Step"
                                 required=""
                                 name="fourthactionstep"
                         />
-                    </div>
-
-                    <div class="col">
+                        <br>
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Action Step"
+                                placeholder="5th Action Step"
                                 required=""
                                 name="fifthactionstep"
                         />
-                    </div>
-                    <div class="col">
+                        <br>
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="Action Step"
+                                placeholder="6th Action Step"
                                 required=""
                                 name="sixthactionstep"
                         />
                     </div>
-
-                </div>
             </fieldset>
 
             <!-- Submit button -->
+            <br>
             <button type="submit" class="btn btn-primary mb-2" onClick="return valChecked();">Submit</button>
         </form>
     </div>
 </div>
 
 <jsp:include page="includes/footer.jsp"/>
+<script>function disableSubjectField() {
+    if (document.getElementById('defaultCheck8a').checked) {
+        document.getElementById('SessTopicOther').disabled = false;
+    } else {
+        document.getElementById('SessTopicOther').value = '';
+        document.getElementById('SessTopicOther').disabled = true;
+    }
+}
+</script>
 </body>
 </html>
