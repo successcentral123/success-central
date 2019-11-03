@@ -81,34 +81,28 @@ public class SessionForm {
 
         for(int i = 0; i < actions.length; i++){
             PreActions[i] = actions[i];
-            setPreActions(actions[i], i);
+            setPreActions(actions[i]);
         }
     }
 
-    public void setPreActions(String act, int i) {
-        switch (i) {
-            case 0:
-                setPreActionOne(act);
+    public void setPreActions(String act) {
+        switch (act) {
+            case "Previous Action Item #1":
                 setBoolActionOne(true);
                 break;
-            case 1:
-                setPreActionTwo(act);
+            case "Previous Action Item #2":
                 setBoolActionTwo(true);
                 break;
-            case 2:
-                setPreActionThree(act);
+            case "Previous Action Item #3":
                 setBoolActionThree(true);
                 break;
-            case 3:
-                setPreActionFour(act);
+            case "Previous Action Item #4":
                 setBoolActionFour(true);
                 break;
-            case 4:
-                setPreActionFive(act);
+            case "Previous Action Item #5":
                 setBoolActionFive(true);
                 break;
-            case 5:
-                setPreActionSix(act);
+            case "Previous Action Item #6":
                 setBoolActionSix(true);
                 break;
             default:
