@@ -65,6 +65,7 @@
                                 placeholder="Session #"
                                 required=""
                                 name="sessionnum"
+                                min="1"
                         />
                     </div>
                     <div class="col">
