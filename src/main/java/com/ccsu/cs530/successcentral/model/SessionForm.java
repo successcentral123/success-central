@@ -6,30 +6,28 @@ public class SessionForm {
     private String second_name;
     private int session_number;
     private String date;
-    private String pre_action_one;
-    private boolean bool_action_one;
-    private String pre_action_two;
-    private boolean bool_action_two;
-    private String pre_action_three;
-    private boolean bool_action_three;
-    private String pre_action_four;
-    private boolean bool_action_four;
-    private String pre_action_five;
-    private boolean bool_action_five;
-    private String pre_action_six;
-    private boolean bool_action_six;
+    private String pre_action_one = "na";
+    private boolean bool_action_one = false;
+    private String pre_action_two = "";
+    private boolean bool_action_two = false;
+    private String pre_action_three = "";
+    private boolean bool_action_three = false;
+    private String pre_action_four = "";
+    private boolean bool_action_four = false;
+    private String pre_action_five = "";
+    private boolean bool_action_five = false;
+    private String pre_action_six = "";
+    private boolean bool_action_six = false;
     private int scale;
-
-
-    private boolean campus_involvement;
-    private boolean meaningful_relationships;
-    private boolean financial_management;
-    private boolean outside_responsibilities;
-    private boolean study_time_management;
-    private boolean academic_engagement;
-    private boolean health_wellness;
+    private boolean campus_involvement = false;
+    private boolean meaningful_relationships = false;
+    private boolean financial_management = false;
+    private boolean outside_responsibilities = false;
+    private boolean study_time_management = false;
+    private boolean academic_engagement = false;
+    private boolean health_wellness = false;
     private String other;
-    private boolean bool_other;
+    private boolean bool_other = false;
     private String issues_concerns;
     private String notes_comments;
 
@@ -83,6 +81,38 @@ public class SessionForm {
 
         for(int i = 0; i < actions.length; i++){
             PreActions[i] = actions[i];
+            setPreActions(actions[i], i);
+        }
+    }
+
+    public void setPreActions(String act, int i) {
+        switch (i) {
+            case 0:
+                setPreActionOne(act);
+                setBoolActionOne(true);
+                break;
+            case 1:
+                setPreActionTwo(act);
+                setBoolActionTwo(true);
+                break;
+            case 2:
+                setPreActionThree(act);
+                setBoolActionThree(true);
+                break;
+            case 3:
+                setPreActionFour(act);
+                setBoolActionFour(true);
+                break;
+            case 4:
+                setPreActionFive(act);
+                setBoolActionFive(true);
+                break;
+            case 5:
+                setPreActionSix(act);
+                setBoolActionSix(true);
+                break;
+            default:
+                break;
         }
     }
 
@@ -198,8 +228,41 @@ public class SessionForm {
     public void setTopicsForm(String Topic[]){
         for(int i = 0; i < Topic.length; i++){
             SessionTopics[i] = Topic[i];
+            setTopics(Topic[i]);
         }
     }
+
+    public void setTopics(String topic) {
+        switch (topic) {
+            case "Campus Involvement":
+                setCampusInvolement(true);
+                break;
+            case "Meaningful Relationships":
+                setMeaningfulRelationships(true);
+                break;
+            case "Financial Management":
+                setFinancialManagement(true);
+                break;
+            case "Outside Responsibilities":
+                setOutsideResponsibilities(true);
+                break;
+            case "Study Skills/Time Management":
+                setStudyTimeManagement(true);
+                break;
+            case "Academic Engagement":
+                setAcademicEngagement(true);
+                break;
+            case "Health & Wellness":
+                setHealthWellness(true);
+                break;
+            case "Other":
+                setOther(true);
+                break;
+            default:
+                break;
+        }
+    }
+
     public String [] getTopicsForm(){
         return SessionTopics;
 
@@ -340,4 +403,5 @@ public class SessionForm {
     public void setSixthActionStep(String action_step_six) {
         this.action_step_six = action_step_six;
     }
+
 }
