@@ -92,33 +92,92 @@
 
                 <!-- Call button -->
                 <br>
-                <button id="previous" type="button" class="btn btn-primary mb-2" onClick="getPreviousActions();">Get Previous Action Steps</button>
-                <br>
-                <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+
                 <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
-                <div class="form-row">
+
+                <fieldset>
+                    <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+                    <div class="col">
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="1st Previous Action Step"
+                                required=""
+                                name="preactionone"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="2nd Previous Action Step"
+                                required=""
+                                name="preactiontwo"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="3rd Previous Action Step"
+                                required=""
+                                name="preactionthree"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="4th Previous Action Step"
+                                required=""
+                                name="preactionfour"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="5th Previous Action Step"
+                                required=""
+                                name="preactionfive"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="6th Previous Action Step"
+                                required=""
+                                name="preactionsix"
+                        />
+                    </div>
+                </fieldset>
+
+
+                <!--<div class="form-row">
                     <div class="col">
                         <div class="form-check" required="">
-                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1" disabled>
-                            <label class="form-check-label" id="" for="defaultCheck1" ></label></div>
+
+                            <label class="form-check-label" id="" for="defaultCheck1" >Previous</label></div>
                         <div class="form-check">
-                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" disabled>
+
                             <label class="form-check-label" for="defaultCheck2" ></label></div>
                         <div class="form-check">
-                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" disabled>
+
                             <label class="form-check-label" for="defaultCheck3" ></label></div>
                         <div class="form-check">
-                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" disabled >
+
                             <label class="form-check-label" for="defaultCheck4" ></label></div>
                         <div class="form-check">
-                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" disabled>
+
                             <label class="form-check-label" for="defaultCheck5" ></label></div>
                         <div class="form-check">
-                            <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" disabled>
+
                             <label class="form-check-label" for="defaultCheck6" ></label></div>
                         <br />
                     </div>
-                </div>
+                </div>-->
 
 
 
@@ -320,25 +379,6 @@
     } else {
         document.getElementById('SessTopicOther').value = '';
         document.getElementById('SessTopicOther').disabled = true;
-    }
-}
-
-function getPreviousActions(){
-    document.getElementById('previous').style.display = 'none';
-
-    document.getElementById('defaultCheck1').disabled = false;
-    document.getElementById('defaultCheck2').disabled = false;
-    document.getElementById('defaultCheck3').disabled = false;
-    document.getElementById('defaultCheck4').disabled = false;
-    document.getElementById('defaultCheck5').disabled = false;
-    document.getElementById('defaultCheck6').disabled = false;
-    document.getElementById('defaultCheck1').innerText = 'Complete my CS 494 Online Test';
-    /* If Session # is greater than 1, then get action steps for 'session # - 1' */
-
-    var sessionNum = document.getElementById('sessionnum');
-    if (sessionNum > 1){
-        var prevSessionNum = sessionNum-1;
-        var action
     }
 }
 </script>
