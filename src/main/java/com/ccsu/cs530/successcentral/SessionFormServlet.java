@@ -51,10 +51,10 @@ public class SessionFormServlet extends HttpServlet {
         }
 
         //TODO the preaction steps. decided to send whole array and do the assignment in the model
-//        if (req.getParameter("preactionsteps") != null) {
-//            String[] preActionSteps = req.getParameterValues("preactionsteps");
-//            sessionform.setPreActionSteps(preActionSteps);
-//        }
+        if (req.getParameter("preactionsteps") != null) {
+            String[] boolPreAction = req.getParameterValues("prevactionsteps");
+            sessionform.setPreActionSteps(boolPreAction);
+        }
         if (req.getParameter("preactionone") != null) {
             sessionform.setPreActionOne(req.getParameter("preactionone"));
         }
