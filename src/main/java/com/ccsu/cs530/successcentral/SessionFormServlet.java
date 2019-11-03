@@ -51,7 +51,7 @@ public class SessionFormServlet extends HttpServlet {
         }
 
         //TODO the preaction steps. decided to send whole array and do the assignment in the model
-        if (req.getParameter("preactionsteps") != null) {
+        if (req.getParameter("prevactionsteps") != null) {
             String[] boolPreAction = req.getParameterValues("prevactionsteps");
             sessionform.setPreActionSteps(boolPreAction);
         }
@@ -118,8 +118,8 @@ public class SessionFormServlet extends HttpServlet {
         if (req.getParameter("fifthactionstep") != null) {
             sessionform.setFifthActionStep(req.getParameter("fifthactionstep"));
         }
-        if (req.getParameter("sixthtactionstep") != null) {
-            sessionform.setSixthActionStep(req.getParameter("sixthtactionstep"));
+        if (req.getParameter("sixthactionstep") != null) {
+            sessionform.setSixthActionStep(req.getParameter("sixthactionstep"));
         }
             // if the user already exists, update 'em
 //        if (crud.getSessionForm(mentor.getEmail()).getEmail() != null) {
