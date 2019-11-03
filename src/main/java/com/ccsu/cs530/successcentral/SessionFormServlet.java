@@ -21,14 +21,14 @@ public class SessionFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // todo Need to set attributes for Previous Action Steps
 
-        SessionForm sessform = new SessionForm();
-        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), Integer.parseInt(req.getParameter("sessionnum")));
-        req.setAttribute("preactionone", sessform.getFirstActionStep());
-        req.setAttribute("preactiontwo", sessform.getSecondActionStep());
-        req.setAttribute("preactionthree", sessform.getThirdActionStep());
-        req.setAttribute("preactionfour", sessform.getFourthActionStep());
-        req.setAttribute("preactionfive", sessform.getFifthActionStep());
-        req.setAttribute("preactionsix", sessform.getSixthActionStep());
+//        SessionForm sessform = new SessionForm();
+//        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), Integer.parseInt(req.getParameter("sessionnum")));
+//        req.setAttribute("preactionone", sessform.getFirstActionStep());
+//        req.setAttribute("preactiontwo", sessform.getSecondActionStep());
+//        req.setAttribute("preactionthree", sessform.getThirdActionStep());
+//        req.setAttribute("preactionfour", sessform.getFourthActionStep());
+//        req.setAttribute("preactionfive", sessform.getFifthActionStep());
+//        req.setAttribute("preactionsix", sessform.getSixthActionStep());
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
@@ -51,9 +51,27 @@ public class SessionFormServlet extends HttpServlet {
         }
 
         //TODO the preaction steps. decided to send whole array and do the assignment in the model
-        if (req.getParameter("preactionsteps") != null) {
-            String[] preActionSteps = req.getParameterValues("preactionsteps");
-            sessionform.setPreActionSteps(preActionSteps);
+//        if (req.getParameter("preactionsteps") != null) {
+//            String[] preActionSteps = req.getParameterValues("preactionsteps");
+//            sessionform.setPreActionSteps(preActionSteps);
+//        }
+        if (req.getParameter("preactionone") != null) {
+            sessionform.setPreActionOne(req.getParameter("preactionone"));
+        }
+        if (req.getParameter("preactiontwo") != null) {
+            sessionform.setPreActionTwo(req.getParameter("preactiontwo"));
+        }
+        if (req.getParameter("preactionthree") != null) {
+            sessionform.setPreActionThree(req.getParameter("preactionthree"));
+        }
+        if (req.getParameter("preactionfour") != null) {
+            sessionform.setPreActionFour(req.getParameter("preactionfour"));
+        }
+        if (req.getParameter("preactionfive") != null) {
+            sessionform.setPreActionFive(req.getParameter("preactionfive"));
+        }
+        if (req.getParameter("preactionsix") != null) {
+            sessionform.setPreActionSix(req.getParameter("preactionsix"));
         }
 
         if (req.getParameter("scale") != null) {
