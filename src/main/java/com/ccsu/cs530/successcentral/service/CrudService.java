@@ -114,66 +114,54 @@ public class CrudService {
 
     //Stores the information from a current session form into
     //the database.
-    public void createSessionForm(SessionForm SessionForm){
+    public void createSessionForm(SessionForm sessionform){
 
         try {
-            String qry = "INSERT INTO session_form(first_name," +
-                    "last_name,session_number,day, " +
-                    "campus_involvement,meaningful_relationships," +
-                    "financial_management,outside_responsibilities," +
-                    "study_time_management,academic_engagement," +
-                    "health_wellness,other_bool," +
-                    "other_text,issues_concerns,notes_comments," +
-                    "action_one,action_two,action_three," +
-                    "action_four,action_five,action_six) VALUES (,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
-                    "?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String qry = "INSERT INTO session_form VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(qry);
-            statement.setString(1, SessionForm.getFirstName());
-            statement.setString(2, SessionForm.getLastName());
-            statement.setInt(3, SessionForm.getSessionNum());
-            statement.setString(4, SessionForm.getDate());
+            statement.setString(1, sessionform.getFirstName());
+            statement.setString(2, sessionform.getLastName());
+            statement.setInt(3, sessionform.getSessionNum());
+            statement.setString(4, sessionform.getDate());
 
-            statement.setInt(5, SessionForm.getScale());
+            statement.setString(5, sessionform.getPreActionOne());
+            statement.setBoolean(6, sessionform.isBool_action_one());
+            statement.setString(7, sessionform.getPreActionTwo());
+            statement.setBoolean(8, sessionform.isBool_action_two());
+            statement.setString(9, sessionform.getPreActionThree());
+            statement.setBoolean(10, sessionform.isBool_action_three());
+            statement.setString(11, sessionform.getPreActionFour());
+            statement.setBoolean(12, sessionform.isBool_action_four());
+            statement.setString(13, sessionform.getPreActionFive());
+            statement.setBoolean(14, sessionform.isBool_action_five());
+            statement.setString(15, sessionform.getPreActionSix());
+            statement.setBoolean(16, sessionform.isBool_action_six());
 
-            statement.setString(6, SessionForm.getPreActionOne());
-            statement.setInt(7, SessionForm.isBool_action_one() ? 1 : 0);
-            statement.setString(8, SessionForm.getPreActionTwo());
-            statement.setInt(9, SessionForm.isBool_action_two() ? 1 : 0 );
-            statement.setString(10, SessionForm.getPreActionThree());
-            statement.setInt(11, SessionForm.isBool_action_three() ? 1 : 0);
-            statement.setString(12, SessionForm.getPreActionFour());
-            statement.setInt(13, SessionForm.isBool_action_four() ? 1 : 0);
-            statement.setString(14, SessionForm.getPreActionFive());
-            statement.setInt(15, SessionForm.isBool_action_five() ? 1 : 0);
-            statement.setString(16, SessionForm.getPreActionSix());
-            statement.setInt(17, SessionForm.isBool_action_six() ? 1 : 0);
+            statement.setInt(17, sessionform.getScale());
 
-            statement.setInt(18, SessionForm.isCampus_involvement()? 1 : 0);
-            statement.setInt(19, SessionForm.isMeaningful_relationships()? 1 : 0);
-            statement.setInt(20, SessionForm.isFinancial_management()? 1 : 0);
-            statement.setInt(21, SessionForm.isOutside_responsibilities()? 1 : 0);
-            statement.setInt(22, SessionForm.isStudy_time_management()? 1 : 0);
-            statement.setInt(23,SessionForm.isAcademic_engagement()? 1 : 0);
-            statement.setInt(24,SessionForm.isHealth_wellness()? 1 : 0);
-            statement.setInt(25, SessionForm.isBool_other()? 1 : 0);
-            statement.setString(26, SessionForm.getOther());
-            statement.setString(27, SessionForm.getIssuesConcerns());
-            statement.setString(28, SessionForm.getNotesComments());
-            statement.setString(29, SessionForm.getFirstActionStep());
-            statement.setString(30, SessionForm.getSecondActionStep());
-            statement.setString(31, SessionForm.getThirdActionStep());
-            statement.setString(32, SessionForm.getFourthActionStep());
-            statement.setString(33, SessionForm.getFifthActionStep());
-            statement.setString(34, SessionForm.getSixthActionStep());
-
+            statement.setBoolean(18, sessionform.isCampus_involvement());
+            statement.setBoolean(19, sessionform.isMeaningful_relationships());
+            statement.setBoolean(20, sessionform.isFinancial_management());
+            statement.setBoolean(21, sessionform.isOutside_responsibilities());
+            statement.setBoolean(22, sessionform.isStudy_time_management());
+            statement.setBoolean(23, sessionform.isAcademic_engagement());
+            statement.setBoolean(24, sessionform.isHealth_wellness());
+            statement.setBoolean(25, sessionform.isBool_other());
+            statement.setString(26, sessionform.getOther());
+            statement.setString(27, sessionform.getIssuesConcerns());
+            statement.setString(28, sessionform.getNotesComments());
+            statement.setString(29, sessionform.getFirstActionStep());
+            statement.setString(30, sessionform.getSecondActionStep());
+            statement.setString(31, sessionform.getThirdActionStep());
+            statement.setString(32, sessionform.getFourthActionStep());
+            statement.setString(33, sessionform.getFifthActionStep());
+            statement.setString(34, sessionform.getSixthActionStep());
 
             statement.executeUpdate();
+
         } catch (Exception e) {
             System.out.println("There was a problem placing the session form in the database");
         }
-
-
-
 
     }
 
