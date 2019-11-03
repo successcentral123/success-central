@@ -113,7 +113,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="2nd Previous Action Step"
-                                required=""
                                 name="preactiontwo"
                         />
                         <br>
@@ -122,7 +121,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="3rd Previous Action Step"
-                                required=""
                                 name="preactionthree"
                         />
                         <br>
@@ -131,7 +129,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="4th Previous Action Step"
-                                required=""
                                 name="preactionfour"
                         />
                         <br>
@@ -140,7 +137,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="5th Previous Action Step"
-                                required=""
                                 name="preactionfive"
                         />
                         <br>
@@ -149,7 +145,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="6th Previous Action Step"
-                                required=""
                                 name="preactionsix"
                         />
                     </div>
@@ -328,7 +323,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="2nd Action Step"
-                                required=""
                                 name="secondactionstep"
                         />
                         <br>
@@ -336,7 +330,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="3rd Action Step"
-                                required=""
                                 name="thirdactionstep"
                         />
                         <br>
@@ -344,7 +337,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="4th Action Step"
-                                required=""
                                 name="fourthactionstep"
                         />
                         <br>
@@ -352,7 +344,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="5th Action Step"
-                                required=""
                                 name="fifthactionstep"
                         />
                         <br>
@@ -360,7 +351,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="6th Action Step"
-                                required=""
                                 name="sixthactionstep"
                         />
                     </div>
