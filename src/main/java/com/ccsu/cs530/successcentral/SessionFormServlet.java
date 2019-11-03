@@ -21,9 +21,14 @@ public class SessionFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // todo Need to set attributes for Previous Action Steps
 
-//        SessionForm sessform = new SessionForm();
-//        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), req.getParameter("sessionnum"));
-//        req.setAttribute("preactionsteps", sessform.getActionStepArray());
+        SessionForm sessform = new SessionForm();
+        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), Integer.parseInt(req.getParameter("sessionnum")));
+        req.setAttribute("preactionone", sessform.getFirstActionStep());
+        req.setAttribute("preactiontwo", sessform.getSecondActionStep());
+        req.setAttribute("preactionthree", sessform.getThirdActionStep());
+        req.setAttribute("preactionfour", sessform.getFourthActionStep());
+        req.setAttribute("preactionfive", sessform.getFifthActionStep());
+        req.setAttribute("preactionsix", sessform.getSixthActionStep());
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
