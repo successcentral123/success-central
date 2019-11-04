@@ -19,8 +19,8 @@ public class SessionFormServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // todo Need to set attributes for Previous Action Steps
-
+        // todo want to set attributes for Previous Action Steps by pulling from database
+        // todo this does not work
 //        SessionForm sessform = new SessionForm();
 //        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), Integer.parseInt(req.getParameter("sessionnum")));
 //        req.setAttribute("preactionone", sessform.getFirstActionStep());
@@ -35,7 +35,7 @@ public class SessionFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-        //todo these wont work until model and crud work
+        // Instantiate sessionform and then it to database
         SessionForm sessionform = new SessionForm();
         if (req.getParameter("firstname") != null) {
             sessionform.setFirstName(req.getParameter("firstname"));
@@ -50,11 +50,12 @@ public class SessionFormServlet extends HttpServlet {
             sessionform.setDate(req.getParameter("date"));
         }
 
-        //TODO the preaction steps. decided to send whole array and do the assignment in the model
+        //sends the check box values as an array
         if (req.getParameter("prevactionsteps") != null) {
             String[] boolPreAction = req.getParameterValues("prevactionsteps");
             sessionform.setPreActionSteps(boolPreAction);
         }
+        // sets the input of the input boxes
         if (req.getParameter("preactionone") != null) {
             sessionform.setPreActionOne(req.getParameter("preactionone"));
         }
@@ -121,17 +122,15 @@ public class SessionFormServlet extends HttpServlet {
         if (req.getParameter("sixthactionstep") != null) {
             sessionform.setSixthActionStep(req.getParameter("sixthactionstep"));
         }
-            // if the user already exists, update 'em
-//        if (crud.getSessionForm(mentor.getEmail()).getEmail() != null) {
-//            crud.updateUser(mentor);
-//        } else {
-//            crud.createUser(mentor);
-//        }
-            crud.createSessionForm(sessionform);
-//            message = "<p class=\"text-success border border-success\">Mentor successfully created!</p>";
-//        req.setAttribute("mentor", "true");
-//        req.setAttribute("email", mentor.getEmail());
-            req.getRequestDispatcher("form_success").forward(req, resp);
+
+
+//        message = "<p class=\"text-success border border-success\">Session form successfully created!</p>";
+
+        crud.createSessionForm(sessionform);
+        // sets form type to seesion_form so form_success can show correct page message
+        // todo want to change the attribute "mentor" to "form_type"
+        req.setAttribute("mentor", "session_form");
+        req.getRequestDispatcher("form_success").forward(req, resp);
 
         }
 
