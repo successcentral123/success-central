@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="includes/header.jsp">
-    <jsp:param name="title" value="Session Form"/>
+    <jsp:param name="title" value="Intake Form Report Choice"/>
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
