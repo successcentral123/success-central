@@ -78,6 +78,7 @@ public class DatabaseSetupPage extends HttpServlet {
             "ENGINE = InnoDB;";
 
     String sessionformTableCreationQuery = "CREATE TABLE `success_central`.`session_form` (" +
+            " `mentor` varchar(50) NULL DEFAULT NULL ," +
             " `first_name` varchar(50) NOT NULL ," +
             " `last_name` varchar(50) NOT NULL ," +
             " `session_number` int NOT NULL ," +
