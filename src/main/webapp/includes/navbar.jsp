@@ -32,6 +32,11 @@
                     Introduction Email
                   </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="report_choice">
+                        Intake Form Report
+                    </a>
+                </li>
             <% } else if (request.getSession().getAttribute("email") != null) { %>
                 <li class="nav-item">
                     <a class="nav-link" href="mentee_list">
