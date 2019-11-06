@@ -1,6 +1,7 @@
 package com.ccsu.cs530.successcentral;
 
 import com.ccsu.cs530.successcentral.model.SessionForm;
+import com.ccsu.cs530.successcentral.model.Mentor;
 import com.ccsu.cs530.successcentral.service.CrudService;
 
 import javax.servlet.ServletException;
@@ -35,8 +36,15 @@ public class SessionFormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
+        String mentorEmail = (String)req.getSession().getAttribute("email");
+        Mentor mentor = crud.getMentor(mentorEmail);
+        String mentorFirst = mentor.getFirstName();
+        String mentorLast = mentor.getLastName();
+        String fullname = mentorFirst + " " + mentorLast;
         // Instantiate sessionform and then it to database
         SessionForm sessionform = new SessionForm();
+        sessionform.setMentor(fullname);
+
         if (req.getParameter("firstname") != null) {
             sessionform.setFirstName(req.getParameter("firstname"));
         }
