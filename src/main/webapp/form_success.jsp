@@ -15,6 +15,11 @@
         <p>You application has been received to be a mentor.</p>
         <p>We will send an email to you at <b><%= request.getAttribute("email") %></b> if your application is approved.</p>
         <p>Thank you for your interest in Success Central!</p>
+
+    <% } else if (request.getAttribute("mentor").equals("session_form")) { %>
+        <p>You application has been received to be a mentor.</p>
+        <p>Thank you for your interest in Success Central!</p>
+
     <% } else { %>
         <p>You application has been received to be a mentee.</p>
         <p>We will send an email to you at <b><%= request.getAttribute("email") %></b> when you have been matched with a mentor.</p>
