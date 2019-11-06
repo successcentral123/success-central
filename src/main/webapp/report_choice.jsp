@@ -46,14 +46,5 @@
 </div>
 
 <jsp:include page="includes/footer.jsp"/>
-<script>function disableSubjectField() {
-    if (document.getElementById('defaultCheck8a').checked) {
-        document.getElementById('SessTopicOther').disabled = false;
-    } else {
-        document.getElementById('SessTopicOther').value = '';
-        document.getElementById('SessTopicOther').disabled = true;
-    }
-}
-</script>
 </body>
 </html>
