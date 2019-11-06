@@ -8,7 +8,7 @@
 <body>
 <jsp:include page="includes/navbar.jsp"/>
 
-<div class="container">
+<div class="container" style="text-align: center">
 
     <h1>Form Submitted Successfully!</h1>
     <% if (request.getAttribute("mentor").equals("true")) { %>
@@ -17,8 +17,7 @@
         <p>Thank you for your interest in Success Central!</p>
 
     <% } else if (request.getAttribute("mentor").equals("session_form")) { %>
-        <p>You application has been received to be a mentor.</p>
-        <p>Thank you for your interest in Success Central!</p>
+        <p>Your session form has been submitted.</p>
 
     <% } else { %>
         <p>You application has been received to be a mentee.</p>
