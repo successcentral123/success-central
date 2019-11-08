@@ -77,42 +77,43 @@ public class DatabaseSetupPage extends HttpServlet {
             " PRIMARY KEY (`email`)) " +
             "ENGINE = InnoDB;";
 
-    String sessionformTableCreationQuery = "CREATE TABLE 'success_central'.'session_form' (" +
-            " 'first_name' varchar(50) NOT NULL ," +
-            " 'last_name' varchar(50) NOT NULL ," +
-            " 'session_number' int NOT NULL ," +
-            " 'day' varchar(10) NOT NULL ," +
-            " 'pre_action_one' text NOT NULL ," +
-            " 'bool_action_one' boolean NOT NULL DEFAULT 0 ," +
-            " 'pre_action_two' text NULL DEFAULT NULL ," +
-            " 'bool_action_two' boolean NOT NULL DEFAULT 0 ," +
-            " 'pre_action_three' text NULL DEFAULT NULL ," +
-            " 'bool_action_three' boolean NOT NULL DEFAULT 0 ," +
-            " 'pre_action_four' text NULL DEFAULT NULL ," +
-            " 'bool_action_four' boolean NOT NULL DEFAULT 0 ," +
-            " 'pre_action_five' text NULL DEFAULT NULL ," +
-            " 'bool_action_five' boolean NOT NULL DEFAULT 0 ," +
-            " 'pre_action_six' text NULL DEFAULT NULL ," +
-            " 'bool_action_six' boolean NOT NULL DEFAULT 0 ," +
-            " 'scale' int NOT NULL," +
-            " 'campus_involvement' boolean NOT NULL DEFAULT 0 ," +
-            " 'meaningful_relationships' boolean NOT NULL DEFAULT 0 ," +
-            " 'financial_management' boolean NOT NULL DEFAULT 0 ," +
-            " 'outside_responsibilities' boolean NOT NULL DEFAULT 0 ," +
-            " 'study_time_management' boolean NOT NULL DEFAULT 0 ," +
-            " 'academic_engagement' boolean NOT NULL DEFAULT 0 ," +
-            " 'health_wellness' boolean NOT NULL DEFAULT 0 ," +
-            " 'other_bool' boolean NOT NULL DEFAULT 0 ," +
-            " 'other_text' varchar(100) NULL DEFAULT NULL ," +
-            " 'issues_concerns' text NULL DEFAULT NULL ," +
-            " 'notes_comments' text NULL DEFAULT NULL ," +
-            " 'action_one' text NOT NULL ," +
-            " 'action_two' text NULL DEFAULT NULL ," +
-            " 'action_three' text NULL DEFAULT NULL ," +
-            " 'action_four' text NULL DEFAULT NULL ," +
-            " 'action_five' text NULL DEFAULT NULL ," +
-            " 'action_six' text NULL DEFAULT NULL) " +
-            " ENGINE = InnoDB; ";
+    String sessionformTableCreationQuery = "CREATE TABLE `success_central`.`session_form` (" +
+            " `mentor` varchar(50) NULL DEFAULT NULL ," +
+            " `first_name` varchar(50) NOT NULL ," +
+            " `last_name` varchar(50) NOT NULL ," +
+            " `session_number` int NOT NULL ," +
+            " `day` varchar(10) NOT NULL ," +
+            " `pre_action_one` text NOT NULL ," +
+            " `bool_action_one` boolean NOT NULL DEFAULT 0 ," +
+            " `pre_action_two` text NULL DEFAULT NULL ," +
+            " `bool_action_two` boolean NOT NULL DEFAULT 0 ," +
+            " `pre_action_three` text NULL DEFAULT NULL ," +
+            " `bool_action_three` boolean NOT NULL DEFAULT 0 ," +
+            " `pre_action_four` text NULL DEFAULT NULL ," +
+            " `bool_action_four` boolean NOT NULL DEFAULT 0 ," +
+            " `pre_action_five` text NULL DEFAULT NULL ," +
+            " `bool_action_five` boolean NOT NULL DEFAULT 0 ," +
+            " `pre_action_six` text NULL DEFAULT NULL ," +
+            " `bool_action_six` boolean NOT NULL DEFAULT 0 ," +
+            " `scale` int NOT NULL," +
+            " `campus_involvement` boolean NOT NULL DEFAULT 0 ," +
+            " `meaningful_relationships` boolean NOT NULL DEFAULT 0 ," +
+            " `financial_management` boolean NOT NULL DEFAULT 0 ," +
+            " `outside_responsibilities` boolean NOT NULL DEFAULT 0 ," +
+            " `study_time_management` boolean NOT NULL DEFAULT 0 ," +
+            " `academic_engagement` boolean NOT NULL DEFAULT 0 ," +
+            " `health_wellness` boolean NOT NULL DEFAULT 0 ," +
+            " `other_bool` boolean NOT NULL DEFAULT 0 ," +
+            " `other_text` varchar(100) NULL DEFAULT NULL ," +
+            " `issues_concerns` text NULL DEFAULT NULL ," +
+            " `notes_comments` text NULL DEFAULT NULL ," +
+            " `action_one` text NOT NULL ," +
+            " `action_two` text NULL DEFAULT NULL ," +
+            " `action_three` text NULL DEFAULT NULL ," +
+            " `action_four` text NULL DEFAULT NULL ," +
+            " `action_five` text NULL DEFAULT NULL ," +
+            " `action_six` text NULL DEFAULT NULL) " +
+            "ENGINE = InnoDB; ";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServerException, IOException {
@@ -140,7 +141,7 @@ public class DatabaseSetupPage extends HttpServlet {
             dc.executeUpdateCommand("DROP TABLE IF EXISTS `town`;");
             dc.executeUpdateCommand("DROP TABLE IF EXISTS `major`;");
             dc.executeUpdateCommand("DROP TABLE IF EXISTS `password_reset`;");
-            dc.executeUpdateCommand("DROP TABLE IF EXISTS 'session_form;");
+            dc.executeUpdateCommand("DROP TABLE IF EXISTS `session_form`;");
             message += "<p>All tables dropped.</p>";
             dc.executeUpdateCommand(majorTableCreationQuery);
             dc.executeUpdateCommand(townTableCreationQuery);
@@ -148,7 +149,7 @@ public class DatabaseSetupPage extends HttpServlet {
             dc.executeUpdateCommand(mentorTableCreationQuery);
             dc.executeUpdateCommand(menteeTableCreationQuery);
             dc.executeUpdateCommand(passwordResetTableCreationQuery);
-            dc.executeQueryCommand(sessionformTableCreationQuery);
+            dc.executeUpdateCommand(sessionformTableCreationQuery);
             message += "<p>New tables added.</p>";
         } catch (SQLException | NamingException e) {
             message += "<p>Error: SQL Exception Phil Thrown.</p>";
