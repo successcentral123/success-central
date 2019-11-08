@@ -13,7 +13,7 @@
 
 </head>
 <jsp:include page="includes/header.jsp">
-    <jsp:param name="title" value="Intake Form Report Choice"/>
+    <jsp:param name="title" value="Intake Form Report"/>
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
@@ -43,12 +43,12 @@
     </div>
 
     <div class="form-row">
-        <div class="row" align="left">
+        <div class="col" align="left">
             <label id="mentorGen" hidden>Mentor Gender</label>
             <label id="menteeGen" hidden>Mentee Gender</label>
 
         </div>
-        <div class="row" align="right">
+        <div class="col" align="right">
             <label id="mentorEth" hidden>Mentor Ethnicity</label>
             <label id="menteeEth" hidden>Mentee Ethnicity</label>
         </div>
