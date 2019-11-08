@@ -33,7 +33,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="report_choice">
+                    <a class="nav-link" href="report_intake">
                         Intake Form Report
                     </a>
                 </li>
