@@ -64,12 +64,10 @@
                     <div class="col-auto">
                         <select name="sortBy" onchange="this.form.submit()">
                             <option value=""  <%if(sortBy.equals("")) {%>selected<%}%>></option>
-                            <option value="last_name" <%if(sortBy.equals("last_name")) {%>selected<%}%>>Last Name</option>
-                            <option value="first_name" <%if(sortBy.equals("first_name")) {%>selected<%}%>>First Name</option>
-                            <option value="email" <%if(sortBy.equals("email")) {%>selected<%}%>>Email Address</option>
-                            <option value="major" <%if(sortBy.equals("major")) {%>selected<%}%>>Major (Alphabetic order)</option>
-                            <option value="matched_1"  <%if(sortBy.equals("matched_1")) {%>selected<%}%>>Mentor-matched First</option>
-                            <option value="matched_0"  <%if(sortBy.equals("matched_0")) {%>selected<%}%>>Not-yet-matched First</option>
+                            <option value="last_name" <%if(sortBy.equals("last_name")) {%>selected<%}%>>Mentee Last Name</option>
+                            <option value="first_name" <%if(sortBy.equals("first_name")) {%>selected<%}%>>Mentee First Name</option>
+                            <option value="session_number" <%if(sortBy.equals("session_number")) {%>selected<%}%>>Session Number</option>
+                            <option value="mentor" <%if(sortBy.equals("mentor")) {%>selected<%}%>>Mentor</option>
                         </select>
                     </div>
                 </form>
@@ -80,12 +78,10 @@
     <table style="background-color: white" class="table table-sm table-striped table-bordered table-responsive-sm">
         <thead class="table-secondary">
         <tr class="text-center">
-            <th scope="col">Email</th>
-            <th scope="col">Name</th>
-            <th scope="col">Student ID</th>
-            <th scope="col" width="300">Major</th>
+            <th scope="col">Mentee Last Name</th>
+            <th scope="col">Mentee First Name</th>
+            <th scope="col">Session Number</th>
             <th scope="col">Mentor</th>
-            <th scope="col">Delete</th>
         </tr>
         </thead>
         <form name="delete_mentee" action="mentee_update" method="post">
