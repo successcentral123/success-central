@@ -33,6 +33,11 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="session_form_list">
+                        Session Form List
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="report_intake">
                         Intake Form Report
                     </a>
