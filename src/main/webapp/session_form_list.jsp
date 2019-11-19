@@ -1,4 +1,4 @@
-<%@ page import="com.ccsu.cs530.successcentral.model.Mentee" %>
+<%@ page import="com.ccsu.cs530.successcentral.model.SessionForm" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -53,7 +53,7 @@
         <div>
             <!-- Display  Sorting Options -->
             <div class="col" align="right">
-                <form class="form-inline" action="mentee_list" method="get">
+                <form class="form-inline" action="session_form_list" method="get">
                     <div class="form-row alight-items-center">
                         <div class="col-auto" >
                             <div class="form-group ">
@@ -84,25 +84,22 @@
             <th scope="col">Mentor</th>
         </tr>
         </thead>
-        <form name="delete_mentee" action="mentee_update" method="post">
+        <form name="session_form" >
             <input type="hidden" name="work" value="">
             <input type="hidden" name="menteeEmail" value="">
             <input type="hidden" name="returnPage" value="mentee_list">
             <tbody>
-            <%for (Mentee mentee : (List<Mentee>) request.getAttribute("mentees")) {
+            <%for (SessionForm sessionform : (List<SessionForm>) request.getAttribute("sessionforms")) {
                 String mentorName = "";
-                if(mentee.getMentor().getFirstName()==null) mentorName = "<a href=\"dynamic_matches?email="+mentee.getEmail()+"\"><button type=\"button\" class=\"btn btn-sm btn-success\">Get Match</button></a>";
-                else mentorName =  mentee.getMentor().getFirstName() + " " + mentee.getMentor().getLastName();
+                mentorName =  sessionform.getMentor().getFirstName() + " " + sessionform.getMentor().getLastName();
             %>
             <tr class="text-center">
-                <th scope="row"><a href="mentee_info?menteeID=<%=mentee.getEmail()%>"><%= mentee.getEmail() %></a></th>
-                <td><%= mentee.getFirstName() + " " + mentee.getLastName()%></td>
-                <td><%= mentee.getStudentId() %></td>
-                <td><%= mentee.getMajor() %></td>
                 <td><%= mentorName %></td>
-                <td>
-                    <button class="btn btn-primary btn-sm mb-2" type="delete" onClick="return confirm_del('<%= mentee.getEmail() %>')">Delete</button>
-                </td>
+                <td><%= sessionform.getFirstName() %></td>
+                <td><%= sessionform.getLastName() %></td>
+<%--                 todo link for the session number--%>
+<%--                <th scope="row"><a href="mentee_info?menteeID=<%=mentee.getEmail()%>"><%= mentee.getEmail() %></a></th>--%>
+                <td><%= sessionform.getSessionNum() %></td>
             </tr>
             <% } %>
             </tbody>
@@ -118,7 +115,7 @@
             int endPage = (int)request.getAttribute("endPage");
             if(startPage > perBlockNum){
         %>
-        <a href="mentee_list?page=<%= startPage - perBlockNum %>">[Prev]</a>
+        <a href="session_form_list?page=<%= startPage - perBlockNum %>">[Prev]</a>
         <%}
             for (int i = startPage; i <= endPage; i++) {
                 if(i == (int)request.getAttribute("page")){
@@ -127,14 +124,14 @@
         <%
         } else {
         %>
-        <a href="mentee_list?page=<%= i %>">[<%= i %>]</a>
+        <a href="session_form_list?page=<%= i %>">[<%= i %>]</a>
         <%
                 }
             }
 
             if(endPage < pageCount){
         %>
-        <a href="mentee_list?page=<%= startPage + perBlockNum %>">[Next]</a>
+        <a href="session_form_list?page=<%= startPage + perBlockNum %>">[Next]</a>
         <%
             }
 
@@ -142,15 +139,15 @@
     </div>
 </div>
 <script>
-    function confirm_del(deleteId){
-        var result = confirm('Do you really want to delete this mentee '+deleteId+'?');
-        if(result == true) {
-            document.delete_mentee.elements['menteeEmail'].value = deleteId;
-            document.delete_mentee.elements['work'].value = 'delete';
-        } else {
-            return false;
-        }
-    }
+    // function confirm_del(deleteId){
+    //     var result = confirm('Do you really want to delete this mentee '+deleteId+'?');
+    //     if(result == true) {
+    //         document.delete_mentee.elements['menteeEmail'].value = deleteId;
+    //         document.delete_mentee.elements['work'].value = 'delete';
+    //     } else {
+    //         return false;
+    //     }
+    // }
 </script>
 <jsp:include page="includes/footer.jsp"/>
 </body>
