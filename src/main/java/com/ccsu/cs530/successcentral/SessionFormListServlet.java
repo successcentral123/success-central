@@ -1,6 +1,6 @@
 package com.ccsu.cs530.successcentral;
 
-import com.ccsu.cs530.successcentral.model.Mentee;
+import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.service.CrudService;
 
 import javax.servlet.ServletException;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 
 @WebServlet("/session_form_list")
@@ -36,11 +35,11 @@ public class SessionFormListServlet extends HttpServlet {
             else page = Integer.parseInt(pageNum);
 
             int firstRecord = (page -1) * perPageNum;
-            int menteeCount = crud.countMentees();
+            int sessionCount = crud.countSessionForms();
             int pageCount = 1;
 
-            if(menteeCount != 0){
-                pageCount = menteeCount / perPageNum + (menteeCount % perPageNum != 0 ? 1 : 0);
+            if(sessionCount != 0){
+                pageCount = sessionCount / perPageNum + (sessionCount % perPageNum != 0 ? 1 : 0);
 
                 startPage = ((page-1)/perBlockNum)*perBlockNum+1;
                 endPage   = startPage + perBlockNum -1;
@@ -50,18 +49,15 @@ public class SessionFormListServlet extends HttpServlet {
                 }
             }
 
-            // mentee
             String search = (String)req.getParameter("search");
             String sortBy = (String)req.getParameter("sortBy");
-            List<Mentee> mentees = crud.getMentees(firstRecord, perPageNum, search,sortBy);
-            Map<Integer,String> allMajors = crud.getAllMajors();
+            List<SessionForm> sessionforms = crud.getSessionForms(firstRecord, perPageNum, search,sortBy);
 
 
             // populate the request object to send to the jsp
             req.setAttribute("pageCount", pageCount);
-            req.setAttribute("mentees", mentees);
-            req.setAttribute("allMajors",allMajors);
-            req.setAttribute("menteeCount",menteeCount);
+            req.setAttribute("sessionforms", sessionforms);
+            req.setAttribute("sessionCount",sessionCount);
             req.setAttribute("perBlockNum", perBlockNum);
             req.setAttribute("startPage",startPage);
             req.setAttribute("endPage",endPage);
