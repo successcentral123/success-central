@@ -40,10 +40,9 @@ public class SessionFormServlet extends HttpServlet {
         Mentor mentor = crud.getMentor(mentorEmail);
         String mentorFirst = mentor.getFirstName();
         String mentorLast = mentor.getLastName();
-        String fullname = mentorFirst + " " + mentorLast;
         // Instantiate sessionform and then it to database
         SessionForm sessionform = new SessionForm();
-        sessionform.setMentor(fullname);
+        sessionform.setMentor(mentor);
 
         if (req.getParameter("firstname") != null) {
             sessionform.setFirstName(req.getParameter("firstname"));
