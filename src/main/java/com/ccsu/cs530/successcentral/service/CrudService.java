@@ -6,6 +6,7 @@ import com.ccsu.cs530.successcentral.model.User;
 import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.util.DatabaseConnection;
 
+import java.net.BindException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -119,7 +120,7 @@ public class CrudService {
         try {
             String qry = "INSERT INTO session_form VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(qry);
-            statement.setString(1, sessionform.getMentor());
+            statement.setString(1, sessionform.getMentor() == null ? null : sessionform.getMentor().getEmail());
             statement.setString(2, sessionform.getFirstName());
             statement.setString(3, sessionform.getLastName());
             statement.setInt(4, sessionform.getSessionNum());
@@ -342,83 +343,10 @@ public class CrudService {
             ResultSet results = statement.executeQuery();
 
             if (results.next()) {
-                sessionform.setMentor(results.getString("mentor"));
+                sessionform.setMentor(getMentor(results.getString("mentor")));
                 sessionform.setFirstName(results.getString("first_name"));
                 sessionform.setLastName(results.getString("last_name"));
-                sessionform.setSessionNum(results.getInt("sessionnum"));
-                sessionform.setDate(results.getString("day"));
-
-                sessionform.setPreActionOne(results.getString("pre_actions_one"));
-                sessionform.setBoolActionOne(results.getBoolean("bool_action_one"));
-                sessionform.setPreActionTwo(results.getString("pre_actions_two"));
-                sessionform.setBoolActionTwo(results.getBoolean("bool_action_two"));
-                sessionform.setPreActionThree(results.getString("pre_actions_three"));
-                sessionform.setBoolActionThree(results.getBoolean("bool_action_three"));
-                sessionform.setPreActionFour(results.getString("pre_actions_four"));
-                sessionform.setBoolActionFour(results.getBoolean("bool_action_four"));
-                sessionform.setPreActionFive(results.getString("pre_actions_five"));
-                sessionform.setBoolActionFive(results.getBoolean("bool_action_five"));
-                sessionform.setPreActionSix(results.getString("pre_actions_six"));
-                sessionform.setBoolActionSix(results.getBoolean("bool_action_six"));
-
-                sessionform.setScale(results.getInt("scale"));
-
-                sessionform.setCampusInvolement(results.getBoolean("campus_involvement"));
-                sessionform.setMeaningfulRelationships(results.getBoolean("meaningful_relationships"));
-                sessionform.setFinancialManagement(results.getBoolean("financial_management"));
-                sessionform.setOutsideResponsibilities(results.getBoolean("outside_responsibilities"));
-                sessionform.setStudyTimeManagement(results.getBoolean("study_time_management"));
-                sessionform.setAcademicEngagement(results.getBoolean("academic_engagement"));
-                sessionform.setHealthWellness(results.getBoolean("health_wellness"));
-                sessionform.setOther(results.getBoolean("other_bool"));
-                sessionform.setOtherText(results.getString("other_text"));
-
-                sessionform.setIssuesConcerns(results.getString("issues_concerns"));
-                sessionform.setNotesComments(results.getString("notes_comments"));
-
-                sessionform.setFirstActionStep(results.getString("firstactionstep"));
-                sessionform.setSecondActionStep(results.getString("secondactionstep"));
-                sessionform.setThirdActionStep(results.getString("thridactionstep"));
-                sessionform.setFourthActionStep(results.getString("fourthactionstep"));
-                sessionform.setFifthActionStep(results.getString("fithactionstep"));
-                sessionform.setSixthActionStep(results.getString("sithactionstep"));
-            }
-
-        } catch (Exception e) {
-            System.out.println("could not get Session Form");
-        }
-        return sessionform;
-    }
-
-    public List<SessionForm> getSessionForms(int first, int total, String search, String sortBy) {
-        List<SessionForm> sessionforms = new ArrayList<>();
-        String tmpQry = "";
-
-        try {
-            String qry = "SELECT * FROM session_form";
-            if(search != null){
-                qry += "WHERE mentor like '%"+search+"%' OR first_name like '%"+search+"%' OR last_name like '%"+search+"%' ";
-            }
-            if(sortBy != null && !sortBy.equals("")){
-                qry += "ORDER BY " + sortBy + ", session_number ASC ";
-            }
-
-            qry += "LIMIT ?,?";
-
-            tmpQry = qry;
-
-            PreparedStatement statement = this.con.prepareStatement(qry);
-            statement.setInt(1, first);
-            statement.setInt(2, total);
-
-            ResultSet results = statement.executeQuery();
-
-            while (results.next()) {
-                SessionForm sessionform = new SessionForm();
-                sessionform.setMentor(results.getString("mentor"));
-                sessionform.setFirstName(results.getString("first_name"));
-                sessionform.setLastName(results.getString("last_name"));
-                sessionform.setSessionNum(results.getInt("sessionnum"));
+                sessionform.setSessionNum(results.getInt("session_number"));
                 sessionform.setDate(results.getString("day"));
 
                 sessionform.setPreActionOne(results.getString("pre_action_one"));
@@ -449,20 +377,92 @@ public class CrudService {
                 sessionform.setIssuesConcerns(results.getString("issues_concerns"));
                 sessionform.setNotesComments(results.getString("notes_comments"));
 
-                sessionform.setFirstActionStep(results.getString("firstactionstep"));
-                sessionform.setSecondActionStep(results.getString("secondactionstep"));
-                sessionform.setThirdActionStep(results.getString("thridactionstep"));
-                sessionform.setFourthActionStep(results.getString("fourthactionstep"));
-                sessionform.setFifthActionStep(results.getString("fithactionstep"));
-                sessionform.setSixthActionStep(results.getString("sithactionstep"));
+                sessionform.setFirstActionStep(results.getString("action_one"));
+                sessionform.setSecondActionStep(results.getString("action_two"));
+                sessionform.setThirdActionStep(results.getString("action_three"));
+                sessionform.setFourthActionStep(results.getString("action_four"));
+                sessionform.setFifthActionStep(results.getString("action_five"));
+                sessionform.setSixthActionStep(results.getString("action_six"));
+            }
 
-                sessionforms.add(sessionform);
+        } catch (Exception e) {
+            System.out.println("could not get Session Form \n" + e);
+        }
+        return sessionform;
+    }
+
+    public List<SessionForm> getSessionForms(int first, int total, String search, String sortBy) {
+        List<SessionForm> sessionformlist = new ArrayList<>();
+        String tmpQry = "";
+
+        try {
+            String qry = "SELECT * FROM session_form";
+            if(search != null){
+                qry += "WHERE mentor like '%"+search+"%' OR first_name like '%"+search+"%' OR last_name like '%"+search+"%' ";
+            }
+            if(sortBy != null && !sortBy.equals("")){
+                qry += " ORDER BY " + sortBy + ", session_number ASC ";
+            }
+
+            qry += " LIMIT ?,?";
+
+            tmpQry = qry;
+
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setInt(1, first);
+            statement.setInt(2, total);
+            ResultSet results = statement.executeQuery();
+
+            while (results.next()) {
+                SessionForm sessionform = new SessionForm();
+                sessionform.setMentor(getMentor(results.getString("mentor")));
+                sessionform.setFirstName(results.getString("first_name"));
+                sessionform.setLastName(results.getString("last_name"));
+                sessionform.setSessionNum(results.getInt("session_number"));
+                sessionform.setDate(results.getString("day"));
+
+                sessionform.setPreActionOne(results.getString("pre_action_one"));
+                sessionform.setBoolActionOne(results.getBoolean("bool_action_one"));
+                sessionform.setPreActionTwo(results.getString("pre_action_two"));
+                sessionform.setBoolActionTwo(results.getBoolean("bool_action_two"));
+                sessionform.setPreActionThree(results.getString("pre_action_three"));
+                sessionform.setBoolActionThree(results.getBoolean("bool_action_three"));
+                sessionform.setPreActionFour(results.getString("pre_action_four"));
+                sessionform.setBoolActionFour(results.getBoolean("bool_action_four"));
+                sessionform.setPreActionFive(results.getString("pre_action_five"));
+                sessionform.setBoolActionFive(results.getBoolean("bool_action_five"));
+                sessionform.setPreActionSix(results.getString("pre_action_six"));
+                sessionform.setBoolActionSix(results.getBoolean("bool_action_six"));
+
+                sessionform.setScale(results.getInt("scale"));
+
+                sessionform.setCampusInvolement(results.getBoolean("campus_involvement"));
+                sessionform.setMeaningfulRelationships(results.getBoolean("meaningful_relationships"));
+                sessionform.setFinancialManagement(results.getBoolean("financial_management"));
+                sessionform.setOutsideResponsibilities(results.getBoolean("outside_responsibilities"));
+                sessionform.setStudyTimeManagement(results.getBoolean("study_time_management"));
+                sessionform.setAcademicEngagement(results.getBoolean("academic_engagement"));
+                sessionform.setHealthWellness(results.getBoolean("health_wellness"));
+                sessionform.setOther(results.getBoolean("other_bool"));
+                sessionform.setOtherText(results.getString("other_text"));
+
+                sessionform.setIssuesConcerns(results.getString("issues_concerns"));
+                sessionform.setNotesComments(results.getString("notes_comments"));
+
+                sessionform.setFirstActionStep(results.getString("action_one"));
+                sessionform.setSecondActionStep(results.getString("action_two"));
+                sessionform.setThirdActionStep(results.getString("action_three"));
+                sessionform.setFourthActionStep(results.getString("action_four"));
+                sessionform.setFifthActionStep(results.getString("action_five"));
+                sessionform.setSixthActionStep(results.getString("action_six"));
+
+                sessionformlist.add(sessionform);
             }
         } catch (Exception e) {
-            System.out.println("Could not get the session form"+tmpQry);
+            System.out.println("Could not get the session form "+tmpQry +"\n" +e);
         }
 
-        return sessionforms;
+        return sessionformlist;
     }
 
 
@@ -1316,6 +1316,21 @@ public class CrudService {
         } catch (Exception e) {
             System.out.println("There was a problem creating the password reset");
         }
+    }
+
+    public int countSessionForms() {
+        int sessionCount = 0;
+        try {
+            String qry = "SELECT COUNT(*) FROM session_form";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                sessionCount = results.getInt("COUNT(*)");
+            }
+        } catch (Exception e) {
+            System.out.println("There was a problem counting the session forms");
+        }
+        return sessionCount;
     }
 
 
