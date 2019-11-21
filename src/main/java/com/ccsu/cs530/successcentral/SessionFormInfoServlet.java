@@ -17,8 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-@WebServlet("/session_form")
-public class SessionFormServlet extends HttpServlet {
+@WebServlet("/session_form_info")
+public class SessionFormInfoServlet extends HttpServlet {
     private CrudService crud = new CrudService();
 
     @Override
@@ -26,7 +26,7 @@ public class SessionFormServlet extends HttpServlet {
         // todo want to set attributes for Previous Action Steps by pulling from database
         // todo this does not work
         req.setAttribute("myMentees", crud.getMyMentees((String)req.getSession().getAttribute("email")));
-        req.getRequestDispatcher("session_form.jsp").forward(req, resp);
+        req.getRequestDispatcher("session_form_info.jsp").forward(req, resp);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class SessionFormServlet extends HttpServlet {
         req.setAttribute("mentor", "session_form");
         req.getRequestDispatcher("form_success").forward(req, resp);
 
-        }
-
-
     }
+
+
+}
