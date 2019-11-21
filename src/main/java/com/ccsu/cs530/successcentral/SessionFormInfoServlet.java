@@ -27,7 +27,7 @@ public class SessionFormInfoServlet extends HttpServlet {
             SessionForm sessionform = crud.getSessionForm(firstname, lastname, sessionNum);
 
             // populate the request object to send to the jsp
-            req.setAttribute("sessionform", sessionform);
+            req.setAttribute("session_form", sessionform);
 
             req.getRequestDispatcher("session_form_info.jsp").forward(req, resp);
         } else {
