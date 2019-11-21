@@ -73,7 +73,7 @@
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="DD-MMM-YYYY"
+                                placeholder="MM-DD-YY"
                                 required=""
                                 name="date"
 
