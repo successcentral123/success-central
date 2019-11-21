@@ -60,11 +60,12 @@
                     <div class="form-group col-md-6">
                         <label> <span style="color:red">*</span>Session #</label>
                         <input
-                                type="text"
+                                type="number"
                                 class="form-control"
                                 placeholder="Session #"
                                 required=""
                                 name="sessionnum"
+                                min="1"
                         />
                     </div>
                     <div class="col">
@@ -82,33 +83,104 @@
                 <br />
             </fieldset>
 
+
+
             <fieldset>
                 <legend>Assessment of Prior Session:</legend>
 
-                <!-- 17-Sep-2019 CDP Phase 2: Action Steps from last session  -->
-                <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
-                <br>
-                    <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
-                    <div class="form-check" required="">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1">
-                        <label class="form-check-label" for="defaultCheck1"> Previous Action Item #1 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2">
-                        <label class="form-check-label" for="defaultCheck2"> Previous Action Item #2 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3">
-                        <label class="form-check-label" for="defaultCheck3"> Previous Action Item #3 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4">
-                        <label class="form-check-label" for="defaultCheck4"> Previous Action Item #4 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5">
-                        <label class="form-check-label" for="defaultCheck5"> Previous Action Item #5 </label></div>
-                    <div class="form-check">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6">
-                        <label class="form-check-label" for="defaultCheck6"> Previous Action Item #6 </label></div>
-                <br />
 
+                <!-- 17-Sep-2019 CDP Phase 2: Action Steps from last session  -->
+
+                <!-- Call button -->
+                <br>
+
+                <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
+
+                <fieldset>
+                    <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+                    <div class="col">
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="1st Previous Action Step"
+                                required=""
+                                name="preactionone"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="2nd Previous Action Step"
+                                name="preactiontwo"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="3rd Previous Action Step"
+                                name="preactionthree"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="4th Previous Action Step"
+                                name="preactionfour"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="5th Previous Action Step"
+                                name="preactionfive"
+                        />
+                        <br>
+                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" >
+                        <input
+                                type="text"
+                                class="form-control"
+                                placeholder="6th Previous Action Step"
+                                name="preactionsix"
+                        />
+                    </div>
+                </fieldset>
+
+
+                <!--<div class="form-row">
+                    <div class="col">
+                        <div class="form-check" required="">
+
+                            <label class="form-check-label" id="" for="defaultCheck1" >Previous</label></div>
+                        <div class="form-check">
+
+                            <label class="form-check-label" for="defaultCheck2" ></label></div>
+                        <div class="form-check">
+
+                            <label class="form-check-label" for="defaultCheck3" ></label></div>
+                        <div class="form-check">
+
+                            <label class="form-check-label" for="defaultCheck4" ></label></div>
+                        <div class="form-check">
+
+                            <label class="form-check-label" for="defaultCheck5" ></label></div>
+                        <div class="form-check">
+
+                            <label class="form-check-label" for="defaultCheck6" ></label></div>
+                        <br />
+                    </div>
+                </div>-->
+
+
+
+
+
+                <br>
+                <br>
                 <!-- 17-Sep-2019 CDP Phase 2: Change Gender to the 1-5 Scale -->
                 <label><span style="color:red">*</span> On a scale of 1 to 5, how happy is the Mentee with the outcome of the action steps from last session? </label>
                 <br>
@@ -251,7 +323,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="2nd Action Step"
-                                required=""
                                 name="secondactionstep"
                         />
                         <br>
@@ -259,7 +330,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="3rd Action Step"
-                                required=""
                                 name="thirdactionstep"
                         />
                         <br>
@@ -267,7 +337,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="4th Action Step"
-                                required=""
                                 name="fourthactionstep"
                         />
                         <br>
@@ -275,7 +344,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="5th Action Step"
-                                required=""
                                 name="fifthactionstep"
                         />
                         <br>
@@ -283,7 +351,6 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="6th Action Step"
-                                required=""
                                 name="sixthactionstep"
                         />
                     </div>

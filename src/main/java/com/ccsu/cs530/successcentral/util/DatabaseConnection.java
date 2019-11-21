@@ -21,14 +21,14 @@ public class DatabaseConnection {
 
 //        try {
 //            HikariConfig config = new HikariConfig();
-//
-//            // Configure which instance and what database user to connect with.
+
+            // Configure which instance and what database user to connect with.
 //            config.setJdbcUrl(System.getenv("JDBC_URL"));
 //
 //            DataSource pool = new HikariDataSource(config);
 //            con = pool.getConnection();
 //            return con;
-//
+
 //        } catch (Exception e) {
 //            System.out.println("Could not connect Booya");
 //            return null;
@@ -42,20 +42,20 @@ public class DatabaseConnection {
     }
 
     public void open() throws NamingException, SQLException {
-        // The configuration object specifies behaviors for the connection pool.
-//        HikariConfig config = new HikariConfig();
-//
-//        // Configure which instance and what database user to connect with.
-//        config.setJdbcUrl(System.getenv("JDBC_URL"));
-//
-//
-//        // Initialize the connection pool using the configuration object.
-//        DataSource pool = new HikariDataSource(config);
-//        con = pool.getConnection();
+       // The configuration object specifies behaviors for the connection pool.
+        HikariConfig config = new HikariConfig();
 
-        ic = new InitialContext();
-        ds = (DataSource) ic.lookup("java:/SCDB");
-        con = ds.getConnection();
+        // Configure which instance and what database user to connect with.
+        config.setJdbcUrl(System.getenv("JDBC_URL"));
+
+
+        // Initialize the connection pool using the configuration object.
+        DataSource pool = new HikariDataSource(config);
+        con = pool.getConnection();
+
+        //ic = new InitialContext();
+        //ds = (DataSource) ic.lookup("java:/SCDB");
+        //con = ds.getConnection();
     }
 
     public void close() throws SQLException {
