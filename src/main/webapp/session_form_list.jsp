@@ -98,8 +98,8 @@
                 <td><%= sessionform.getFirstName() %></td>
                 <td><%= sessionform.getLastName() %></td>
 <%--                 todo link for the session number--%>
-<%--                <th scope="row"><a href="mentee_info?menteeID=<%=mentee.getEmail()%>"><%= mentee.getEmail() %></a></th>--%>
-                <td><%= sessionform.getSessionNum() %></td>
+                <th scope="row"><a
+                        href="session_form_info?firstName=<%=sessionform.getFirstName()%>&lastName=<%=sessionform.getLastName()%>&seshNum=<%=sessionform.getSessionNum()%>"><%= sessionform.getSessionNum() %></a></th>
             </tr>
             <% } %>
             </tbody>

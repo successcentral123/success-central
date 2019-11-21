@@ -16,6 +16,12 @@
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
+<%
+    SessionForm sessionform = (SessionForm) request.getAttribute("session_form");
+    //String name = sessionform.getFirstName() + sessionform.getLastName();
+    //String date = sessionform.getDate();
+    //String
+%>
 
 
 <div class="container">
@@ -33,32 +39,27 @@
                 <legend>Session Information:</legend>
 
                 <!-- Name -->
-                <div class="row">
-                    <label><span style="color:red">*</span> Student Name</label>
-                    <%
-                        SessionForm sessionForm = (SessionForm) request.getAttribute("session_form");
-                        String name = sessionForm.getFirstName() + sessionForm.getLastName();
-                    %>
-                </div>
 
-                <br>
 
                 <!-- 17-Sep-2019 CDP Phase 2: Added a textbox for Session# Date  -->
                 <!-- CCSU Info -->
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label> <span style="color:red">*</span>Session #</label>
-                    </div>
                     <div class="col">
-                        <label><span style="color:red">*</span> Date</label>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="DD-MMM-YYYY"
-                                required=""
-                                name="date"
-
-                        />
+                        <label> Student Name: </label> &nbsp;
+                        <b>
+                            <%=sessionform.getFirstName()%>
+                            <%=sessionform.getLastName()%>
+                        </b>
+                        <br>
+                        <label>Session #:</label> &nbsp;
+                        <b>
+                            <%=sessionform.getSessionNum()%>
+                        </b>
+                        <br>
+                        <label>Date:</label> &nbsp;
+                        <b>
+                            <%=sessionform.getDate()%>
+                        </b>
                     </div>
                 </div>
                 <br />
@@ -68,206 +69,79 @@
 
             <fieldset>
                 <legend>Assessment of Prior Session:</legend>
-
-
-                <!-- 17-Sep-2019 CDP Phase 2: Action Steps from last session  -->
-
-                <!-- Call button -->
-                <br>
-
-                <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
-
                 <fieldset>
-                    <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
-                    <div class="col">
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1" >
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="1st Previous Action Step"
-                                required=""
-                                name="preactionone"
-                        />
-                        <br>
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" >
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="2nd Previous Action Step"
-                                name="preactiontwo"
-                        />
-                        <br>
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" >
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="3rd Previous Action Step"
-                                name="preactionthree"
-                        />
-                        <br>
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" >
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="4th Previous Action Step"
-                                name="preactionfour"
-                        />
-                        <br>
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" >
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="5th Previous Action Step"
-                                name="preactionfive"
-                        />
-                        <br>
-                        <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" >
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="6th Previous Action Step"
-                                name="preactionsix"
-                        />
+                    <label> Action Steps from the previous session (Check if completed): </label>
+                    <div class="form-row">
+                        <div class="col">
+                        <b>
+                            <%=sessionform.isBool_action_one()%> &nbsp;
+                            <%=sessionform.getPreActionOne()%>
+                            <br>
+                            <%=sessionform.isBool_action_two()%> &nbsp;
+                            <%=sessionform.getPreActionTwo()%>
+                            <br>
+                            <%=sessionform.isBool_action_three()%> &nbsp;
+                            <%=sessionform.getPreActionThree()%>
+                            <br>
+                            <%=sessionform.isBool_action_four()%> &nbsp;
+                            <%=sessionform.getPreActionFour()%>
+                            <br>
+                            <%=sessionform.isBool_action_five()%> &nbsp;
+                            <%=sessionform.getPreActionFive()%>
+                            <br>
+                            <%=sessionform.isBool_action_six()%> &nbsp;
+                            <%=sessionform.getPreActionSix()%>
+                        </b>
+                        </div>
                     </div>
                 </fieldset>
-
-
-                <!--<div class="form-row">
-                    <div class="col">
-                        <div class="form-check" required="">
-
-                            <label class="form-check-label" id="" for="defaultCheck1" >Previous</label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck2" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck3" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck4" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck5" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck6" ></label></div>
-                        <br />
-                    </div>
-                </div>-->
-
-
-
-
-
-                <br>
                 <br>
                 <!-- 17-Sep-2019 CDP Phase 2: Change Gender to the 1-5 Scale -->
-                <label><span style="color:red">*</span> On a scale of 1 to 5, how happy is the Mentee with the outcome of the action steps from last session? </label>
-                <br>
-                <div class="form-check">
-                    <input
-                            class="form-check-input"
-                            type="radio"
-                            id="exampleRadios1a"
-                            value="5"
-                            name="scale"
-                            required=""
-                    />
-                    <label class="form-check-label" for="exampleRadios1a">5 - Very Satisfied </label></div>
-                <div class="form-check" >
-                    <input
-                            class="form-check-input"
-                            type="radio"
-                            id="exampleRadios2a"
-                            value="4"
-                            name="scale"
-                            required=""
-                    />
-                    <label class="form-check-label" for="exampleRadios2a"
-                    >4 - Satisfied </label
-                    ></div>
-                <div class="form-check" >
-                    <input
-                            class="form-check-input"
-                            type="radio"
-                            id="exampleRadios3a"
-                            value="3"
-                            name="scale"
-                            required=""
-                    />
-                    <label class="form-check-label" for="exampleRadios3a"
-                    >3 - Neither Satisfied Nor Dissatisfied</label>
-                </div>
-                <div class="form-check" >
-                    <input
-                            class="form-check-input"
-                            type="radio"
-                            id="exampleRadios4a"
-                            value="2"
-                            name="scale"
-                            required=""
-                    />
-                    <label class="form-check-label" for="exampleRadios4a"
-                    >2 - Dissatisfied </label
-                    ></div>
-                <div class="form-check" >
-                    <input
-                            class="form-check-input"
-                            type="radio"
-                            id="exampleRadios5a"
-                            value="1"
-                            name="scale"
-                            required=""
-                    />
-                    <label class="form-check-label" for="exampleRadios5a"
-                    >1 - Very Dissatisfied </label
-                    ></div>
-                <br>
+                <label>On a scale of 1 to 5, how happy is the Mentee with the outcome of the action steps from last session? </label>
+                <b>
+                    <%=sessionform.getScale()%>
+                </b>
             </fieldset>
+
             <fieldset>
                 <legend>Assessment of Current Session:</legend>
 
                 <!-- 17-Sep-2019 CDP Phase 2: Change Ethnicity to the Current Session Topics -->
                 <div class="form-row">
                     <div class="col">
-                        <label><span style="color:red">*</span> Current Session Topics. Check all that apply.</label>
-                        <div class="form-check" required="">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck1a" value="Campus Involvement">
-                            <label class="form-check-label" for="defaultCheck1a"> Campus Involvement </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck2a" value="Meaningful Relationships">
-                            <label class="form-check-label" for="defaultCheck2a"> Meaningful Relationships </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck3a" value="Financial Management">
-                            <label class="form-check-label" for="defaultCheck3a"> Financial Management </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck4a" value="Outside Responsibilities">
-                            <label class="form-check-label" for="defaultCheck4a"> Outside Responsibilities </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck5a" value="Study Skills/Time Management">
-                            <label class="form-check-label" for="defaultCheck5a"> Study Skills/Time Management </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck6a" value="Academic Engagement">
-                            <label class="form-check-label" for="defaultCheck6a"> Academic Engagement </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck7a" value="Health & Wellness">
-                            <label class="form-check-label" for="defaultCheck7a"> Health & Wellness </label></div>
-                        <div class="form-check">
-                            <input class="form-check-input" name="sessiontopics" type="checkbox" id="defaultCheck8a" value="Other" onclick="disableSubjectField()">
-                            <label class="form-check-label" for="defaultCheck8a"> Other </label>
-                        </div>
+                        <label>Current Session Topics. Check all that apply.</label>
+                        <b>
+                            <br>
+                            <%=sessionform.isCampus_involvement()%> &nbsp;
+                            <label> Campus Involvement </label>
+                            <br>
+                            <%=sessionform.isMeaningful_relationships()%> &nbsp;
+                            <label> Meaningful Relationships </label>
+                            <br>
+                            <%=sessionform.isFinancial_management()%> &nbsp;
+                            <label> Financial Management </label>
+                            <br>
+                            <%=sessionform.isOutside_responsibilities()%> &nbsp;
+                            <label> Outside Responsibilities </label>
+                            <br>
+                            <%=sessionform.isStudy_time_management()%> &nbsp;
+                            <label> Study Skills/Time Management </label>
+                            <br>
+                            <%=sessionform.isAcademic_engagement()%> &nbsp;
+                            <label> Academic Engagement </label>
+                            <br>
+                            <%=sessionform.isHealth_wellness()%> &nbsp;
+                            <label> Health & Wellness </label>
+                            <br>
+                            <%=sessionform.isBool_other()%> &nbsp;
+                            <label> Other </label>
+                        </b>
                     </div>
                     <div class="col">
                         <label>If you selected Other, please specify.</label>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Specify Session Topic"
-                                name="othersesstopic"
-                                id="SessTopicOther"
-                                disabled
-                        />
+                        <b>
+                            <%=sessionform.getOther()%>
+                        </b>
                     </div>
                 </div>
                 <br />
@@ -278,68 +152,41 @@
             <fieldset>
                 <legend>Session Notes:</legend>
                 <!-- Issues & Concerns -->
-                <label><span style="color:red">*</span> Issues & Concerns:  </label>
-                <textarea class="form-control" name="issues_concerns" rows="3" required=""></textarea>
+                <label>Issues & Concerns:  </label> &nbsp;
+                <b>
+                    <%=sessionform.getIssuesConcerns()%>
+                </b>
                 <br />
 
                 <!-- Notes & Comments -->
-                <label><span style="color:red">*</span> Notes & Comments:  </label>
-                <textarea class="form-control" name="notes_comments" rows="3" required=""></textarea>
+                <label>Notes & Comments:  </label> &nbsp;
+                <b>
+                    <%=sessionform.getNotesComments()%>
+                </b>
                 <br />
             </fieldset>
 
             <fieldset>
                 <legend>New Action Steps:</legend>
-                <label><span style="color:red">*</span> New Action Step(s) to address Issues/Concerns: </label>
-                <div class="col">
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="1st Action Step"
-                            required=""
-                            name="firstactionstep"
-                    />
-                    <br>
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="2nd Action Step"
-                            name="secondactionstep"
-                    />
-                    <br>
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="3rd Action Step"
-                            name="thirdactionstep"
-                    />
-                    <br>
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="4th Action Step"
-                            name="fourthactionstep"
-                    />
-                    <br>
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="5th Action Step"
-                            name="fifthactionstep"
-                    />
-                    <br>
-                    <input
-                            type="text"
-                            class="form-control"
-                            placeholder="6th Action Step"
-                            name="sixthactionstep"
-                    />
+                <label> New Action Step(s) to address Issues/Concerns: </label> &nbsp;
+                <div class="form-row">
+                    <div class="col">
+                    <b>
+                        <%=sessionform.getFirstActionStep()%>
+                        <br>
+                        <%=sessionform.getSecondActionStep()%>
+                        <br>
+                        <%=sessionform.getThirdActionStep()%>
+                        <br>
+                        <%=sessionform.getFourthActionStep()%>
+                        <br>
+                        <%=sessionform.getFifthActionStep()%>
+                        <br>
+                        <%=sessionform.getSixthActionStep()%>
+                    </b>
+                    </div>
                 </div>
             </fieldset>
-
-            <!-- Submit button -->
-            <br>
-            <button type="submit" class="btn btn-primary mb-2" onClick="return valChecked();">Submit</button>
         </form>
     </div>
 </div>

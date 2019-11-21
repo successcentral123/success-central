@@ -162,7 +162,7 @@ public class CrudService {
             statement.executeUpdate();
 
         } catch (Exception e) {
-            System.out.println("There was a problem placing the session form in the database");
+            System.out.println("There was a problem placing the session form in the database\n" + e);
         }
 
     }
