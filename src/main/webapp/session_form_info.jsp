@@ -16,6 +16,9 @@
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
+<%
+    SessionForm sessionform = (SessionForm) request.getAttribute("session_form");
+%>
 
 
 <div class="container">
@@ -34,11 +37,9 @@
 
                 <!-- Name -->
                 <div class="row">
-                    <label><span style="color:red">*</span> Student Name</label>
-                    <%
-                        SessionForm sessionForm = (SessionForm) request.getAttribute("session_form");
-                        String name = sessionForm.getFirstName() + sessionForm.getLastName();
-                    %>
+                    <label><span style="color:red">*</span> Student Name:</label>
+                    <%sessionform.getLastName();%>
+
                 </div>
 
                 <br>
