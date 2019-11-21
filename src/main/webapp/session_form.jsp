@@ -73,10 +73,10 @@
                         <input
                                 type="text"
                                 class="form-control"
-                                placeholder="MM-DD-YY"
+                                placeholder="MM-DD-YYYY"
                                 required=""
                                 name="date"
-
+                                maxlength="10"
                         />
                     </div>
                 </div>
