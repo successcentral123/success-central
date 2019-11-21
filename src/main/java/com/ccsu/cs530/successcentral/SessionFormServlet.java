@@ -2,6 +2,7 @@ package com.ccsu.cs530.successcentral;
 
 import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.model.Mentor;
+import com.ccsu.cs530.successcentral.model.Mentee;
 import com.ccsu.cs530.successcentral.service.CrudService;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,14 +25,7 @@ public class SessionFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // todo want to set attributes for Previous Action Steps by pulling from database
         // todo this does not work
-//        SessionForm sessform = new SessionForm();
-//        sessform = crud.getSessionForm(req.getParameter("firstname"), req.getParameter("lastname"), Integer.parseInt(req.getParameter("sessionnum")));
-//        req.setAttribute("preactionone", sessform.getFirstActionStep());
-//        req.setAttribute("preactiontwo", sessform.getSecondActionStep());
-//        req.setAttribute("preactionthree", sessform.getThirdActionStep());
-//        req.setAttribute("preactionfour", sessform.getFourthActionStep());
-//        req.setAttribute("preactionfive", sessform.getFifthActionStep());
-//        req.setAttribute("preactionsix", sessform.getSixthActionStep());
+        req.setAttribute("myMentees", crud.getMyMentees((String)req.getSession().getAttribute("email")));
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
@@ -43,8 +39,11 @@ public class SessionFormServlet extends HttpServlet {
         // Instantiate sessionform and then it to database
         SessionForm sessionform = new SessionForm();
         sessionform.setMentor(mentor);
+        List<Mentee> menteelist = new ArrayList<>();
+        menteelist = crud.getMyMentees(mentorEmail);
 
         if (req.getParameter("firstname") != null) {
+
             sessionform.setFirstName(req.getParameter("firstname"));
         }
         if (req.getParameter("lastname") != null) {
