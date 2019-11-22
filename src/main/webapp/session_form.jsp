@@ -32,14 +32,16 @@
             <!-- Basic info -->
             <fieldset>
                 <legend>Session Information:</legend>
-                <% String myEmail = (String)request.getAttribute("email"); %>
                 <% List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;%>
                 <!-- Name -->
                 <label><span style="color:red">*</span> Student Name:</label>
                 <br />
                 <select class="form-control" name="firstname" required="">
-                    <% for (int i = 0; i < myMentees.size(); i++) { ; %>
-                    <option value="<%= i %>"><%= myMentees.get(i).getFirstName() %></option>
+                    <% for (int i = 0; i < myMentees.size(); i++) {
+                        String first = myMentees.get(i).getFirstName();
+                        String last = myMentees.get(i).getLastName();
+                        String full = first + " "+ last;%>
+                    <option value="<%= i %>"><%= full %></option>
                     <% } %>
                 </select>
                 <br /><br/>
