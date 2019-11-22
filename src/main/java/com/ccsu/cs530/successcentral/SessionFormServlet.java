@@ -28,7 +28,6 @@ public class SessionFormServlet extends HttpServlet {
         String myEmail = (String)req.getSession().getAttribute("email");
         List<Mentee> myMentees = crud.getMyMentees(myEmail);
         req.setAttribute("myMentees", myMentees);
-        req.setAttribute("email", myEmail);
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
