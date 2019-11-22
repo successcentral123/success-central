@@ -18,9 +18,6 @@
 <jsp:include page="includes/navbar.jsp"/>
 <%
     SessionForm sessionform = (SessionForm) request.getAttribute("session_form");
-    //String name = sessionform.getFirstName() + sessionform.getLastName();
-    //String date = sessionform.getDate();
-    //String
 %>
 
 
@@ -74,12 +71,12 @@
                         <div class="col">
                         <b>
                             <%  String check1 ="";
-                                if (sessionform.isBool_action_one() == true)
+                                if (sessionform.isBool_action_one())
                                     check1 = "CHECKED";
                                 else
                                     check1 = "UNCHECKED";
                             %>
-                            <%=check1%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=check1%>>
                             <%=sessionform.getPreActionOne()%>
                             <br>
                             <%  String check2 ="";
@@ -88,7 +85,7 @@
                                 else
                                     check2 = "UNCHECKED";
                             %>
-                            <%=check2%> &nbsp;&nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=check2%>>
                             <%=sessionform.getPreActionTwo()%>
                             <br>
                             <%  String check3 ="";
@@ -97,7 +94,7 @@
                                 else
                                     check3 = "UNCHECKED";
                             %>
-                            <%=check3%> &nbsp;&nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=check3%>>
                             <%=sessionform.getPreActionThree()%>
                             <br>
                             <%  String check4 ="";
@@ -106,7 +103,7 @@
                                 else
                                     check4 = "UNCHECKED";
                             %>
-                            <%=check4%> &nbsp;&nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=check4%>>
                             <%=sessionform.getPreActionFour()%>
                             <br>
                             <%  String check5 ="";
@@ -115,7 +112,7 @@
                                 else
                                     check5 = "UNCHECKED";
                             %>
-                            <%=check5%> &nbsp; &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=check5%>>
                             <%=sessionform.getPreActionFive()%>
                             <br>
                             <%  String check6 ="";
@@ -124,7 +121,7 @@
                                 else
                                     check6 = "UNCHECKED";
                             %>
-                            <%=check6%> &nbsp;&nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=check6%>>
                             <%=sessionform.getPreActionSix()%>
                         </b>
                         </div>
@@ -153,7 +150,7 @@
                                 else
                                     checkST1 = "UNCHECKED";
                             %>
-                            <%=checkST1%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST1%>>
                             <label> Campus Involvement </label>
                             <br>
                             <%  String checkST2 ="";
@@ -162,7 +159,7 @@
                                 else
                                     checkST2 = "UNCHECKED";
                             %>
-                            <%=checkST2%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST2%>>
                             <label> Meaningful Relationships </label>
                             <br>
                             <%  String checkST3 ="";
@@ -171,7 +168,7 @@
                                 else
                                     checkST3 = "UNCHECKED";
                             %>
-                            <%=checkST3%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST3%>>
                             <label> Financial Management </label>
                             <br>
                             <%  String checkST4 ="";
@@ -180,7 +177,7 @@
                                 else
                                     checkST4 = "UNCHECKED";
                             %>
-                            <%=checkST4%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST4%>>
                             <label> Outside Responsibilities </label>
                             <br>
                             <%  String checkST5 ="";
@@ -189,7 +186,7 @@
                                 else
                                     checkST5 = "UNCHECKED";
                             %>
-                            <%=checkST5%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST5%>>
                             <label> Study Skills/Time Management </label>
                             <br>
                             <%  String checkST6 ="";
@@ -198,7 +195,7 @@
                                 else
                                     checkST6 = "UNCHECKED";
                             %>
-                            <%=checkST6%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST6%>>
                             <label> Academic Engagement </label>
                             <br>
                             <%  String checkST7 ="";
@@ -207,7 +204,7 @@
                                 else
                                     checkST7 = "UNCHECKED";
                             %>
-                            <%=checkST7%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST7%>>
                             <label> Health & Wellness </label>
                             <br>
                             <%  String checkST8 ="";
@@ -216,7 +213,7 @@
                                 else
                                     checkST8 = "UNCHECKED";
                             %>
-                            <%=checkST8%> &nbsp;
+                            <input type="checkbox" name="pre action one" disabled <%=checkST8%>>
                             <label> Other </label>
                         </b>
                     </div>
