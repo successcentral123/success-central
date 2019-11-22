@@ -37,16 +37,6 @@
                         Session Form List
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="report_session">
-                        Session Form Report
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="report_intake">
-                        Intake Form Report
-                    </a>
-                </li>
             <% } else if (request.getSession().getAttribute("email") != null) { %>
                 <li class="nav-item">
                     <a class="nav-link" href="mentee_list">
@@ -70,6 +60,23 @@
                   </a>
                </li>
             <% } %>
+
+
+            <li class="nav-item dropdown ">
+                <% if (request.getSession().getAttribute("isAdmin") != null && request.getSession().getAttribute("isAdmin").equals("true")) { %>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="foo" role="button" aria-haspopup="true" aria-expanded="false">
+                    Reports
+                </a>
+                <div class="dropdown-menu" aria-labelledby="foo">
+                    <a href="report_intake" aria-labelledby="foo" class="dropdown-item">Intake Form Report </a>
+                    <a href="report_session" aria-labelledby="foo" class="dropdown-item">Session Form Report </a>
+                </div>
+                <% } else { %>
+                <% } %>
+            </li>
+
+
+
             <li class="nav-item dropdown ">
                 <% if (request.getSession().getAttribute("email") != null) { %>
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="foo" role="button" aria-haspopup="true" aria-expanded="false">
