@@ -25,7 +25,10 @@ public class SessionFormServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // todo want to set attributes for Previous Action Steps by pulling from database
         // todo this does not work
-        req.setAttribute("myMentees", crud.getMyMentees((String)req.getSession().getAttribute("email")));
+        String myEmail = (String)req.getSession().getAttribute("email");
+        List<Mentee> myMentees = crud.getMyMentees(myEmail);
+        req.setAttribute("myMentees", myMentees);
+        req.setAttribute("email", myEmail);
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
@@ -36,9 +39,10 @@ public class SessionFormServlet extends HttpServlet {
         Mentor mentor = crud.getMentor(mentorEmail);
         String mentorFirst = mentor.getFirstName();
         String mentorLast = mentor.getLastName();
+        String mentorName = mentor.getFirstName() + " " + mentor.getLastName();
         // Instantiate sessionform and then it to database
         SessionForm sessionform = new SessionForm();
-        sessionform.setMentor(mentor);
+        sessionform.setMentor(mentorName);
         List<Mentee> menteelist = new ArrayList<>();
         menteelist = crud.getMyMentees(mentorEmail);
 
