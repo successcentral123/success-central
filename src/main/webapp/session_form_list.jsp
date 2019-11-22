@@ -78,10 +78,10 @@
     <table style="background-color: white" class="table table-sm table-striped table-bordered table-responsive-sm">
         <thead class="table-secondary">
         <tr class="text-center">
-            <th scope="col">Mentee Last Name</th>
-            <th scope="col">Mentee First Name</th>
-            <th scope="col">Session Number</th>
             <th scope="col">Mentor</th>
+            <th scope="col">Mentee First Name</th>
+            <th scope="col">Mentee Last Name</th>
+            <th scope="col">Session Number</th>
         </tr>
         </thead>
         <form name="session_form" >
@@ -91,7 +91,8 @@
             <tbody>
             <%for (SessionForm sessionform : (List<SessionForm>) request.getAttribute("sessionforms")) {
                 String mentorName = "";
-                mentorName =  sessionform.getMentor().getFirstName() + " " + sessionform.getMentor().getLastName();
+                mentorName = sessionform.getMentor();
+//                mentorName =  sessionform.getMentor().getFirstName() + " " + sessionform.getMentor().getLastName();
             %>
             <tr class="text-center">
                 <td><%= mentorName %></td>
