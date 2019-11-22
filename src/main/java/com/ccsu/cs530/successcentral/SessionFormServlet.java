@@ -27,7 +27,16 @@ public class SessionFormServlet extends HttpServlet {
         // todo this does not work
         String myEmail = (String)req.getSession().getAttribute("email");
         List<Mentee> myMentees = crud.getMyMentees(myEmail);
-        req.setAttribute("myMentees", myMentees);
+        if (req.getParameter("fullname") != null) {
+            String fullname = (String) req.getParameter("fullname");
+            int maxSession = crud.getMaxSessionNumber(fullname);
+            SessionForm preSession = crud.getSessionForm(fullname, maxSession);
+            req.setAttribute("preSession", preSession);
+            req.setAttribute("fullname", fullname);
+            req.setAttribute("myMentees", myMentees);
+        }
+        else
+            req.setAttribute("myMentees", myMentees);
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
@@ -141,7 +150,6 @@ public class SessionFormServlet extends HttpServlet {
 
         crud.createSessionForm(sessionform);
         // sets form type to seesion_form so form_success can show correct page message
-        // todo want to change the attribute "mentor" to "form_type"
         req.setAttribute("form_type", "session_form");
         req.getRequestDispatcher("form_success").forward(req, resp);
 

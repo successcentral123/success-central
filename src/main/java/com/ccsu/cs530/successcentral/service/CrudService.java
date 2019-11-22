@@ -394,6 +394,24 @@ public class CrudService {
         return sessionform;
     }
 
+    public int getMaxSessionNumber(String name) {
+        int sessionnum = 1;
+        try {
+            String qry = "SELECT MAX(session_number) FROM session_form WHERE full_name like ?";
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setString(1, name);
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                sessionnum = results.getInt("MAX(session_number)");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not get the session number\n" +e);
+        }
+
+        return sessionnum;
+    }
+
     public List<SessionForm> getSessionForms(int first, int total, String search, String sortBy) {
         List<SessionForm> sessionformlist = new ArrayList<>();
         String tmpQry = "";

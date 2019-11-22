@@ -8,6 +8,7 @@
 <%@ page import="com.ccsu.cs530.successcentral.model.Mentee" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.ccsu.cs530.successcentral.model.SessionForm" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,17 +32,26 @@
 
             <!-- Basic info -->
             <fieldset>
+
+<%--                 todo this gets the sessionform from the doGet in the servlet--%>
+                <%  SessionForm pre = new SessionForm();
+                    if (request.getAttribute("fullname") != null)
+                        pre = (SessionForm) request.getAttribute("preSession");
+                %>
+
                 <legend>Session Information:</legend>
                 <% List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;%>
                 <!-- Name -->
                 <label><span style="color:red">*</span> Student Name:</label>
                 <br />
-                <select class="form-control" name="fullname" required="">
-                    <% for (int i = 0; i < myMentees.size(); i++) {
+                <select class="form-control" name="fullname" id="fullSelect"  onchange="refreshpage()" required="">
+                    <option value="Mentee" selected>Mentee</option>
+                    <%  String fullname = "";
+                        for (int i = 0; i < myMentees.size(); i++) {
                         String first = myMentees.get(i).getFirstName();
                         String last = myMentees.get(i).getLastName();
                         String full = first + " "+ last;%>
-                    <option value="<%= full %>"><%= full %></option>
+                    <option value="<%= full %>" <%if(fullname.equals(full)) {%>selected<%}%>><%= full %></option>
                     <% } %>
                 </select>
                 <br /><br/>
@@ -356,14 +366,10 @@
 </div>
 
 <jsp:include page="includes/footer.jsp"/>
-<script>function disableSubjectField() {
-    if (document.getElementById('defaultCheck8a').checked) {
-        document.getElementById('SessTopicOther').disabled = false;
-    } else {
-        document.getElementById('SessTopicOther').value = '';
-        document.getElementById('SessTopicOther').disabled = true;
+<script>
+    function refreshpage() {
+        // console.log(document.getElementById("fullSelect").value);
     }
-}
 </script>
 </body>
 </html>
