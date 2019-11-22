@@ -5,6 +5,7 @@ public class SessionForm {
     private String mentor;
     private String first_name;
     private String second_name;
+    private String full_name;
     private int session_number;
     private String date;
     private String pre_action_one;
@@ -66,6 +67,14 @@ public class SessionForm {
     public void setLastName(String name){
         this.second_name = name;
 
+    }
+
+    public String getFullName() {
+        return full_name;
+    }
+
+    public void setFullName(String fullname) {
+        this.full_name = fullname;
     }
 
     public int getSessionNum() {

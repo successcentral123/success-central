@@ -36,12 +36,12 @@
                 <!-- Name -->
                 <label><span style="color:red">*</span> Student Name:</label>
                 <br />
-                <select class="form-control" name="firstname" required="">
+                <select class="form-control" name="fullname" required="">
                     <% for (int i = 0; i < myMentees.size(); i++) {
                         String first = myMentees.get(i).getFirstName();
                         String last = myMentees.get(i).getLastName();
                         String full = first + " "+ last;%>
-                    <option value="<%= i %>"><%= full %></option>
+                    <option value="<%= full %>"><%= full %></option>
                     <% } %>
                 </select>
                 <br /><br/>

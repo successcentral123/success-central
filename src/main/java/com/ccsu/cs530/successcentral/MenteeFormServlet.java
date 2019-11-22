@@ -122,7 +122,7 @@ public class MenteeFormServlet extends HttpServlet {
 
             crud.createMentee(mentee);
             //message = "<p class=\"text-success border border-success\">Mentee successfully created!</p>";
-            req.setAttribute("mentor", "false");
+            req.setAttribute("form_type", "mentee");
             req.setAttribute("email", mentee.getEmail());
             req.getRequestDispatcher("form_success").forward(req, resp);
         } else {

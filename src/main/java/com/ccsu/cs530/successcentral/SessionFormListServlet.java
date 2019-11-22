@@ -51,7 +51,7 @@ public class SessionFormListServlet extends HttpServlet {
 
             String search = (String)req.getParameter("search");
             String sortBy = (String)req.getParameter("sortBy");
-            List<SessionForm> sessionforms = crud.getSessionForms(firstRecord, perPageNum, search,sortBy);
+            List<SessionForm> sessionforms = crud.getSessionForms(firstRecord, perPageNum, search, sortBy);
 
 
             // populate the request object to send to the jsp

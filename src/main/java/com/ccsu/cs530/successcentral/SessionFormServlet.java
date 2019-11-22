@@ -45,12 +45,16 @@ public class SessionFormServlet extends HttpServlet {
         List<Mentee> menteelist = new ArrayList<>();
         menteelist = crud.getMyMentees(mentorEmail);
 
-        if (req.getParameter("firstname") != null) {
+//        if (req.getParameter("firstname") != null) {
+//
+//            sessionform.setFirstName(req.getParameter("firstname"));
+//        }
+//        if (req.getParameter("lastname") != null) {
+//            sessionform.setLastName(req.getParameter("lastname"));
+//        }
+        if (req.getParameter("fullname") != null) {
 
-            sessionform.setFirstName(req.getParameter("firstname"));
-        }
-        if (req.getParameter("lastname") != null) {
-            sessionform.setLastName(req.getParameter("lastname"));
+            sessionform.setFullName(req.getParameter("fullname"));
         }
         if (req.getParameter("sessionnum") != null) {
             sessionform.setSessionNum(Integer.parseInt(req.getParameter("sessionnum")));
@@ -138,7 +142,7 @@ public class SessionFormServlet extends HttpServlet {
         crud.createSessionForm(sessionform);
         // sets form type to seesion_form so form_success can show correct page message
         // todo want to change the attribute "mentor" to "form_type"
-        req.setAttribute("mentor", "session_form");
+        req.setAttribute("form_type", "session_form");
         req.getRequestDispatcher("form_success").forward(req, resp);
 
         }

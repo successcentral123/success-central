@@ -129,7 +129,7 @@ public class MentorFormServlet extends HttpServlet {
             }
             crud.createMentor(mentor);
 //            message = "<p class=\"text-success border border-success\">Mentor successfully created!</p>";
-            req.setAttribute("mentor", "true");
+            req.setAttribute("form_type", "mentor");
             req.setAttribute("email", mentor.getEmail());
             req.getRequestDispatcher("form_success").forward(req, resp);
         } else {

@@ -118,47 +118,48 @@ public class CrudService {
     public void createSessionForm(SessionForm sessionform){
 
         try {
-            String qry = "INSERT INTO session_form VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String qry = "INSERT INTO session_form VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(qry);
 //            statement.setString(1, sessionform.getMentor() == null ? null : sessionform.getMentor().getEmail());
             statement.setString(1,sessionform.getMentor());
-            statement.setString(2, sessionform.getFirstName());
-            statement.setString(3, sessionform.getLastName());
-            statement.setInt(4, sessionform.getSessionNum());
-            statement.setString(5, sessionform.getDate());
+            statement.setString(2,sessionform.getFullName());
+//            statement.setString(2, sessionform.getFirstName());
+//            statement.setString(3, sessionform.getLastName());
+            statement.setInt(3, sessionform.getSessionNum());
+            statement.setString(4, sessionform.getDate());
 
-            statement.setString(6, sessionform.getPreActionOne());
-            statement.setBoolean(7, sessionform.isBool_action_one());
-            statement.setString(8, sessionform.getPreActionTwo());
-            statement.setBoolean(9, sessionform.isBool_action_two());
-            statement.setString(10, sessionform.getPreActionThree());
-            statement.setBoolean(11, sessionform.isBool_action_three());
-            statement.setString(12, sessionform.getPreActionFour());
-            statement.setBoolean(13, sessionform.isBool_action_four());
-            statement.setString(14, sessionform.getPreActionFive());
-            statement.setBoolean(15, sessionform.isBool_action_five());
-            statement.setString(16, sessionform.getPreActionSix());
-            statement.setBoolean(17, sessionform.isBool_action_six());
+            statement.setString(5, sessionform.getPreActionOne());
+            statement.setBoolean(6, sessionform.isBool_action_one());
+            statement.setString(7, sessionform.getPreActionTwo());
+            statement.setBoolean(8, sessionform.isBool_action_two());
+            statement.setString(9, sessionform.getPreActionThree());
+            statement.setBoolean(10, sessionform.isBool_action_three());
+            statement.setString(11, sessionform.getPreActionFour());
+            statement.setBoolean(12, sessionform.isBool_action_four());
+            statement.setString(13, sessionform.getPreActionFive());
+            statement.setBoolean(14, sessionform.isBool_action_five());
+            statement.setString(15, sessionform.getPreActionSix());
+            statement.setBoolean(16, sessionform.isBool_action_six());
 
-            statement.setInt(18, sessionform.getScale());
+            statement.setInt(17, sessionform.getScale());
 
-            statement.setBoolean(19, sessionform.isCampus_involvement());
-            statement.setBoolean(20, sessionform.isMeaningful_relationships());
-            statement.setBoolean(21, sessionform.isFinancial_management());
-            statement.setBoolean(22, sessionform.isOutside_responsibilities());
-            statement.setBoolean(23, sessionform.isStudy_time_management());
-            statement.setBoolean(24, sessionform.isAcademic_engagement());
-            statement.setBoolean(25, sessionform.isHealth_wellness());
-            statement.setBoolean(26, sessionform.isBool_other());
-            statement.setString(27, sessionform.getOther());
-            statement.setString(28, sessionform.getIssuesConcerns());
-            statement.setString(29, sessionform.getNotesComments());
-            statement.setString(30, sessionform.getFirstActionStep());
-            statement.setString(31, sessionform.getSecondActionStep());
-            statement.setString(32, sessionform.getThirdActionStep());
-            statement.setString(33, sessionform.getFourthActionStep());
-            statement.setString(34, sessionform.getFifthActionStep());
-            statement.setString(35, sessionform.getSixthActionStep());
+            statement.setBoolean(18, sessionform.isCampus_involvement());
+            statement.setBoolean(19, sessionform.isMeaningful_relationships());
+            statement.setBoolean(20, sessionform.isFinancial_management());
+            statement.setBoolean(21, sessionform.isOutside_responsibilities());
+            statement.setBoolean(22, sessionform.isStudy_time_management());
+            statement.setBoolean(23, sessionform.isAcademic_engagement());
+            statement.setBoolean(24, sessionform.isHealth_wellness());
+            statement.setBoolean(25, sessionform.isBool_other());
+            statement.setString(26, sessionform.getOther());
+            statement.setString(27, sessionform.getIssuesConcerns());
+            statement.setString(28, sessionform.getNotesComments());
+            statement.setString(29, sessionform.getFirstActionStep());
+            statement.setString(30, sessionform.getSecondActionStep());
+            statement.setString(31, sessionform.getThirdActionStep());
+            statement.setString(32, sessionform.getFourthActionStep());
+            statement.setString(33, sessionform.getFifthActionStep());
+            statement.setString(34, sessionform.getSixthActionStep());
 
             statement.executeUpdate();
 
@@ -346,8 +347,9 @@ public class CrudService {
             if (results.next()) {
 //                sessionform.setMentor(getMentor(results.getString("mentor")));
                 sessionform.setMentor(results.getString("mentor"));
-                sessionform.setFirstName(results.getString("first_name"));
-                sessionform.setLastName(results.getString("last_name"));
+                sessionform.setFullName(results.getString("full_name"));
+//                sessionform.setFirstName(results.getString("first_name"));
+//                sessionform.setLastName(results.getString("last_name"));
                 sessionform.setSessionNum(results.getInt("session_number"));
                 sessionform.setDate(results.getString("day"));
 
@@ -400,8 +402,7 @@ public class CrudService {
         try {
             String qry = "SELECT * FROM session_form ";
             if(search != null){
-//                mentor like '%" +search+"%'
-                qry += "WHERE first_name like '%"+search+"%' OR last_name like '%"+search+ "%' ";
+                qry += "WHERE mentor like '%"+search+"%' OR full_name like '%"+search+ "%' ";
             }
             if(sortBy != null && !sortBy.equals("")){
                 qry += " ORDER BY " + sortBy + ", session_number ASC ";
@@ -420,8 +421,9 @@ public class CrudService {
                 SessionForm sessionform = new SessionForm();
 //                sessionform.setMentor(getMentor(results.getString("mentor")));
                 sessionform.setMentor(results.getString("mentor"));
-                sessionform.setFirstName(results.getString("first_name"));
-                sessionform.setLastName(results.getString("last_name"));
+                sessionform.setFullName(results.getString("full_name"));
+//                sessionform.setFirstName(results.getString("first_name"));
+//                sessionform.setLastName(results.getString("last_name"));
                 sessionform.setSessionNum(results.getInt("session_number"));
                 sessionform.setDate(results.getString("day"));
 
