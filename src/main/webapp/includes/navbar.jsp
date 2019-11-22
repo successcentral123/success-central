@@ -38,6 +38,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="report_session">
+                        Session Form Report
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="report_intake">
                         Intake Form Report
                     </a>
