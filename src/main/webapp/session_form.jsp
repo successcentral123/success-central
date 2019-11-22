@@ -5,7 +5,9 @@
   Time: 7:16 PM This is a test for the Commit
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="com.ccsu.cs530.successcentral.model.Mentee" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,7 @@
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
+
 
 
 <div class="container">
@@ -29,30 +32,17 @@
             <!-- Basic info -->
             <fieldset>
                 <legend>Session Information:</legend>
-
+                <% String myEmail = (String)request.getAttribute("email"); %>
+                <% List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;%>
                 <!-- Name -->
-                <label><span style="color:red">*</span> Student Name</label>
-                <div class="form-row">
-                    <div class="col">
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="First name"
-                                required=""
-                                name="firstname"
-                        />
-                    </div>
-                    <div class="col">
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Last name"
-                                required=""
-                                name="lastname"
-                        />
-                    </div>
-                </div>
-                <br>
+                <label><span style="color:red">*</span> Student Name:</label>
+                <br />
+                <select class="form-control" name="firstname" required="">
+                    <% for (int i = 0; i < myMentees.size(); i++) { ; %>
+                    <option value="<%= i %>"><%= myMentees.get(i).getFirstName() %></option>
+                    <% } %>
+                </select>
+                <br /><br/>
 
                 <!-- 17-Sep-2019 CDP Phase 2: Added a textbox for Session# Date  -->
                 <!-- CCSU Info -->
@@ -310,50 +300,50 @@
             <fieldset>
                 <legend>New Action Steps:</legend>
                 <label><span style="color:red">*</span> New Action Step(s) to address Issues/Concerns: </label>
-                    <div class="col">
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="1st Action Step"
-                                required=""
-                                name="firstactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="2nd Action Step"
-                                name="secondactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="3rd Action Step"
-                                name="thirdactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="4th Action Step"
-                                name="fourthactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="5th Action Step"
-                                name="fifthactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="6th Action Step"
-                                name="sixthactionstep"
-                        />
-                    </div>
+                <div class="col">
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="1st Action Step"
+                            required=""
+                            name="firstactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="2nd Action Step"
+                            name="secondactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="3rd Action Step"
+                            name="thirdactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="4th Action Step"
+                            name="fourthactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="5th Action Step"
+                            name="fifthactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="6th Action Step"
+                            name="sixthactionstep"
+                    />
+                </div>
             </fieldset>
 
             <!-- Submit button -->
