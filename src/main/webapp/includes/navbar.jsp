@@ -12,16 +12,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <% if (request.getSession().getAttribute("email") != null && request.getSession().getAttribute("isAdmin").equals("true")) { %>
-                <li class="nav-item">
-                    <a class="nav-link" href="mentee_list">
-                        Mentee List
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="mentor_list">
-                        Mentor List
-                    </a>
-                </li>
+            <li class="nav-item dropdown ">
+                <% if (request.getSession().getAttribute("isAdmin") != null && request.getSession().getAttribute("isAdmin").equals("true")) { %>
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="foo" role="button" aria-haspopup="true" aria-expanded="false">
+                    Lists
+                </a>
+                <div class="dropdown-menu" aria-labelledby="foo">
+                    <a href="mentee_list" aria-labelledby="foo" class="dropdown-item">Mentee List </a>
+                    <a href="mentor_list" aria-labelledby="foo" class="dropdown-item">Mentor List </a>
+                    <a href="session_form_list" aria-labelledby="foo" class="dropdown-item">Session Form List </a>
+                </div>
+                <% } else { %>
+                <% } %>
+            </li>
                 <li class="nav-item">
                     <a class="nav-link" href="dynamic_matches">
                         Matching Page
@@ -31,11 +34,6 @@
                    <a class="nav-link" href="matched_team">
                     Introduction Email
                   </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="session_form_list">
-                        Session Form List
-                    </a>
                 </li>
             <% } else if (request.getSession().getAttribute("email") != null) { %>
                 <li class="nav-item">
