@@ -331,17 +331,16 @@ public class CrudService {
     }
 
     // Get a specfic Session From from the DB with a firstname lastname and session#
-    public SessionForm getSessionForm(String firstname, String lastname, int sessionnumber) {
+    public SessionForm getSessionForm(String fullname, int sessionnumber) {
         SessionForm sessionform = new SessionForm();
         try {
-            if (firstname == null && lastname == null) { // todo what about no session number?
+            if (fullname == null) { // todo what about no session number?
                 throw new Exception();
             }
-            String qry = "SELECT * FROM session_form WHERE first_name = ? AND last_name = ? AND session_number = ?";
+            String qry = "SELECT * FROM session_form WHERE full_name = ? AND session_number = ?";
             PreparedStatement statement = con.prepareStatement(qry);
-            statement.setString(1, firstname);
-            statement.setString(2, lastname);
-            statement.setInt(3, sessionnumber);
+            statement.setString(1, fullname);
+            statement.setInt(2, sessionnumber);
             ResultSet results = statement.executeQuery();
 
             if (results.next()) {

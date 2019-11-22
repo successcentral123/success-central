@@ -47,8 +47,7 @@
                     <div class="col">
                         <label> Student Name: </label> &nbsp;
                         <b>
-                            <%=sessionform.getFirstName()%>
-                            <%=sessionform.getLastName()%>
+                            <%=sessionform.getFullName()%>
                         </b>
                         <br>
                         <label>Session #:</label> &nbsp;

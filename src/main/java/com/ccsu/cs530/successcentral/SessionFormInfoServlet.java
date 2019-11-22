@@ -19,12 +19,11 @@ public class SessionFormInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("email") != null) {
-            String firstname = req.getParameter("firstName");
-            String lastname = req.getParameter("lastName");
+            String fullname = req.getParameter("fullName");
             int sessionNum = Integer.parseInt(req.getParameter("seshNum"));
 
 
-            SessionForm sessionform = crud.getSessionForm(firstname, lastname, sessionNum);
+            SessionForm sessionform = crud.getSessionForm(fullname, sessionNum);
 
             // populate the request object to send to the jsp
             req.setAttribute("session_form", sessionform);
