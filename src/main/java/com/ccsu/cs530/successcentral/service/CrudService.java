@@ -120,7 +120,8 @@ public class CrudService {
         try {
             String qry = "INSERT INTO session_form VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(qry);
-            statement.setString(1, sessionform.getMentor() == null ? null : sessionform.getMentor().getEmail());
+//            statement.setString(1, sessionform.getMentor() == null ? null : sessionform.getMentor().getEmail());
+            statement.setString(1,sessionform.getMentor());
             statement.setString(2, sessionform.getFirstName());
             statement.setString(3, sessionform.getLastName());
             statement.setInt(4, sessionform.getSessionNum());
@@ -343,7 +344,8 @@ public class CrudService {
             ResultSet results = statement.executeQuery();
 
             if (results.next()) {
-                sessionform.setMentor(getMentor(results.getString("mentor")));
+//                sessionform.setMentor(getMentor(results.getString("mentor")));
+                sessionform.setMentor(results.getString("mentor"));
                 sessionform.setFirstName(results.getString("first_name"));
                 sessionform.setLastName(results.getString("last_name"));
                 sessionform.setSessionNum(results.getInt("session_number"));
@@ -396,9 +398,10 @@ public class CrudService {
         String tmpQry = "";
 
         try {
-            String qry = "SELECT * FROM session_form";
+            String qry = "SELECT * FROM session_form ";
             if(search != null){
-                qry += "WHERE mentor like '%"+search+"%' OR first_name like '%"+search+"%' OR last_name like '%"+search+"%' ";
+//                mentor like '%" +search+"%'
+                qry += "WHERE first_name like '%"+search+"%' OR last_name like '%"+search+ "%' ";
             }
             if(sortBy != null && !sortBy.equals("")){
                 qry += " ORDER BY " + sortBy + ", session_number ASC ";
@@ -415,7 +418,8 @@ public class CrudService {
 
             while (results.next()) {
                 SessionForm sessionform = new SessionForm();
-                sessionform.setMentor(getMentor(results.getString("mentor")));
+//                sessionform.setMentor(getMentor(results.getString("mentor")));
+                sessionform.setMentor(results.getString("mentor"));
                 sessionform.setFirstName(results.getString("first_name"));
                 sessionform.setLastName(results.getString("last_name"));
                 sessionform.setSessionNum(results.getInt("session_number"));
