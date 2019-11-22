@@ -74,22 +74,58 @@
                     <div class="form-row">
                         <div class="col">
                         <b>
-                            <%=sessionform.isBool_action_one()%> &nbsp;
+                            <%  String check1 ="";
+                                if (sessionform.isBool_action_one() == true)
+                                    check1 = "CHECKED";
+                                else
+                                    check1 = "UNCHECKED";
+                            %>
+                            <%=check1%> &nbsp;
                             <%=sessionform.getPreActionOne()%>
                             <br>
-                            <%=sessionform.isBool_action_two()%> &nbsp;
+                            <%  String check2 ="";
+                                if (sessionform.isBool_action_two() == true)
+                                    check2 = "CHECKED";
+                                else
+                                    check2 = "UNCHECKED";
+                            %>
+                            <%=check2%> &nbsp;&nbsp;
                             <%=sessionform.getPreActionTwo()%>
                             <br>
-                            <%=sessionform.isBool_action_three()%> &nbsp;
+                            <%  String check3 ="";
+                                if (sessionform.isBool_action_three() == true)
+                                    check3 = "CHECKED";
+                                else
+                                    check3 = "UNCHECKED";
+                            %>
+                            <%=check3%> &nbsp;&nbsp;
                             <%=sessionform.getPreActionThree()%>
                             <br>
-                            <%=sessionform.isBool_action_four()%> &nbsp;
+                            <%  String check4 ="";
+                                if (sessionform.isBool_action_four() == true)
+                                    check4 = "CHECKED";
+                                else
+                                    check4 = "UNCHECKED";
+                            %>
+                            <%=check4%> &nbsp;&nbsp;
                             <%=sessionform.getPreActionFour()%>
                             <br>
-                            <%=sessionform.isBool_action_five()%> &nbsp;
+                            <%  String check5 ="";
+                                if (sessionform.isBool_action_five() == true)
+                                    check5 = "CHECKED";
+                                else
+                                    check5 = "UNCHECKED";
+                            %>
+                            <%=check5%> &nbsp; &nbsp;
                             <%=sessionform.getPreActionFive()%>
                             <br>
-                            <%=sessionform.isBool_action_six()%> &nbsp;
+                            <%  String check6 ="";
+                                if (sessionform.isBool_action_six() == true)
+                                    check6 = "CHECKED";
+                                else
+                                    check6 = "UNCHECKED";
+                            %>
+                            <%=check6%> &nbsp;&nbsp;
                             <%=sessionform.getPreActionSix()%>
                         </b>
                         </div>
@@ -112,28 +148,76 @@
                         <label>Current Session Topics. Check all that apply.</label>
                         <b>
                             <br>
-                            <%=sessionform.isCampus_involvement()%> &nbsp;
+                            <%  String checkST1 ="";
+                                if (sessionform.isCampus_involvement() == true)
+                                    checkST1 = "CHECKED";
+                                else
+                                    checkST1 = "UNCHECKED";
+                            %>
+                            <%=checkST1%> &nbsp;
                             <label> Campus Involvement </label>
                             <br>
-                            <%=sessionform.isMeaningful_relationships()%> &nbsp;
+                            <%  String checkST2 ="";
+                                if (sessionform.isMeaningful_relationships() == true)
+                                    checkST2 = "CHECKED";
+                                else
+                                    checkST2 = "UNCHECKED";
+                            %>
+                            <%=checkST2%> &nbsp;
                             <label> Meaningful Relationships </label>
                             <br>
-                            <%=sessionform.isFinancial_management()%> &nbsp;
+                            <%  String checkST3 ="";
+                                if (sessionform.isFinancial_management() == true)
+                                    checkST3 = "CHECKED";
+                                else
+                                    checkST3 = "UNCHECKED";
+                            %>
+                            <%=checkST3%> &nbsp;
                             <label> Financial Management </label>
                             <br>
-                            <%=sessionform.isOutside_responsibilities()%> &nbsp;
+                            <%  String checkST4 ="";
+                                if (sessionform.isOutside_responsibilities() == true)
+                                    checkST4 = "CHECKED";
+                                else
+                                    checkST4 = "UNCHECKED";
+                            %>
+                            <%=checkST4%> &nbsp;
                             <label> Outside Responsibilities </label>
                             <br>
-                            <%=sessionform.isStudy_time_management()%> &nbsp;
+                            <%  String checkST5 ="";
+                                if (sessionform.isStudy_time_management() == true)
+                                    checkST5 = "CHECKED";
+                                else
+                                    checkST5 = "UNCHECKED";
+                            %>
+                            <%=checkST5%> &nbsp;
                             <label> Study Skills/Time Management </label>
                             <br>
-                            <%=sessionform.isAcademic_engagement()%> &nbsp;
+                            <%  String checkST6 ="";
+                                if (sessionform.isAcademic_engagement() == true)
+                                    checkST6 = "CHECKED";
+                                else
+                                    checkST6 = "UNCHECKED";
+                            %>
+                            <%=checkST6%> &nbsp;
                             <label> Academic Engagement </label>
                             <br>
-                            <%=sessionform.isHealth_wellness()%> &nbsp;
+                            <%  String checkST7 ="";
+                                if (sessionform.isHealth_wellness() == true)
+                                    checkST7 = "CHECKED";
+                                else
+                                    checkST7 = "UNCHECKED";
+                            %>
+                            <%=checkST7%> &nbsp;
                             <label> Health & Wellness </label>
                             <br>
-                            <%=sessionform.isBool_other()%> &nbsp;
+                            <%  String checkST8 ="";
+                                if (sessionform.isBool_other() == true)
+                                    checkST8 = "CHECKED";
+                                else
+                                    checkST8 = "UNCHECKED";
+                            %>
+                            <%=checkST8%> &nbsp;
                             <label> Other </label>
                         </b>
                     </div>
@@ -153,17 +237,20 @@
                 <legend>Session Notes:</legend>
                 <!-- Issues & Concerns -->
                 <label>Issues & Concerns:  </label> &nbsp;
+                <br>
                 <b>
                     <%=sessionform.getIssuesConcerns()%>
                 </b>
                 <br />
-
+                <br>
                 <!-- Notes & Comments -->
                 <label>Notes & Comments:  </label> &nbsp;
+                <br>
                 <b>
                     <%=sessionform.getNotesComments()%>
                 </b>
                 <br />
+                <br>
             </fieldset>
 
             <fieldset>
