@@ -1,7 +1,8 @@
 package com.ccsu.cs530.successcentral.model;
 
 public class SessionForm {
-    private Mentor mentor;
+//    private Mentor mentor;
+    private String mentor;
     private String first_name;
     private String second_name;
     private int session_number;
@@ -44,9 +45,11 @@ public class SessionForm {
 
     public SessionForm(){}
 
-    public Mentor getMentor() { return mentor;}
+//    public Mentor getMentor() { return mentor;}
+//    public void setMentor(Mentor mentor) { this.mentor = mentor;}
 
-    public void setMentor(Mentor mentor) { this.mentor = mentor;}
+    public String getMentor() { return mentor;}
+    public void setMentor(String mentor) { this.mentor = mentor;}
 
     public String getFirstName(){
         return first_name;
