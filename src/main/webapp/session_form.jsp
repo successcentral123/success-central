@@ -33,25 +33,24 @@
             <!-- Basic info -->
             <fieldset>
 
-<%--                 todo this gets the sessionform from the doGet in the servlet--%>
-                <%  SessionForm pre = new SessionForm();
-                    if (request.getAttribute("fullname") != null)
-                        pre = (SessionForm) request.getAttribute("preSession");
-                %>
-
                 <legend>Session Information:</legend>
-                <% List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;%>
+                <%  List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;
+                    SessionForm presession = new SessionForm();
+                    if (request.getAttribute("fullname") != null) {
+                        presession = (SessionForm) request.getAttribute("preSession");
+                    }
+                %>
                 <!-- Name -->
                 <label><span style="color:red">*</span> Student Name:</label>
                 <br />
-                <select class="form-control" name="fullname" id="fullSelect"  onchange="refreshpage()" required="">
+                <select class="form-control" name="fullname" id="fullSelect"
+                        onchange="refreshpage()" required="">
                     <option value="Mentee" selected>Mentee</option>
-                    <%  String fullname = "";
-                        for (int i = 0; i < myMentees.size(); i++) {
+                    <%  for (int i = 0; i < myMentees.size(); i++) {
                         String first = myMentees.get(i).getFirstName();
                         String last = myMentees.get(i).getLastName();
                         String full = first + " "+ last;%>
-                    <option value="<%= full %>" <%if(fullname.equals(full)) {%>selected<%}%>><%= full %></option>
+                    <option value="<%= full %>" <%if(full.equals(request.getAttribute("fullname"))) {%>selected<%}%>><%= full %></option>
                     <% } %>
                 </select>
                 <br /><br/>
@@ -68,17 +67,19 @@
                                 required=""
                                 name="sessionnum"
                                 min="1"
+                                <% if (presession != null) {
+                                    int num = presession.getSessionNum() + 1; %>
+                                    value="<%=num%>"
+                                <% } %>
                         />
                     </div>
                     <div class="col">
                         <label><span style="color:red">*</span> Date</label>
                         <input
-                                type="text"
+                                type="date"
                                 class="form-control"
-                                placeholder="MM-DD-YYYY"
                                 required=""
                                 name="date"
-                                maxlength="10"
                         />
                     </div>
                 </div>
@@ -108,6 +109,10 @@
                                 placeholder="1st Previous Action Step"
                                 required=""
                                 name="preactionone"
+                                <% if (presession.getFirstActionStep() != null) {
+                                    String action = presession.getFirstActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" >
@@ -116,6 +121,10 @@
                                 class="form-control"
                                 placeholder="2nd Previous Action Step"
                                 name="preactiontwo"
+                                <% if (presession.getSecondActionStep() != null) {
+                                    String action = presession.getSecondActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" >
@@ -124,6 +133,10 @@
                                 class="form-control"
                                 placeholder="3rd Previous Action Step"
                                 name="preactionthree"
+                                <% if (presession.getThirdActionStep() != null) {
+                                    String action = presession.getThirdActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" >
@@ -132,6 +145,10 @@
                                 class="form-control"
                                 placeholder="4th Previous Action Step"
                                 name="preactionfour"
+                                <% if (presession.getFourthActionStep() != null) {
+                                    String action = presession.getFourthActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" >
@@ -140,6 +157,10 @@
                                 class="form-control"
                                 placeholder="5th Previous Action Step"
                                 name="preactionfive"
+                                <% if (presession.getFifthActionStep() != null) {
+                                    String action = presession.getFifthActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" >
@@ -148,6 +169,10 @@
                                 class="form-control"
                                 placeholder="6th Previous Action Step"
                                 name="preactionsix"
+                                <% if (presession.getSixthActionStep() != null) {
+                                    String action = presession.getSixthActionStep();%>
+                                    value="<%=action%>"
+                                <% }  %>
                         />
                     </div>
                 </fieldset>
@@ -368,7 +393,8 @@
 <jsp:include page="includes/footer.jsp"/>
 <script>
     function refreshpage() {
-        // console.log(document.getElementById("fullSelect").value);
+        var name = document.getElementById("fullSelect").value
+        window.location.href="?fullname="+name
     }
 </script>
 </body>
