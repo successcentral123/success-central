@@ -557,6 +557,44 @@ public class CrudService {
         return mentees;
     }
 
+    public List<Mentee> getAllMentees() {
+        List<Mentee> mentees = new ArrayList<>();
+        try {
+            String qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id ";
+
+            PreparedStatement statement = this.con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                Mentee mentee = new Mentee();
+                mentee.setEmail(results.getString("email"));
+                mentee.setPassword(results.getString("password"));
+                mentee.setFirstName(results.getString("first_name"));
+                mentee.setLastName(results.getString("last_name"));
+                mentee.setStudentId(results.getString("student_id"));
+                mentee.setMajor(results.getString("name"));
+                mentee.setGrade(results.getString("grade"));
+                mentee.setYear(results.getString("year"));
+                mentee.setHobbies(results.getString("hobbies"));
+                mentee.setCtHometown(results.getString("ct_hometown"));
+                mentee.setOtherHometown(results.getString("other_hometown"));
+                mentee.setParentEducation(results.getBoolean("parent_education"));
+                mentee.setLanguage(results.getString("language"));
+                mentee.setRace(results.getString("race"));
+                mentee.setGender(results.getString("gender"));
+                mentee.setLookingForward(results.getString("looking_forward"));
+                mentee.setWhyMentor(results.getString("why_mentor"));
+                mentee.setMentor(getMentor(results.getString("mentor")));
+
+                mentees.add(mentee);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not get the mentors"+ e);
+        }
+
+        return mentees;
+    }
+
 
     /**
      * Return all mentees who don't have a mentor.

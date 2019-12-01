@@ -19,12 +19,9 @@ public class ReportSessionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         if (req.getSession().getAttribute("email") != null && req.getSession().getAttribute("isAdmin").equals("true")) {
+            List<Mentee> Mentees = crud.getAllMentees();
+            req.setAttribute("Mentees", Mentees);
             req.getRequestDispatcher("report_session.jsp").forward(req, resp);
-            String myEmail = (String)req.getSession().getAttribute("email");
-            List<Mentee> myMentees = crud.getMyMentees(myEmail);
-            String fullname = (String) req.getParameter("fullname");
-            req.setAttribute("fullname", fullname);
-            req.setAttribute("myMentees", myMentees);
         }
     }
 

@@ -40,18 +40,20 @@
                  width="150"/>
         </div>
         <div class="col">
-            <%  SessionForm pre = new SessionForm();
-                if (request.getAttribute("fullname") != null)
-                    pre = (SessionForm) request.getAttribute("preSession");
-            %>
-
             <legend>Session Information:</legend>
-            <% List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;%>
+            <% List<Mentee> Mentees = (List<Mentee>) request.getAttribute("Mentees") ;%>
             <!-- Name -->
             <label><span style="color:red">*</span> Student Name:</label>
             <br />
-            <select class="form-control" name="fullname" id="fullSelect"  onchange="refreshpage()" required="">
+            <select class="form-control" name="fullname" id="fullSelect"
+                    onchange="refreshpage()" required="">
                 <option value="Mentee" selected>Mentee</option>
+                <%  for (int i = 0; i < Mentees.size(); i++) {
+                    String first = Mentees.get(i).getFirstName();
+                    String last = Mentees.get(i).getLastName();
+                    String full = first + " "+ last;%>
+                <option value="<%= full %>"><%= full %></option>
+                <% } %>
             </select>
             <br>
             <button type="button" id="reportButton" class="btn btn-primary mb-2" onClick="sessionReport()">Generate Session Form Report</button>
