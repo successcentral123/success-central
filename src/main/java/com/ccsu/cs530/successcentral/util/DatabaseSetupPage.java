@@ -83,7 +83,7 @@ public class DatabaseSetupPage extends HttpServlet {
 //            " `last_name` varchar(50) NOT NULL ," +
             " `full_name` varchar(50) NOT NULL ," +
             " `session_number` int NOT NULL ," +
-            " `day` varchar(10) NOT NULL ," +
+            " `day` Date NOT NULL ," +
             " `pre_action_one` text NOT NULL ," +
             " `bool_action_one` boolean NOT NULL DEFAULT 0 ," +
             " `pre_action_two` text NULL DEFAULT NULL ," +

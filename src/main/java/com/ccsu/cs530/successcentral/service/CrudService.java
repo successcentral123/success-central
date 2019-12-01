@@ -422,7 +422,13 @@ public class CrudService {
                 qry += "WHERE mentor like '%"+search+"%' OR full_name like '%"+search+ "%' ";
             }
             if(sortBy != null && !sortBy.equals("")){
-                qry += " ORDER BY " + sortBy + ", session_number ASC ";
+                if(sortBy.equals("day_0")){
+                    qry += " ORDER BY day DESC, session_number DESC  ";
+                } else if(sortBy.equals("day_1")){
+                    qry += " ORDER BY day ASC, session_number ASC ";
+                }else{
+                    qry += " ORDER BY " + sortBy + ", session_number ASC ";
+                }
             }
 
             qry += " LIMIT ?,?";

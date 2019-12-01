@@ -64,10 +64,12 @@
                     <div class="col-auto">
                         <select name="sortBy" onchange="this.form.submit()">
                             <option value=""  <%if(sortBy.equals("")) {%>selected<%}%>></option>
-<%--                            <option value="last_name" <%if(sortBy.equals("last_name")) {%>selected<%}%>>Mentee Last Name</option>--%>
                             <option value="full_name" <%if(sortBy.equals("full_name")) {%>selected<%}%>>Mentee Name</option>
 <%--                            <option value="session_number" <%if(sortBy.equals("session_number")) {%>selected<%}%>>Session Number</option>--%>
                             <option value="mentor" <%if(sortBy.equals("mentor")) {%>selected<%}%>>Mentor</option>
+                            <option value="day_1" <%if(sortBy.equals("day_1")) {%>selected<%}%>>Date (Ascending)</option>
+                            <option value="day_0" <%if(sortBy.equals("day_0")) {%>selected<%}%>>Date
+                                (Decending)</option>
                         </select>
                     </div>
                 </form>
@@ -81,6 +83,7 @@
             <th scope="col">Mentor</th>
             <th scope="col">Mentee</th>
             <th scope="col">Session Number</th>
+            <th scope="col">Date</th>
         </tr>
         </thead>
         <form name="session_form" >
@@ -98,8 +101,9 @@
                 <td><%= sessionform.getFullName() %></td>
 <%--                <td><%= sessionform.getLastName() %></td>--%>
 <%--                 todo link for the session number--%>
-                <th scope="row"><a
-                        href="session_form_info?fullName=<%=sessionform.getFullName()%>&seshNum=<%=sessionform.getSessionNum()%>"><%= sessionform.getSessionNum() %></a></th>
+                <td scope="row"><a
+                        href="session_form_info?fullName=<%=sessionform.getFullName()%>&seshNum=<%=sessionform.getSessionNum()%>"><%= sessionform.getSessionNum() %></a></td>
+                <td><%=sessionform.getDate()%></td>
             </tr>
             <% } %>
             </tbody>
