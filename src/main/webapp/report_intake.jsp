@@ -37,8 +37,8 @@
                  width="150"/>
         </div>
         <div class="col">
-            <button type="button" id="mentorButton" class="btn btn-primary mb-2" onClick="mentorReport()">Mentor Intake Form Report</button>
-            <button type="button" id="menteeButton" class="btn btn-primary mb-2" onClick="menteeReport()">Mentee Intake Form Report</button>
+            <a href="graph_MenteeIntake" class="button">Mentee Intake Form Report</a>
+            <a href="graph_MentorIntake" class="button">Mentor Intake Form Report</a>
         </div>
     </div>
 
