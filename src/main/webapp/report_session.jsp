@@ -55,8 +55,7 @@
                 <% } %>
             </select>
             <br>
-            <a href="graph_SessionForm" class="button">Session Form Reportt</a>
-            <button type="button" id="reportButton" class="btn btn-primary mb-2" onClick="sessionReport()">Generate Session Form Report</button>
+            <a href="graph_SessionForm" class="btn btn-primary mb-2">Session Form Report</a>
         </div>
     </div>
 </div>
