@@ -219,7 +219,7 @@
 </script>
 
 
-<a href="IntakeReportMentor">Download Report</a>
+<a class="btn btn-primary mb-2" href="IntakeReportMentor">Download Report</a>
 
 
 
