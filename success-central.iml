@@ -47,5 +47,15 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.objenesis:objenesis:2.6" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:2.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
+    <orderEntry type="library" name="java-json" level="project" />
+    <orderEntry type="library" name="commons-compress-1.19" level="project" />
+    <orderEntry type="library" name="poi-4.1.1" level="project" />
+    <orderEntry type="library" name="poi-examples-4.1.1" level="project" />
+    <orderEntry type="library" name="poi-excelant-4.1.1" level="project" />
+    <orderEntry type="library" name="poi-ooxml-4.1.1" level="project" />
+    <orderEntry type="library" name="poi-ooxml-schemas-4.1.1" level="project" />
+    <orderEntry type="library" name="poi-scratchpad-4.1.1" level="project" />
+    <orderEntry type="library" name="xmlbeans-3.1.0" level="project" />
+    <orderEntry type="library" name="commons-collections4-4.4" level="project" />
   </component>
 </module>

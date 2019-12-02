@@ -6,15 +6,27 @@ import com.ccsu.cs530.successcentral.model.User;
 import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.util.DatabaseConnection;
 
+import java.io.*;
 import java.net.BindException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+
+import java.sql.ResultSetMetaData;
+
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+
 
 public class CrudService {
     private Connection con = DatabaseConnection.getConnection();
@@ -1397,8 +1409,954 @@ public class CrudService {
         } catch (Exception e) {
             System.out.println("There was a problem counting the session forms");
         }
+
         return sessionCount;
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+    public JSONObject sessionTableMentee(String firstName, String lastName,String sessionNum1, String sessionNum2){
+
+
+        JSONObject finalJObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            //String qry = "select * from user where is_admin = 0";
+            String qry = "select * from session_form where last_name = " + lastName + " and " + "first_name = " + firstName
+                    + " and (session_number = " + sessionNum1 + "or session_number = " + sessionNum2 + ")";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (results.next()) {
+
+
+                String first_name_json=results.getString("first_name");
+                String last_name_json=results.getString("last_name");
+                String session_number_json=results.getString("session_number");
+                String day_json=results.getString("day");
+                String pre_action_one_json=results.getString("pre_action_one");
+                String bool_action_one_json=results.getString("bool_action_one");
+                String pre_action_two_json=results.getString("pre_action_two");
+                String bool_action_two_json=results.getString("bool_action_two");
+                String pre_action_three_json=results.getString("pre_action_three");
+                String pre_action_four_json=results.getString("pre_action_four");
+                String bool_action_three_json=results.getString("bool_action_three");
+                String bool_action_four_json=results.getString("bool_action_four");
+                String pre_action_five_json=results.getString("pre_action_five");
+                String bool_action_five_json=results.getString("bool_action_five");
+                String pre_action_six_json=results.getString("pre_action_six");
+                String bool_action_six_json=results.getString("bool_action_six");
+                String scale_json=results.getString("scale");
+                String campus_involvement_json=results.getString("campus_involvement");
+                String meaningful_relationships_json=results.getString("meaningful_relationships");
+                String financial_management_json=results.getString("financial_management");
+                String outside_responsibilities_json=results.getString("outside_responsibilities");
+                String study_time_management_json=results.getString("study_time_management");
+                String academic_engagement_json=results.getString("academic_engagement");
+                String health_wellness_json=results.getString("health_wellness");
+                String other_bool_json=results.getString("other_bool");
+                String other_text_json=results.getString("other_text");
+                String issues_concerns_json=results.getString("issues_concerns");
+                String notes_comments_json=results.getString("notes_comments");
+                String action_one_json=results.getString("action_one");
+                String action_two_json=results.getString("action_two");
+                String action_three_json=results.getString("action_three");
+                String action_four_json=results.getString("action_four");
+                String action_five_json=results.getString("action_five");
+                String action_six_json=results.getString("action_six");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("first_name",first_name_json);
+                jobj.put("last_name",last_name_json);
+                jobj.put("session_number",session_number_json);
+                jobj.put("day",day_json);
+                jobj.put("pre_action_one",pre_action_one_json);
+                jobj.put("bool_action_one",bool_action_one_json);
+                jobj.put("pre_action_two",pre_action_two_json);
+                jobj.put("bool_action_two",bool_action_two_json);
+                jobj.put("pre_action_three",pre_action_three_json);
+                jobj.put("bool_action_three",bool_action_three_json);
+                jobj.put("pre_action_four",pre_action_four_json);
+                jobj.put("bool_action_four",bool_action_four_json);
+                jobj.put("pre_action_five",pre_action_five_json);
+                jobj.put("bool_action_five",bool_action_five_json);
+                jobj.put("pre_action_six",pre_action_six_json);
+                jobj.put("bool_action_six",bool_action_six_json);
+                jobj.put("scale",scale_json);
+                jobj.put("campus_involvement",campus_involvement_json);
+                jobj.put("meaningful_relationships",meaningful_relationships_json);
+                jobj.put("financial_management",financial_management_json);
+                jobj.put("outside_responsibilities",outside_responsibilities_json);
+                jobj.put("study_time_management",study_time_management_json);
+                jobj.put("academic_engagement",academic_engagement_json);
+                jobj.put("health_wellness",health_wellness_json);
+                jobj.put("other_bool",other_bool_json);
+                jobj.put("other_text",other_text_json);
+                jobj.put("issues_concerns",issues_concerns_json);
+                jobj.put("notes_comments",notes_comments_json);
+                jobj.put("action_one",action_one_json);
+                jobj.put("action_two",action_two_json);
+                jobj.put("action_three",action_three_json);
+                jobj.put("action_four",action_four_json);
+                jobj.put("action_five",action_five_json);
+                jobj.put("action_six",action_six_json);
+
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying session_form table in database ");
+        }
+        return finalJObject;
+
+    }
+
+
+
+
+
+
+
+
+
+
+    public JSONObject userTableMentee(){
+
+
+        JSONObject finalJObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            //String qry = "select * from user where is_admin = 0";
+            String qry = "select * from user join mentee on user.email = mentee.email";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (results.next()) {
+
+                String  email_json=results.getString("email");
+                String  password_json=results.getString("password");
+                String  first_name_json=results.getString("first_name");
+                String  last_name_json=results.getString("last_name");
+                String  student_id_json=results.getString("student_id");
+                String  major_json=results.getString("major");
+                String  grade_json=results.getString("grade");
+                String  year_json=results.getString("year");
+                String  hobbies_json=results.getString("hobbies");
+                String  ct_hometown_json=results.getString("ct_hometown");
+                String  other_hometown_json=results.getString("other_hometown");
+                String  parent_education_json=results.getString("parent_education");
+                String  language_json=results.getString("language");
+                String  race_json=results.getString("race");
+                String  gender_json=results.getString("gender");
+                String is_admin_json=results.getString("is_admin");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("email",email_json);
+                jobj.put("password",password_json);
+                jobj.put("first_name",first_name_json);
+                jobj.put("last_name",last_name_json);
+                jobj.put("student_id",student_id_json);
+                jobj.put("major",major_json);
+                jobj.put("grade",grade_json);
+                jobj.put("year",year_json);
+                jobj.put("hobbies",hobbies_json);
+                jobj.put("ct_hometown",ct_hometown_json);
+                jobj.put("other_hometown",other_hometown_json);
+                jobj.put("parent_education",parent_education_json);
+                jobj.put("language",language_json);
+                jobj.put("race",race_json);
+                jobj.put("gender",gender_json);
+                jobj.put("is_admin",is_admin_json);
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying user table in database ");
+        }
+        return finalJObject;
+
+    }
+
+
+
+
+    public JSONObject userTableMentor(){
+
+
+        JSONObject finalJObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            //String qry = "select * from user where is_admin = 0";
+            String qry = "select * from user join mentor on user.email = mentor.email";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (results.next()) {
+
+                String  email_json=results.getString("email");
+                String  password_json=results.getString("password");
+                String  first_name_json=results.getString("first_name");
+                String  last_name_json=results.getString("last_name");
+                String  student_id_json=results.getString("student_id");
+                String  major_json=results.getString("major");
+                String  grade_json=results.getString("grade");
+                String  year_json=results.getString("year");
+                String  hobbies_json=results.getString("hobbies");
+                String  ct_hometown_json=results.getString("ct_hometown");
+                String  other_hometown_json=results.getString("other_hometown");
+                String  parent_education_json=results.getString("parent_education");
+                String  language_json=results.getString("language");
+                String  race_json=results.getString("race");
+                String  gender_json=results.getString("gender");
+                String is_admin_json=results.getString("is_admin");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("email",email_json);
+                jobj.put("password",password_json);
+                jobj.put("first_name",first_name_json);
+                jobj.put("last_name",last_name_json);
+                jobj.put("student_id",student_id_json);
+                jobj.put("major",major_json);
+                jobj.put("grade",grade_json);
+                jobj.put("year",year_json);
+                jobj.put("hobbies",hobbies_json);
+                jobj.put("ct_hometown",ct_hometown_json);
+                jobj.put("other_hometown",other_hometown_json);
+                jobj.put("parent_education",parent_education_json);
+                jobj.put("language",language_json);
+                jobj.put("race",race_json);
+                jobj.put("gender",gender_json);
+                jobj.put("is_admin",is_admin_json);
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying user table in database ");
+        }
+        return finalJObject;
+
+    }
+
+
+
+
+
+
+
+    public JSONObject data_MenteeOpenEndReport(){
+
+        JSONObject finalJObject = new JSONObject();
+        //JSONArray jsonArray = new JSONArray();
+
+        try {
+            //String qry = "select * from user where is_admin = 0";
+            String qry = "select first_name,last_name,looking_forward,why_mentor from user join mentee on user.email = mentee.email";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (results.next()) {
+
+                String  first_name_json=results.getString("first_name");
+                String  last_name_json=results.getString("last_name");
+                String  looking_forward_json=results.getString("looking_forward");
+                String  why_mentor_json=results.getString("why_mentor");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("first_name",first_name_json);
+                jobj.put("last_name",last_name_json);
+                jobj.put("looking_forward",looking_forward_json);
+                jobj.put("why_mentor",why_mentor_json);
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying user table and mentee table in database ");
+        }
+
+        return finalJObject;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public JSONObject data_MentorOpenEndReport(){
+
+        JSONObject finalJObject = new JSONObject();
+        //JSONArray jsonArray = new JSONArray();
+
+        try {
+            //String qry = "select * from user where is_admin = 0";
+            String qry = "select first_name,last_name,mentor_req,attitude_for_diff,challenge,for_successful_1st_year from user join mentor on user.email = mentor.email";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (results.next()) {
+
+                String  first_name_json=results.getString("first_name");
+                String  last_name_json=results.getString("last_name");
+                String  mentor_req_json=results.getString("mentor_req");
+                String  attitude_for_diff_json=results.getString("attitude_for_diff");
+                String  challenge_json=results.getString("challenge");
+                String  for_successful_1st_year_json=results.getString("for_successful_1st_year");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("first_name",first_name_json);
+                jobj.put("last_name",last_name_json);
+                jobj.put("mentor_req",mentor_req_json);
+                jobj.put("attitude_for_diff",attitude_for_diff_json);
+                jobj.put("challenge",challenge_json);
+                jobj.put("for_successful_1st_year",for_successful_1st_year_json);
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying user table and mentor table in database ");
+        }
+
+        return finalJObject;
+
+    }
+
+
+
+
+    public int[] [] graphData_IntakeFormMentee() throws JSONException {
+        JSONObject json = userTableMentee();
+
+        JSONArray data = json.getJSONArray("data");
+        int female = 0;
+        int male = 0;
+        int otherGender = 0;
+
+
+        int white = 0;
+        int black_AfricanAmerican = 0;
+        int hispanic = 0;
+        int latino_Latina = 0;
+        int nativeAmerican_American_Indian = 0;
+        int asian = 0;
+        int pacific_Islander = 0;
+        int otherRace = 0;
+
+        int parentEd = 0;
+        int nonParentEd = 0;
+
+        if(data != null) {
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject temp = data.getJSONObject(i);
+
+                if (temp.getString("gender").equals("male") && temp.getString("gender").equals("male")) { male++; }
+                if (temp.getString("gender").equals("female")) { female++; }
+                if (temp.getString("gender").equals("other")) { otherGender++; }
+
+                if (temp.getString("race").equals("White")) { white++; }
+                if (temp.getString("race").equals("Black/African Am.")) { black_AfricanAmerican++; }
+                if (temp.getString("race").equals("Hispanic")) { hispanic++; }
+                if (temp.getString("race").equals("Latinx")) { latino_Latina++; }
+                if (temp.getString("race").equals("Native American")) { nativeAmerican_American_Indian++; }
+                if (temp.getString("race").equals("Asian")) { asian++; }
+                if (temp.getString("race").equals("Pacific Islander")) { pacific_Islander++; }
+                if (temp.getString("race").equals("Other")) { otherRace++; }
+
+                if (temp.getString("parent_education").equals("1")) { parentEd++; }
+                if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
+
+            }
+        }
+        int result1 [] = {male,female,otherGender};
+        int result2[] = {white,black_AfricanAmerican,hispanic,latino_Latina,
+                nativeAmerican_American_Indian,asian,pacific_Islander,otherRace};
+
+        int result3[] = {parentEd,nonParentEd};
+
+        int result[][] = {result1,result2,result3};
+
+        return result;
+
+
+    }
+
+
+
+
+
+
+    public int[] [] graphData_IntakeFormMentor() throws JSONException {
+        JSONObject json = userTableMentor();
+
+        JSONArray data = json.getJSONArray("data");
+        int female = 0;
+        int male = 0;
+        int otherGender = 0;
+
+
+        int white = 0;
+        int black_AfricanAmerican = 0;
+        int hispanic = 0;
+        int latino_Latina = 0;
+        int nativeAmerican_American_Indian = 0;
+        int asian = 0;
+        int pacific_Islander = 0;
+        int otherRace = 0;
+
+        int parentEd = 0;
+        int nonParentEd = 0;
+
+        if(data != null) {
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject temp = data.getJSONObject(i);
+
+                if (temp.getString("gender").equals("male") && temp.getString("gender").equals("male")) { male++; }
+                if (temp.getString("gender").equals("female")) { female++; }
+                if (temp.getString("gender").equals("other")) { otherGender++; }
+
+                if (temp.getString("race").equals("White")) { white++; }
+                if (temp.getString("race").equals("Black/African Am.")) { black_AfricanAmerican++; }
+                if (temp.getString("race").equals("Hispanic")) { hispanic++; }
+                if (temp.getString("race").equals("Latinx")) { latino_Latina++; }
+                if (temp.getString("race").equals("Native American")) { nativeAmerican_American_Indian++; }
+                if (temp.getString("race").equals("Asian")) { asian++; }
+                if (temp.getString("race").equals("Pacific Islander")) { pacific_Islander++; }
+                if (temp.getString("race").equals("Other")) { otherRace++; }
+
+                if (temp.getString("parent_education").equals("1")) { parentEd++; }
+                if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
+
+            }
+        }
+        int result1 [] = {male,female,otherGender};
+        int result2[] = {white,black_AfricanAmerican,hispanic,latino_Latina,
+                nativeAmerican_American_Indian,asian,pacific_Islander,otherRace};
+
+        int result3[] = {parentEd,nonParentEd};
+
+        int result[][] = {result1,result2,result3};
+
+        return result;
+
+
+    }
+
+
+
+
+
+    public int[] [] graphData_SessionForm(String lastName, String firstName,String sessNum1, String sessNum2) throws JSONException {
+        JSONObject json = sessionTableMentee(lastName,firstName,sessNum1,sessNum2);
+
+        JSONArray data = json.getJSONArray("data");
+        int actStpCmp = 0;
+        int totalActStep = 0;
+
+        int campus_involvement = 0;
+        int meaningful_relationships = 0;
+        int financial_management = 0;
+        int outside_responsibilities = 0;
+        int study_time_management = 0;
+        int academic_engagement = 0;
+        int health_wellness = 0;
+        int other_text = 0;
+
+        int scaleAvg = 0;
+
+
+
+        if(data != null) {
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject temp = data.getJSONObject(i);
+
+
+
+
+                if (temp.getString("bool_action_one").equals("1")) { actStpCmp ++; }
+                if (temp.getString("bool_action_two").equals("1")) { actStpCmp ++; }
+                if (temp.getString("bool_action_three").equals("1")) { actStpCmp ++; }
+                if (temp.getString("bool_action_four").equals("1")) { actStpCmp ++; }
+                if (temp.getString("bool_action_five").equals("1")) { actStpCmp ++; }
+                if (temp.getString("bool_action_six").equals("1")) { actStpCmp ++; }
+
+
+                if (temp.getString("scale")!= null) { scaleAvg+= Integer.parseInt(temp.getString("scale") ); }
+
+
+
+                if (temp.getString("pre_action_one")!= null && !temp.getString("pre_action_one").isEmpty()) { totalActStep++; }
+                if (temp.getString("pre_action_two")!= null && !temp.getString("pre_action_two").isEmpty()) { totalActStep++; }
+                if (temp.getString("pre_action_three")!= null && !temp.getString("pre_action_three").isEmpty()) { totalActStep++; }
+                if (temp.getString("pre_action_four")!= null && !temp.getString("pre_action_four").isEmpty()) { totalActStep++; }
+                if (temp.getString("pre_action_five")!= null && !temp.getString("pre_action_five").isEmpty()) { totalActStep++; }
+                if (temp.getString("pre_action_six")!= null && !temp.getString("pre_action_six").isEmpty()) { totalActStep++; }
+
+                if (temp.getString("campus_involvement").equals("1")) { campus_involvement ++; }
+                if (temp.getString("meaningful_relationships").equals("1")) { meaningful_relationships++; }
+                if (temp.getString("financial_management").equals("1")) { financial_management ++; }
+                if (temp.getString("outside_responsibilities").equals("1")) { outside_responsibilities++; }
+                if (temp.getString("study_time_management").equals("1")) { study_time_management++; }
+                if (temp.getString("academic_engagement").equals("1")) { academic_engagement++; }
+                if (temp.getString("health_wellness").equals("1")) { health_wellness++; }
+                if (temp.getString("other_text").equals("1")) { other_text++; }
+
+
+
+
+
+                 }
+
+            }
+
+
+        int result1 [] = {totalActStep,actStpCmp};
+
+        int result2[] = {campus_involvement,meaningful_relationships,financial_management,outside_responsibilities,
+                study_time_management,academic_engagement,health_wellness,other_text};
+
+        int result3[] = {scaleAvg/2};
+
+        int result[][] = {result1,result2,result3};
+
+        return result;
+
+
+    }
+
+
+
+
+
+
+    public File excelReport_IntakeFormMentee() throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+        int [][] graphData = graphData_IntakeFormMentee();
+
+        JSONObject jsonLookingForward =  data_MenteeOpenEndReport();
+        JSONArray dataLookingForward = jsonLookingForward.getJSONArray("data");
+
+        JSONObject jsonWhyMentor =  data_MenteeOpenEndReport();
+        JSONArray dataWhyMentor = jsonWhyMentor.getJSONArray("data");
+
+        //Map<String, Object[]> datax = new TreeMap<String, Object[]>();
+        LinkedHashMap <String, Object[]> datax = new LinkedHashMap<String, Object[]>();
+
+
+        datax.put("1", new Object[] {"Number of Male","Number of Females",
+        "Number of Other Gender"});
+
+        datax.put("2", new Object[] {Integer.toString(graphData[0][0]),
+                Integer.toString(graphData[0][1]), Integer.toString(graphData[0][2])});
+
+        datax.put("3", new Object[] {"Participants per Ethnic Group"});
+
+        datax.put("4", new Object[] {"White","Black/African American","Hispanic","Latino/Latina"
+                ,"Native American/American Indian","Asian","Pacific Islander","Other Race"});
+
+        datax.put("5", new Object[] {Integer.toString(graphData[1][0]),
+                Integer.toString(graphData[1][1]),Integer.toString(graphData[1][2]),
+                Integer.toString(graphData[1][3]),Integer.toString(graphData[1][4]),
+                Integer.toString(graphData[1][5]),Integer.toString(graphData[1][6]),
+                Integer.toString(graphData[1][7])});
+
+        datax.put("6", new Object[] {"First Generation College Student"});
+        datax.put("7", new Object[] {"Non-First-Generation College Student","First-Generation College Student"});
+        datax.put("8", new Object[] {Integer.toString(graphData[2][0]),
+                Integer.toString(graphData[2][1])});
+
+        datax.put("9", new Object[] {"What are you most looking forward to experiencing in college?"});
+        datax.put("10", new Object[] {"First Name","Last Name","Reason"});
+        int i = 0;
+
+        for (i = 11; i < dataLookingForward.length()+11; i++) {
+            JSONObject temp = dataLookingForward.getJSONObject(i-11);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("looking_forward")});
+        }
+
+
+        datax.put(Integer.toString(i), new Object[] {"Why do you want a peer mentor?"});
+        i++;
+        datax.put(Integer.toString(i), new Object[] {"First Name","Last Name","Reason"});
+        i++;
+        for (int cont = i; cont < dataWhyMentor.length()+i; cont++) {
+            JSONObject temp = dataWhyMentor.getJSONObject(cont-i);
+            datax.put(Integer.toString(cont), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("why_mentor")});
+        }
+
+
+
+
+        File report = new File("MenteeIntakeReport.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Mentee Intake Report");
+
+        Set<String> keyset = datax.keySet();
+        int rownum = 0;
+        for (String key : keyset)
+        {
+            Row row = sheet.createRow(rownum++);
+            Object [] objArr = datax.get(key);
+            int cellnum = 0;
+            for (Object objx : objArr)
+            {
+                Cell cell = row.createCell(cellnum++);
+                if(objx instanceof String)
+                    cell.setCellValue((String)objx);
+                else if(objx instanceof Integer)
+                    cell.setCellValue((Integer)objx);
+            }
+        }
+        try
+        {
+
+            //Write the workbook in file system
+            FileOutputStream out = new FileOutputStream(report);
+            workbook.write(out);
+            out.close();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+
+        return report;
+    }
+
+
+
+
+
+
+
+
+
+    public File excelReport_IntakeFormMentor() throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+        int [][] graphData = graphData_IntakeFormMentor();
+
+        JSONObject jsonMentorReq =  data_MentorOpenEndReport();
+        JSONArray dataMentorReq = jsonMentorReq.getJSONArray("data");
+
+        JSONObject jsonAttitudeForDiff =  data_MentorOpenEndReport();
+        JSONArray dataAttitudeForDiff = jsonAttitudeForDiff.getJSONArray("data");
+
+        JSONObject jsonChallenge =  data_MentorOpenEndReport();
+        JSONArray dataChallenge = jsonChallenge.getJSONArray("data");
+
+        JSONObject jsonForSuccessful_1stYear =  data_MentorOpenEndReport();
+        JSONArray dataForSuccessful_1stYear = jsonForSuccessful_1stYear.getJSONArray("data");
+
+
+
+
+
+        //Map<String, Object[]> datax = new TreeMap<String, Object[]>();
+        LinkedHashMap <String, Object[]> datax = new LinkedHashMap<String, Object[]>();
+
+
+        datax.put("1", new Object[] {"Number of Male","Number of Females",
+                "Number of Other Gender"});
+
+        datax.put("2", new Object[] {Integer.toString(graphData[0][0]),
+                Integer.toString(graphData[0][1]), Integer.toString(graphData[0][2])});
+
+        datax.put("3", new Object[] {"Participants per Ethnic Group"});
+
+        datax.put("4", new Object[] {"White","Black/African American","Hispanic","Latino/Latina"
+                ,"Native American/American Indian","Asian","Pacific Islander","Other Race"});
+
+        datax.put("5", new Object[] {Integer.toString(graphData[1][0]),
+                Integer.toString(graphData[1][1]),Integer.toString(graphData[1][2]),
+                Integer.toString(graphData[1][3]),Integer.toString(graphData[1][4]),
+                Integer.toString(graphData[1][5]),Integer.toString(graphData[1][6]),
+                Integer.toString(graphData[1][7])});
+
+        datax.put("6", new Object[] {"First Generation College Student"});
+        datax.put("7", new Object[] {"Non-First-Generation College Student","First-Generation College Student"});
+        datax.put("8", new Object[] {Integer.toString(graphData[2][0]),
+                Integer.toString(graphData[2][1])});
+
+        datax.put("9", new Object[] {"What are the requirements to being a good mentor to someone who" +
+                "may have a different background than you?"});
+
+        datax.put("10", new Object[] {"First Name","Last Name","Reason"});
+        int i = 11;
+
+
+        for (int j = 0; j < dataMentorReq.length(); j++) {
+            JSONObject temp = dataMentorReq.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("mentor_req")});
+            i++;
+        }
+
+
+        datax.put(Integer.toString(i), new Object[] {"Why would you make a good mentor to first year and sophomores?"});
+        i++;
+        datax.put(Integer.toString(i), new Object[] {"First Name","Last Name","Reason"});
+        i++;
+        for (int j = 0; j < dataAttitudeForDiff.length(); j++) {
+            JSONObject temp = dataAttitudeForDiff.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("attitude_for_diff")});
+            i++;
+        }
+
+        datax.put(Integer.toString(i), new Object[] {"Describe a time when you encountered a challenge in " +
+                " college, and how you dealt with it"});
+
+        i++;
+        datax.put(Integer.toString(i), new Object[] {"First Name","Last Name","Reason"});
+        i++;
+
+        for ( int j = 0; j < dataChallenge.length(); j++) {
+            JSONObject temp = dataChallenge.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("challenge")});
+            i++;
+        }
+
+
+        datax.put(Integer.toString(i), new Object[] {"What does it take for a first generation college student" +
+                " to be successful"});
+
+        i++;
+        datax.put(Integer.toString(i), new Object[] {"First Name","Last Name","Reason"});
+        i++;
+
+        for (int j = 0; j < dataForSuccessful_1stYear.length(); j++) {
+            JSONObject temp = dataForSuccessful_1stYear.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("for_successful_1st_year")});
+            i++;
+        }
+
+
+
+        File report = new File("MentorIntakeReport.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Mentor Intake Report");
+
+        Set<String> keyset = datax.keySet();
+        int rownum = 0;
+        for (String key : keyset)
+        {
+            Row row = sheet.createRow(rownum++);
+            Object [] objArr = datax.get(key);
+            int cellnum = 0;
+            for (Object objx : objArr)
+            {
+                Cell cell = row.createCell(cellnum++);
+                if(objx instanceof String)
+                    cell.setCellValue((String)objx);
+                else if(objx instanceof Integer)
+                    cell.setCellValue((Integer)objx);
+            }
+        }
+        try
+        {
+
+            //Write the workbook in file system
+            FileOutputStream out = new FileOutputStream(report);
+            workbook.write(out);
+            out.close();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return report;
+    }
+
+
+
+
+
+
+
+
+
+
+    public File excelReport_SessionForm(String lastName,String firstName,String sessNum1,String sessNum2) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+        int [][] graphData = graphData_SessionForm(lastName, firstName, sessNum1, sessNum2);
+
+        JSONObject jsonDataToExcel =  sessionTableMentee(lastName, firstName, sessNum1, sessNum2);
+        JSONArray dataDataToExcel = jsonDataToExcel.getJSONArray("data");
+
+
+
+        //Map<String, Object[]> datax = new TreeMap<String, Object[]>();
+        LinkedHashMap <String, Object[]> datax = new LinkedHashMap<String, Object[]>();
+
+
+        datax.put("1", new Object[] {"Total Number of Action Step","Action Steps Completed"});
+
+        datax.put("2", new Object[] {Integer.toString(graphData[0][0]),
+                Integer.toString(graphData[0][1])});
+
+        datax.put("3", new Object[] {"Session Topics Discussed"});
+
+        datax.put("4", new Object[] {"Campus Involvement","Meaningful Relationships","Financial Management",
+                "Outside Responsibilities","Study time Management","Academic Engagement","Health Wellness","Other"});
+
+        datax.put("5", new Object[] {Integer.toString(graphData[1][0]),
+                Integer.toString(graphData[1][1]),Integer.toString(graphData[1][2]),
+                Integer.toString(graphData[1][3]),Integer.toString(graphData[1][4]),
+                Integer.toString(graphData[1][5]),Integer.toString(graphData[1][6]),
+                Integer.toString(graphData[1][7])});
+
+        datax.put("6", new Object[] {"Average Session Rating"});
+        datax.put("7", new Object[] {Integer.toString(graphData[2][0])});
+
+        datax.put("8", new Object[] {"Issues and Concern"});
+        int i = 9;
+
+
+        for (int j = 0; j < dataDataToExcel.length(); j++) {
+            JSONObject temp = dataDataToExcel.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("issues_concerns")});
+            i++;
+        }
+
+
+        datax.put(Integer.toString(i), new Object[] {"Notes and Comments"});
+        i++;
+        for (int j = 0; j < dataDataToExcel.length(); j++) {
+            JSONObject temp = dataDataToExcel.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+                    temp.getString("notes_comments")});
+            i++;
+        }
+
+
+
+        File report = new File("MentorIntakeReport.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Mentor Intake Report");
+
+        Set<String> keyset = datax.keySet();
+        int rownum = 0;
+        for (String key : keyset)
+        {
+            Row row = sheet.createRow(rownum++);
+            Object [] objArr = datax.get(key);
+            int cellnum = 0;
+            for (Object objx : objArr)
+            {
+                Cell cell = row.createCell(cellnum++);
+                if(objx instanceof String)
+                    cell.setCellValue((String)objx);
+                else if(objx instanceof Integer)
+                    cell.setCellValue((Integer)objx);
+            }
+        }
+        try
+        {
+
+            //Write the workbook in file system
+            FileOutputStream out = new FileOutputStream(report);
+            workbook.write(out);
+            out.close();
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+        return report;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

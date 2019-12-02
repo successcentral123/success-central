@@ -5,7 +5,10 @@
   Time: 7:16 PM This is a test for the Commit
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="com.ccsu.cs530.successcentral.model.Mentee" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.ccsu.cs530.successcentral.model.SessionForm" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +17,7 @@
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
+
 
 
 <div class="container">
@@ -28,31 +32,28 @@
 
             <!-- Basic info -->
             <fieldset>
-                <legend>Session Information:</legend>
 
+                <legend>Session Information:</legend>
+                <%  List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;
+                    SessionForm presession = new SessionForm();
+                    if (request.getAttribute("fullname") != null) {
+                        presession = (SessionForm) request.getAttribute("preSession");
+                    }
+                %>
                 <!-- Name -->
-                <label><span style="color:red">*</span> Student Name</label>
-                <div class="form-row">
-                    <div class="col">
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="First name"
-                                required=""
-                                name="firstname"
-                        />
-                    </div>
-                    <div class="col">
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Last name"
-                                required=""
-                                name="lastname"
-                        />
-                    </div>
-                </div>
-                <br>
+                <label><span style="color:red">*</span> Student Name:</label>
+                <br />
+                <select class="form-control" name="fullname" id="fullSelect"
+                        onchange="refreshpage()" required="">
+                    <option value="Mentee" selected>Mentee</option>
+                    <%  for (int i = 0; i < myMentees.size(); i++) {
+                        String first = myMentees.get(i).getFirstName();
+                        String last = myMentees.get(i).getLastName();
+                        String full = first + " "+ last;%>
+                    <option value="<%= full %>" <%if(full.equals(request.getAttribute("fullname"))) {%>selected<%}%>><%= full %></option>
+                    <% } %>
+                </select>
+                <br /><br/>
 
                 <!-- 17-Sep-2019 CDP Phase 2: Added a textbox for Session# Date  -->
                 <!-- CCSU Info -->
@@ -66,17 +67,19 @@
                                 required=""
                                 name="sessionnum"
                                 min="1"
+                                <% if (presession != null) {
+                                    int num = presession.getSessionNum() + 1; %>
+                                    value="<%=num%>"
+                                <% } %>
                         />
                     </div>
                     <div class="col">
                         <label><span style="color:red">*</span> Date</label>
                         <input
-                                type="text"
+                                type="date"
                                 class="form-control"
-                                placeholder="DD-MMM-YYYY"
                                 required=""
                                 name="date"
-
                         />
                     </div>
                 </div>
@@ -97,15 +100,18 @@
                 <!-- 17-Sep-2019 CDP Phase 2: Need to set the values to be equal to the previous session's Action Items  -->
 
                 <fieldset>
-                    <label><span style="color:red">*</span> Action Steps from the previous session (Check if completed): </label>
+                    <label>Action Steps from the previous session (Check if completed): </label>
                     <div class="col">
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck1" value="Previous Action Item #1" >
                         <input
                                 type="text"
                                 class="form-control"
                                 placeholder="1st Previous Action Step"
-                                required=""
                                 name="preactionone"
+                                <% if (presession.getFirstActionStep() != null) {
+                                    String action = presession.getFirstActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck2" value="Previous Action Item #2" >
@@ -114,6 +120,10 @@
                                 class="form-control"
                                 placeholder="2nd Previous Action Step"
                                 name="preactiontwo"
+                                <% if (presession.getSecondActionStep() != null) {
+                                    String action = presession.getSecondActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck3" value="Previous Action Item #3" >
@@ -122,6 +132,10 @@
                                 class="form-control"
                                 placeholder="3rd Previous Action Step"
                                 name="preactionthree"
+                                <% if (presession.getThirdActionStep() != null) {
+                                    String action = presession.getThirdActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck4" value="Previous Action Item #4" >
@@ -130,6 +144,10 @@
                                 class="form-control"
                                 placeholder="4th Previous Action Step"
                                 name="preactionfour"
+                                <% if (presession.getFourthActionStep() != null) {
+                                    String action = presession.getFourthActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck5" value="Previous Action Item #5" >
@@ -138,6 +156,10 @@
                                 class="form-control"
                                 placeholder="5th Previous Action Step"
                                 name="preactionfive"
+                                <% if (presession.getFifthActionStep() != null) {
+                                    String action = presession.getFifthActionStep();%>
+                                    value="<%=action%>"
+                                <% } %>
                         />
                         <br>
                         <input class="form-check-input" name="prevactionsteps" type="checkbox" id="defaultCheck6" value="Previous Action Item #6" >
@@ -146,43 +168,21 @@
                                 class="form-control"
                                 placeholder="6th Previous Action Step"
                                 name="preactionsix"
+                                <% if (presession.getSixthActionStep() != null) {
+                                    String action = presession.getSixthActionStep();%>
+                                    value="<%=action%>"
+                                <% }  %>
                         />
                     </div>
                 </fieldset>
-
-
-                <!--<div class="form-row">
-                    <div class="col">
-                        <div class="form-check" required="">
-
-                            <label class="form-check-label" id="" for="defaultCheck1" >Previous</label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck2" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck3" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck4" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck5" ></label></div>
-                        <div class="form-check">
-
-                            <label class="form-check-label" for="defaultCheck6" ></label></div>
-                        <br />
-                    </div>
-                </div>-->
-
-
-
-
-
                 <br>
                 <br>
                 <!-- 17-Sep-2019 CDP Phase 2: Change Gender to the 1-5 Scale -->
-                <label><span style="color:red">*</span> On a scale of 1 to 5, how happy is the Mentee with the outcome of the action steps from last session? </label>
+                <label>
+                    <% if (presession.getSessionNum() >= 1) { %>
+                        <span style="color:red">*</span>
+                    <% } %>
+                    On a scale of 1 to 5, how happy is the Mentee with the outcome of the action steps from last session? </label>
                 <br>
                 <div class="form-check">
                     <input
@@ -191,7 +191,9 @@
                             id="exampleRadios1a"
                             value="5"
                             name="scale"
-                            required=""
+                            <% if (presession.getSessionNum() >= 1) { %>
+                                required=""
+                            <% } %>
                     />
                     <label class="form-check-label" for="exampleRadios1a">5 - Very Satisfied </label></div>
                 <div class="form-check" >
@@ -201,7 +203,9 @@
                             id="exampleRadios2a"
                             value="4"
                             name="scale"
-                            required=""
+                            <% if (presession.getSessionNum() >= 1) { %>
+                                required=""
+                            <% } %>
                     />
                     <label class="form-check-label" for="exampleRadios2a"
                     >4 - Satisfied </label
@@ -213,7 +217,9 @@
                             id="exampleRadios3a"
                             value="3"
                             name="scale"
-                            required=""
+                            <% if (presession.getSessionNum() >= 1) { %>
+                                required=""
+                            <% } %>
                     />
                     <label class="form-check-label" for="exampleRadios3a"
                     >3 - Neither Satisfied Nor Dissatisfied</label>
@@ -225,7 +231,9 @@
                             id="exampleRadios4a"
                             value="2"
                             name="scale"
-                            required=""
+                            <% if (presession.getSessionNum() >= 1) { %>
+                                required=""
+                            <% } %>
                     />
                     <label class="form-check-label" for="exampleRadios4a"
                     >2 - Dissatisfied </label
@@ -237,7 +245,9 @@
                             id="exampleRadios5a"
                             value="1"
                             name="scale"
-                            required=""
+                            <% if (presession.getSessionNum() >= 1) { %>
+                                required=""
+                            <% } %>
                     />
                     <label class="form-check-label" for="exampleRadios5a"
                     >1 - Very Dissatisfied </label
@@ -310,68 +320,74 @@
             <fieldset>
                 <legend>New Action Steps:</legend>
                 <label><span style="color:red">*</span> New Action Step(s) to address Issues/Concerns: </label>
-                    <div class="col">
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="1st Action Step"
-                                required=""
-                                name="firstactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="2nd Action Step"
-                                name="secondactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="3rd Action Step"
-                                name="thirdactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="4th Action Step"
-                                name="fourthactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="5th Action Step"
-                                name="fifthactionstep"
-                        />
-                        <br>
-                        <input
-                                type="text"
-                                class="form-control"
-                                placeholder="6th Action Step"
-                                name="sixthactionstep"
-                        />
-                    </div>
+                <div class="col">
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="1st Action Step"
+                            required=""
+                            name="firstactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="2nd Action Step"
+                            name="secondactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="3rd Action Step"
+                            name="thirdactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="4th Action Step"
+                            name="fourthactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="5th Action Step"
+                            name="fifthactionstep"
+                    />
+                    <br>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="6th Action Step"
+                            name="sixthactionstep"
+                    />
+                </div>
             </fieldset>
 
             <!-- Submit button -->
             <br>
-            <button type="submit" class="btn btn-primary mb-2" onClick="return valChecked();">Submit</button>
+            <button type="submit" class="btn btn-primary mb-2" onClick="return menteecheck();">Submit</button>
         </form>
     </div>
 </div>
 
 <jsp:include page="includes/footer.jsp"/>
-<script>function disableSubjectField() {
-    if (document.getElementById('defaultCheck8a').checked) {
-        document.getElementById('SessTopicOther').disabled = false;
-    } else {
-        document.getElementById('SessTopicOther').value = '';
-        document.getElementById('SessTopicOther').disabled = true;
+<script>
+    function menteecheck() {
+        var name = document.getElementById("fullSelect").value
+        if (name === "Mentee") {
+            alert("Please select a mentee.")
+            return false
+        }
+        else
+            return true
     }
-}
+    function refreshpage() {
+        var name = document.getElementById("fullSelect").value
+        window.location.href="?fullname="+name
+    }
 </script>
 </body>
 </html>
