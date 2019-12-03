@@ -21,14 +21,14 @@ public class DatabaseConnection {
 
 //        try {
 //            HikariConfig config = new HikariConfig();
-
-            // Configure which instance and what database user to connect with.
+//
+//             //Configure which instance and what database user to connect with.
 //            config.setJdbcUrl(System.getenv("JDBC_URL"));
 //
 //            DataSource pool = new HikariDataSource(config);
 //            con = pool.getConnection();
 //            return con;
-
+//
 //        } catch (Exception e) {
 //            System.out.println("Could not connect Booya");
 //            return null;

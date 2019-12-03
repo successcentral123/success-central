@@ -37,8 +37,8 @@
                  width="150"/>
         </div>
         <div class="col">
-            <a href="graph_MenteeIntake" class="button">Mentee Intake Form Report</a>
-            <a href="graph_MentorIntake" class="button">Mentor Intake Form Report</a>
+            <a href="graph_MenteeIntake" class="btn btn-primary mb-2">Mentee Intake Form Report</a>
+            <a href="graph_MentorIntake" class="btn btn-primary mb-2">Mentor Intake Form Report</a>
         </div>
     </div>
 

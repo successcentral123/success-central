@@ -19,10 +19,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 </head>
 <jsp:include page="includes/header.jsp">
-    <jsp:param name="title" value="Intake Form Report"/>
+    <jsp:param name="title" value="Session Form Report"/>
 </jsp:include>
 <jsp:include page="includes/header.jsp">
-    <jsp:param name="title" value="Intake Form Report"/>
+    <jsp:param name="title" value="Session Form Report"/>
 </jsp:include>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
@@ -172,13 +172,16 @@
 </script>
 
 
+
+
+
 <canvas id="pie-chart4" width="800" height="450"></canvas>
 <script>
     var finalData = []
 
-    <%for (int i = 0; i < graphData[2].length; i++ ) {%>
-    finalData.push(<%=graphData[2][i]%>);
-    <%}%>
+
+    finalData.push(<%=graphData[2][0]%>);
+
 
     new Chart(document.getElementById("pie-chart4"), {
         type: 'pie',
@@ -188,7 +191,7 @@
                 label: "",
                 backgroundColor: ["#3e95cd"],
                 //data: [2478,5267,734,784,433]
-                data:finalData
+                data: finalData
             }]
         },
 
@@ -219,9 +222,9 @@
 </script>
 
 
-<a class="btn btn-primary mb-2" href="IntakeReportMentor">Download Report</a>
 
 
+<a class="btn btn-primary mb-2" href="SessionReport">Download Report</a>
 
 <jsp:include page="includes/footer.jsp"/>
 </body>

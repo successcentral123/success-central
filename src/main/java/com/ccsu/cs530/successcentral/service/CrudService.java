@@ -1425,6 +1425,22 @@ public class CrudService {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public JSONObject sessionTableMentee(String firstName, String lastName,String sessionNum1, String sessionNum2){
 
 
@@ -1432,9 +1448,14 @@ public class CrudService {
         JSONArray jsonArray = new JSONArray();
 
         try {
-            //String qry = "select * from user where is_admin = 0";
-            String qry = "select * from session_form where last_name = " + lastName + " and " + "first_name = " + firstName
-                    + " and (session_number = " + sessionNum1 + "or session_number = " + sessionNum2 + ")";
+            //String qry = "select * from user join mentee on user.email = mentee.email";
+            //String qry = "select * from session_form where last_name = 'Mentee' and first_name = 'Geovanni Roberts' and (session_number = '1' or session_number = '2')";
+            //String qry = "select * from session_form where last_name = " + "\'"+lastName+"\'" + " and " + "first_name = " + "\'" + firstName+ "\'"
+            //        + " and (session_number = " + "\'"+sessionNum1+"\'" + " or session_number = " + sessionNum2 + ")";
+            //String qry = "select * from session_form where last_name ="+   "\'Mentee\'";
+
+
+            String qry = "select * from session_form where last_name = 'Mentee' and first_name = 'Geovanni Roberts' and (session_number = '1' or session_number = '2')";
             PreparedStatement statement = con.prepareStatement(qry);
             ResultSet results = statement.executeQuery();
 
@@ -1529,6 +1550,111 @@ public class CrudService {
         return finalJObject;
 
     }
+
+
+
+    public JSONObject sessionFormTable(String mentee){
+        System.out.println("There was a problem querying session_form table in databa");
+
+        JSONObject finalJObject = new JSONObject();
+        try {
+
+            //String qry = "select * from session_form where full_name = 'Aaron Ba'";
+            String qry = "select * from session_form where full_name = '" +mentee+"'";
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet rs2 = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (rs2.next()) {
+
+                String first_name_json=rs2.getString("mentor");
+                String last_name_json=rs2.getString("full_name");
+                String session_number_json=rs2.getString("session_number");
+                String day_json=rs2.getString("day");
+                String pre_action_one_json=rs2.getString("pre_action_one");
+                String bool_action_one_json=rs2.getString("bool_action_one");
+                String pre_action_two_json=rs2.getString("pre_action_two");
+                String bool_action_two_json=rs2.getString("bool_action_two");
+                String pre_action_three_json=rs2.getString("pre_action_three");
+                String pre_action_four_json=rs2.getString("pre_action_four");
+                String bool_action_three_json=rs2.getString("bool_action_three");
+                String bool_action_four_json=rs2.getString("bool_action_four");
+                String pre_action_five_json=rs2.getString("pre_action_five");
+                String bool_action_five_json=rs2.getString("bool_action_five");
+                String pre_action_six_json=rs2.getString("pre_action_six");
+                String bool_action_six_json=rs2.getString("bool_action_six");
+                String scale_json=rs2.getString("scale");
+                String campus_involvement_json=rs2.getString("campus_involvement");
+                String meaningful_relationships_json=rs2.getString("meaningful_relationships");
+                String financial_management_json=rs2.getString("financial_management");
+                String outside_responsibilities_json=rs2.getString("outside_responsibilities");
+                String study_time_management_json=rs2.getString("study_time_management");
+                String academic_engagement_json=rs2.getString("academic_engagement");
+                String health_wellness_json=rs2.getString("health_wellness");
+                String other_bool_json=rs2.getString("other_bool");
+                String other_text_json=rs2.getString("other_text");
+                String issues_concerns_json=rs2.getString("issues_concerns");
+                String notes_comments_json=rs2.getString("notes_comments");
+                String action_one_json=rs2.getString("action_one");
+                String action_two_json=rs2.getString("action_two");
+                String action_three_json=rs2.getString("action_three");
+                String action_four_json=rs2.getString("action_four");
+                String action_five_json=rs2.getString("action_five");
+                String action_six_json=rs2.getString("action_six");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("mentor",first_name_json);
+                jobj.put("full_name",last_name_json);
+                jobj.put("session_number",session_number_json);
+                jobj.put("day",day_json);
+                jobj.put("pre_action_one",pre_action_one_json);
+                jobj.put("bool_action_one",bool_action_one_json);
+                jobj.put("pre_action_two",pre_action_two_json);
+                jobj.put("bool_action_two",bool_action_two_json);
+                jobj.put("pre_action_three",pre_action_three_json);
+                jobj.put("bool_action_three",bool_action_three_json);
+                jobj.put("pre_action_four",pre_action_four_json);
+                jobj.put("bool_action_four",bool_action_four_json);
+                jobj.put("pre_action_five",pre_action_five_json);
+                jobj.put("bool_action_five",bool_action_five_json);
+                jobj.put("pre_action_six",pre_action_six_json);
+                jobj.put("bool_action_six",bool_action_six_json);
+                jobj.put("scale",scale_json);
+                jobj.put("campus_involvement",campus_involvement_json);
+                jobj.put("meaningful_relationships",meaningful_relationships_json);
+                jobj.put("financial_management",financial_management_json);
+                jobj.put("outside_responsibilities",outside_responsibilities_json);
+                jobj.put("study_time_management",study_time_management_json);
+                jobj.put("academic_engagement",academic_engagement_json);
+                jobj.put("health_wellness",health_wellness_json);
+                jobj.put("other_bool",other_bool_json);
+                jobj.put("other_text",other_text_json);
+                jobj.put("issues_concerns",issues_concerns_json);
+                jobj.put("notes_comments",notes_comments_json);
+                jobj.put("action_one",action_one_json);
+                jobj.put("action_two",action_two_json);
+                jobj.put("action_three",action_three_json);
+                jobj.put("action_four",action_four_json);
+                jobj.put("action_five",action_five_json);
+                jobj.put("action_six",action_six_json);
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying user table in database ");
+        }
+        return finalJObject;
+
+    }
+
+
 
 
 
@@ -1670,6 +1796,7 @@ public class CrudService {
         } catch (Exception e) {
             System.out.println("There was a problem querying user table in database ");
         }
+
         return finalJObject;
 
     }
@@ -1906,8 +2033,11 @@ public class CrudService {
 
 
 
-    public int[] [] graphData_SessionForm(String lastName, String firstName,String sessNum1, String sessNum2) throws JSONException {
-        JSONObject json = sessionTableMentee(lastName,firstName,sessNum1,sessNum2);
+    //public int[] [] graphData_SessionForm(String lastName, String firstName,String sessNum1, String sessNum2) throws JSONException {
+    public int[] [] graphData_SessionForm(String mentee) throws JSONException {
+        //JSONObject json = sessionTableMentee(lastName,firstName,sessNum1,sessNum2);
+        JSONObject json = sessionFormTable(mentee);
+
 
         JSONArray data = json.getJSONArray("data");
         int actStpCmp = 0;
@@ -1920,7 +2050,7 @@ public class CrudService {
         int study_time_management = 0;
         int academic_engagement = 0;
         int health_wellness = 0;
-        int other_text = 0;
+        int other_bool = 0;
 
         int scaleAvg = 0;
 
@@ -1956,10 +2086,11 @@ public class CrudService {
                 if (temp.getString("meaningful_relationships").equals("1")) { meaningful_relationships++; }
                 if (temp.getString("financial_management").equals("1")) { financial_management ++; }
                 if (temp.getString("outside_responsibilities").equals("1")) { outside_responsibilities++; }
+
                 if (temp.getString("study_time_management").equals("1")) { study_time_management++; }
                 if (temp.getString("academic_engagement").equals("1")) { academic_engagement++; }
                 if (temp.getString("health_wellness").equals("1")) { health_wellness++; }
-                if (temp.getString("other_text").equals("1")) { other_text++; }
+                if (temp.getString("other_bool").equals("1")) { other_bool++; }
 
 
 
@@ -1973,11 +2104,12 @@ public class CrudService {
         int result1 [] = {totalActStep,actStpCmp};
 
         int result2[] = {campus_involvement,meaningful_relationships,financial_management,outside_responsibilities,
-                study_time_management,academic_engagement,health_wellness,other_text};
+                study_time_management,academic_engagement,health_wellness,other_bool};
 
         int result3[] = {scaleAvg/2};
 
         int result[][] = {result1,result2,result3};
+        //int result[][] = {{},{},{56}};
 
         return result;
 
@@ -2246,9 +2378,12 @@ public class CrudService {
 
 
     public File excelReport_SessionForm(String lastName,String firstName,String sessNum1,String sessNum2) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
-        int [][] graphData = graphData_SessionForm(lastName, firstName, sessNum1, sessNum2);
+        //int [][] graphData = graphData_SessionForm(lastName, firstName, sessNum1, sessNum2);
+        int [][] graphData = graphData_SessionForm("Aaron Ba");
 
-        JSONObject jsonDataToExcel =  sessionTableMentee(lastName, firstName, sessNum1, sessNum2);
+        //JSONObject jsonDataToExcel =  sessionTableMentee(lastName, firstName, sessNum1, sessNum2);
+        JSONObject jsonDataToExcel =  sessionFormTable("Aaron Ba");
+
         JSONArray dataDataToExcel = jsonDataToExcel.getJSONArray("data");
 
 
@@ -2282,7 +2417,7 @@ public class CrudService {
 
         for (int j = 0; j < dataDataToExcel.length(); j++) {
             JSONObject temp = dataDataToExcel.getJSONObject(j);
-            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+            datax.put(Integer.toString(i), new Object[] {temp.getString("full_name"),
                     temp.getString("issues_concerns")});
             i++;
         }
@@ -2292,14 +2427,14 @@ public class CrudService {
         i++;
         for (int j = 0; j < dataDataToExcel.length(); j++) {
             JSONObject temp = dataDataToExcel.getJSONObject(j);
-            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+            datax.put(Integer.toString(i), new Object[] {temp.getString("full_name"),
                     temp.getString("notes_comments")});
             i++;
         }
 
 
 
-        File report = new File("MentorIntakeReport.xlsx");
+        File report = new File("SessionReport.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Mentor Intake Report");
 
@@ -2336,27 +2471,6 @@ public class CrudService {
 
         return report;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

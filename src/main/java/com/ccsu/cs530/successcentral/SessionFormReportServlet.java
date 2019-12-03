@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,8 +25,17 @@ public class SessionFormReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         try {
-            req.setAttribute("graph", crud.graphData_SessionForm("Mentee", "Geovanni Roberts","1","2"));
+            //String menteeChosen = (String)req.getAttribute("mentee");
+
+
+            HttpSession session = req.getSession();
+            String data = (String) session.getAttribute("mentee");
+
+
+
+            req.setAttribute("graph", crud.graphData_SessionForm((String) session.getAttribute("mentee")));
             //req.setAttribute("report", crud.excelReport_IntakeFormMentee());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

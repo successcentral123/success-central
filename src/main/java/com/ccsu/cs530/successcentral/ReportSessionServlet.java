@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,17 +17,60 @@ import java.util.List;
 public class ReportSessionServlet extends HttpServlet {
     private CrudService crud = new CrudService();
 
+    String menteeChosen = "";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
         if (req.getSession().getAttribute("email") != null && req.getSession().getAttribute("isAdmin").equals("true")) {
             List<Mentee> Mentees = crud.getAllMentees();
             req.setAttribute("Mentees", Mentees);
             req.getRequestDispatcher("report_session.jsp").forward(req, resp);
         }
+
+
+
+        menteeChosen = "Aaron Ba";
+        req.setAttribute("mentee",menteeChosen);
+
+        HttpSession session = req.getSession();
+        session.setAttribute("mentee",menteeChosen);
+
+        //getServletContext().getRequestDispatcher("SessionFormReportServlet").forward(req,resp);
+
+
+        req.getRequestDispatcher("session_form.jsp").forward(req, resp);
+
+
+
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
+//        if (req.getParameter("fullname") == null) {
+//            //menteeChosen = req.getParameter("fullname");
+//            menteeChosen = "Aaron Ba";
+//        }
+//        req.setAttribute("mentee",menteeChosen);
+//        getServletContext().getRequestDispatcher("SessionFormReportServlet").forward(req,resp);
+
+
+
+//        HttpSession session = req.getSession();
+//        session.setAttribute("mentee",menteeChosen);
+        if (req.getParameter("fullname") != null) {
+            //menteeChosen = req.getParameter("fullname");
+            menteeChosen = "Aaron Ba";
+
+
+
+        }
+        req.getRequestDispatcher("form_success").forward(req, resp);
+
     }
+
+
+
 
 }

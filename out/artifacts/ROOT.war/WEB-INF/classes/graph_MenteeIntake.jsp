@@ -216,7 +216,7 @@
 </script>
 
 
-<a href="IntakeReportMentee">Download Report</a>
+<a class="btn btn-primary mb-2" href="IntakeReportMentee">Download Report</a>
 
 
 

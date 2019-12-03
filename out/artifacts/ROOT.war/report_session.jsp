@@ -47,7 +47,6 @@
             <br />
             <select class="form-control" name="fullname" id="fullSelect"
                     onchange="refreshpage()" required="">
-                <option value="Mentee" selected>Mentee</option>
                 <%  for (int i = 0; i < Mentees.size(); i++) {
                     String first = Mentees.get(i).getFirstName();
                     String last = Mentees.get(i).getLastName();
@@ -56,8 +55,7 @@
                 <% } %>
             </select>
             <br>
-            <a href="graph_SessionForm" class="button">Session Form Reportt</a>
-            <button type="button" id="reportButton" class="btn btn-primary mb-2" onClick="sessionReport()">Generate Session Form Report</button>
+            <a href="graph_SessionForm" class="btn btn-primary mb-2">Session Form Report</a>
         </div>
     </div>
 </div>
