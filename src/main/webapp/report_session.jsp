@@ -47,6 +47,7 @@
             <br>
             <form action="/graph_SessionForm" method="get">
                 <select class="form-control" name="fullname" id="fullSelect" required="">
+                    <option value="Mentee" selected>Mentee</option>
                     <%  for (int i = 0; i < Mentees.size(); i++) {
                         String first = Mentees.get(i).getFirstName();
                         String last = Mentees.get(i).getLastName();
