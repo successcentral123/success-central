@@ -1,6 +1,7 @@
 package com.ccsu.cs530.successcentral;
 
 import com.ccsu.cs530.successcentral.model.Mentee;
+import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.service.CrudService;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,10 @@ public class ReportSessionServlet extends HttpServlet {
 
 
 
-        menteeChosen = "Aaron Ba";
+
+
+        //menteeChosen = "Aaron Ba";
+        menteeChosen =""; // The goal is to get the fullname here
         req.setAttribute("mentee",menteeChosen);
 
         HttpSession session = req.getSession();
@@ -59,14 +63,14 @@ public class ReportSessionServlet extends HttpServlet {
 
 //        HttpSession session = req.getSession();
 //        session.setAttribute("mentee",menteeChosen);
-        if (req.getParameter("fullname") != null) {
-            //menteeChosen = req.getParameter("fullname");
-            menteeChosen = "Aaron Ba";
-
-
-
-        }
-        req.getRequestDispatcher("form_success").forward(req, resp);
+//        if (req.getParameter("fullname") != null) {
+//            //menteeChosen = req.getParameter("fullname");
+//            menteeChosen = "Aaron Ba";
+//
+//
+//
+//        }
+//        req.getRequestDispatcher("form_success").forward(req, resp);
 
     }
 
