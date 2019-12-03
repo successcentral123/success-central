@@ -25,16 +25,7 @@ public class SessionFormReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         try {
-            //String menteeChosen = (String)req.getAttribute("mentee");
-
-
-            HttpSession session = req.getSession();
-            String data = (String) session.getAttribute("mentee");
-
-
-
-            req.setAttribute("graph", crud.graphData_SessionForm((String) session.getAttribute("mentee")));
-            //req.setAttribute("report", crud.excelReport_IntakeFormMentee());
+            req.setAttribute("graph", crud.graphData_SessionForm((String) req.getParameter("fullname")));
 
         } catch (JSONException e) {
             e.printStackTrace();
