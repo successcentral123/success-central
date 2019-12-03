@@ -44,18 +44,20 @@
             <% List<Mentee> Mentees = (List<Mentee>) request.getAttribute("Mentees") ;%>
             <!-- Name -->
             <label><span style="color:red">*</span> Student Name:</label>
-            <br />
-            <select class="form-control" name="fullname" id="fullSelect"
-                    onchange="refreshpage()" required="">
-                <%  for (int i = 0; i < Mentees.size(); i++) {
-                    String first = Mentees.get(i).getFirstName();
-                    String last = Mentees.get(i).getLastName();
-                    String full = first + " "+ last;%>
-                <option value="<%= full %>"><%= full %></option>
-                <% } %>
-            </select>
             <br>
-            <a href="graph_SessionForm" class="btn btn-primary mb-2">Session Form Report</a>
+            <form action="/graph_SessionForm" method="get">
+                <select class="form-control" name="fullname" id="fullSelect" required="">
+                    <%  for (int i = 0; i < Mentees.size(); i++) {
+                        String first = Mentees.get(i).getFirstName();
+                        String last = Mentees.get(i).getLastName();
+                        String full = first + " "+ last;%>
+                    <option value="<%= full %>"><%= full %></option>
+                    <% } %>
+                </select>
+            <br>
+            <input type="submit" class="btn btn-primary mb-2" value="Session Report">
+<%--            <a href="graph_SessionForm/?fullname=<%=name%>" class="btn btn-primary mb-2">Session Form Report</a>--%>
+            </form>
         </div>
     </div>
 </div>
