@@ -56,8 +56,7 @@
                     <% } %>
                 </select>
             <br>
-            <input type="submit" class="btn btn-primary mb-2" value="Session Report">
-<%--            <a href="graph_SessionForm/?fullname=<%=name%>" class="btn btn-primary mb-2">Session Form Report</a>--%>
+            <input type="submit" class="btn btn-primary mb-2" value="Session Report" onclick="return menteecheck()">
             </form>
         </div>
     </div>
@@ -65,6 +64,15 @@
 
 <jsp:include page="includes/footer.jsp"/>
 <script>
+    function menteecheck() {
+        var name = document.getElementById("fullSelect").value
+        if (name === "Mentee") {
+            alert("Please select a mentee.")
+            return false
+        }
+        else
+            return true
+    }
     function sessionReport(){
         document.getElementById('reportButton').hidden = true;
         document.getElementById('ccsuLogo').hidden = true;
