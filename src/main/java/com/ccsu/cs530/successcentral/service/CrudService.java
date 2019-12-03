@@ -2439,12 +2439,15 @@ public class CrudService {
 
 
 
-    public File excelReport_SessionForm(String lastName,String firstName,String sessNum1,String sessNum2) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+    //public File excelReport_SessionForm(String lastName,String firstName,String sessNum1,String sessNum2) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+    public File excelReport_SessionForm(String fullname) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
         //int [][] graphData = graphData_SessionForm(lastName, firstName, sessNum1, sessNum2);
-        double [][] graphData = graphData_SessionForm("Aaron Ba");
+        //double [][] graphData = graphData_SessionForm("Aaron Ba");
+        double [][] graphData = graphData_SessionForm(fullname);
 
         //JSONObject jsonDataToExcel =  sessionTableMentee(lastName, firstName, sessNum1, sessNum2);
-        JSONObject jsonDataToExcel =  sessionFormTable("Aaron Ba");
+        //JSONObject jsonDataToExcel =  sessionFormTable("Aaron Ba");
+        JSONObject jsonDataToExcel =  sessionFormTable(fullname);
 
         JSONArray dataDataToExcel = jsonDataToExcel.getJSONArray("data");
 
