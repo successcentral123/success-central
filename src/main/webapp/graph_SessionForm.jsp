@@ -68,7 +68,7 @@
 
 </div>
 <script>
-    <%int[][] graphData = (int[][])request.getAttribute("graph"); %>;
+    <%double [][] graphData = (double[][])request.getAttribute("graph"); %>;
 
 </script>
 
@@ -85,7 +85,7 @@
     new Chart(document.getElementById("pie-chart2"), {
         type: 'pie',
         data: {
-            labels: ["Total Number of Action Steps","Action Steps Completed"],
+            labels: ["Action Steps not Completed","Action Steps Completed"],
             datasets: [{
                 label: "",
                 backgroundColor: ["#3e95cd", "#8e5ea2"],

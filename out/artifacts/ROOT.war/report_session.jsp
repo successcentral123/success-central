@@ -44,24 +44,35 @@
             <% List<Mentee> Mentees = (List<Mentee>) request.getAttribute("Mentees") ;%>
             <!-- Name -->
             <label><span style="color:red">*</span> Student Name:</label>
-            <br />
-            <select class="form-control" name="fullname" id="fullSelect"
-                    onchange="refreshpage()" required="">
-                <%  for (int i = 0; i < Mentees.size(); i++) {
-                    String first = Mentees.get(i).getFirstName();
-                    String last = Mentees.get(i).getLastName();
-                    String full = first + " "+ last;%>
-                <option value="<%= full %>"><%= full %></option>
-                <% } %>
-            </select>
             <br>
-            <a href="graph_SessionForm" class="btn btn-primary mb-2">Session Form Report</a>
+            <form action="/graph_SessionForm" method="get">
+                <select class="form-control" name="fullname" id="fullSelect" required="">
+                    <option value="Mentee" selected>Mentee</option>
+                    <%  for (int i = 0; i < Mentees.size(); i++) {
+                        String first = Mentees.get(i).getFirstName();
+                        String last = Mentees.get(i).getLastName();
+                        String full = first + " "+ last;%>
+                    <option value="<%= full %>"><%= full %></option>
+                    <% } %>
+                </select>
+            <br>
+            <input type="submit" class="btn btn-primary mb-2" value="Session Report" onclick="return menteecheck()">
+            </form>
         </div>
     </div>
 </div>
 
 <jsp:include page="includes/footer.jsp"/>
 <script>
+    function menteecheck() {
+        var name = document.getElementById("fullSelect").value
+        if (name === "Mentee") {
+            alert("Please select a mentee.")
+            return false
+        }
+        else
+            return true
+    }
     function sessionReport(){
         document.getElementById('reportButton').hidden = true;
         document.getElementById('ccsuLogo').hidden = true;

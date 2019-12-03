@@ -1559,8 +1559,54 @@ public class CrudService {
         JSONObject finalJObject = new JSONObject();
         try {
 
-            //String qry = "select * from session_form where full_name = 'Aaron Ba'";
-            String qry = "select * from session_form where full_name = '" +mentee+"'";
+            String countQry = "select count(*) from session_form where full_name = '" +mentee+"'";
+            PreparedStatement statementx = con.prepareStatement(countQry);
+            ResultSet rs = statementx.executeQuery();
+            int count = 0;
+            if(rs.next()) //Expecting one row.
+            {
+                count = rs.getInt(1);
+            }
+
+            String qry = "";
+            if(count == 1){
+                qry = "select * from session_form where full_name = '" +mentee+"' and session_number = 1 ";
+
+            }
+            else if(count == 2 ){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
+
+            }
+            else if(count == 3){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
+
+            }
+            else if(count == 4){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
+            }
+            else if(count == 5){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
+
+            }
+            else if(count == 6){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
+
+            }
+            else if(count == 7){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
+
+            }
+            else if(count == 8){
+                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 7 or session_number = 8)";
+
+            }
+            else{
+                qry = "select * from session_form where full_name = '" +mentee+"'";
+            }
+
+
+
+            //String qry = "select * from session_form where full_name = '" +mentee+"'";
             PreparedStatement statement = con.prepareStatement(qry);
             ResultSet rs2 = statement.executeQuery();
 
@@ -1933,6 +1979,9 @@ public class CrudService {
         int parentEd = 0;
         int nonParentEd = 0;
 
+        int freshman = 0;
+        int sophomore = 0;
+
         if(data != null) {
             for (int i = 0; i < data.length(); i++) {
                 JSONObject temp = data.getJSONObject(i);
@@ -1953,15 +2002,19 @@ public class CrudService {
                 if (temp.getString("parent_education").equals("1")) { parentEd++; }
                 if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
 
+                if (temp.getString("year").equals("1")) { freshman++; }
+                if (temp.getString("year").equals("2")) { sophomore++; }
+
             }
         }
         int result1 [] = {male,female,otherGender};
         int result2[] = {white,black_AfricanAmerican,hispanic,latino_Latina,
                 nativeAmerican_American_Indian,asian,pacific_Islander,otherRace};
-
         int result3[] = {parentEd,nonParentEd};
+        int result4[] = {freshman,sophomore};
 
-        int result[][] = {result1,result2,result3};
+
+        int result[][] = {result1,result2,result3,result4};
 
         return result;
 
@@ -2034,25 +2087,25 @@ public class CrudService {
 
 
     //public int[] [] graphData_SessionForm(String lastName, String firstName,String sessNum1, String sessNum2) throws JSONException {
-    public int[] [] graphData_SessionForm(String mentee) throws JSONException {
+    public double[] [] graphData_SessionForm(String mentee) throws JSONException {
         //JSONObject json = sessionTableMentee(lastName,firstName,sessNum1,sessNum2);
         JSONObject json = sessionFormTable(mentee);
 
 
         JSONArray data = json.getJSONArray("data");
-        int actStpCmp = 0;
-        int totalActStep = 0;
+        double actStpCmp = 0;
+        double totalActStep = 0;
 
-        int campus_involvement = 0;
-        int meaningful_relationships = 0;
-        int financial_management = 0;
-        int outside_responsibilities = 0;
-        int study_time_management = 0;
-        int academic_engagement = 0;
-        int health_wellness = 0;
-        int other_bool = 0;
+        double campus_involvement = 0;
+        double meaningful_relationships = 0;
+        double financial_management = 0;
+        double outside_responsibilities = 0;
+        double study_time_management = 0;
+        double academic_engagement = 0;
+        double health_wellness = 0;
+        double other_bool = 0;
 
-        int scaleAvg = 0;
+        double scaleAvg = 0;
 
 
 
@@ -2101,14 +2154,14 @@ public class CrudService {
             }
 
 
-        int result1 [] = {totalActStep,actStpCmp};
+        double result1 [] = {totalActStep-actStpCmp,actStpCmp};
 
-        int result2[] = {campus_involvement,meaningful_relationships,financial_management,outside_responsibilities,
+        double result2[] = {campus_involvement,meaningful_relationships,financial_management,outside_responsibilities,
                 study_time_management,academic_engagement,health_wellness,other_bool};
 
-        int result3[] = {scaleAvg/2};
+        double result3[] = {scaleAvg/2};
 
-        int result[][] = {result1,result2,result3};
+        double result[][] = {result1,result2,result3};
         //int result[][] = {{},{},{56}};
 
         return result;
@@ -2171,11 +2224,20 @@ public class CrudService {
         i++;
         datax.put(Integer.toString(i), new Object[] {"First Name","Last Name","Reason"});
         i++;
-        for (int cont = i; cont < dataWhyMentor.length()+i; cont++) {
-            JSONObject temp = dataWhyMentor.getJSONObject(cont-i);
-            datax.put(Integer.toString(cont), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
+        for (int j = 0; j < dataWhyMentor.length(); j++) {
+            JSONObject temp = dataWhyMentor.getJSONObject(j);
+            datax.put(Integer.toString(i), new Object[] {temp.getString("first_name"),temp.getString("last_name"),
                     temp.getString("why_mentor")});
+            i++;
         }
+
+        datax.put(Integer.toString(i), new Object[] {"Number of Freshmen and Sophomores"});
+        i++;
+        datax.put(Integer.toString(i), new Object[] {"Freshmen","Sophomores"});
+        i++;
+        datax.put(Integer.toString(i), new Object[] {Integer.toString(graphData[3][0]),
+                Integer.toString(graphData[3][1])});
+        i++;
 
 
 
@@ -2379,7 +2441,7 @@ public class CrudService {
 
     public File excelReport_SessionForm(String lastName,String firstName,String sessNum1,String sessNum2) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
         //int [][] graphData = graphData_SessionForm(lastName, firstName, sessNum1, sessNum2);
-        int [][] graphData = graphData_SessionForm("Aaron Ba");
+        double [][] graphData = graphData_SessionForm("Aaron Ba");
 
         //JSONObject jsonDataToExcel =  sessionTableMentee(lastName, firstName, sessNum1, sessNum2);
         JSONObject jsonDataToExcel =  sessionFormTable("Aaron Ba");
@@ -2394,26 +2456,73 @@ public class CrudService {
 
         datax.put("1", new Object[] {"Total Number of Action Step","Action Steps Completed"});
 
-        datax.put("2", new Object[] {Integer.toString(graphData[0][0]),
-                Integer.toString(graphData[0][1])});
+        datax.put("2", new Object[] {Double.toString(graphData[0][0]),
+                Double.toString(graphData[0][1])});
 
         datax.put("3", new Object[] {"Session Topics Discussed"});
 
         datax.put("4", new Object[] {"Campus Involvement","Meaningful Relationships","Financial Management",
                 "Outside Responsibilities","Study time Management","Academic Engagement","Health Wellness","Other"});
 
-        datax.put("5", new Object[] {Integer.toString(graphData[1][0]),
-                Integer.toString(graphData[1][1]),Integer.toString(graphData[1][2]),
-                Integer.toString(graphData[1][3]),Integer.toString(graphData[1][4]),
-                Integer.toString(graphData[1][5]),Integer.toString(graphData[1][6]),
-                Integer.toString(graphData[1][7])});
+
+
+        datax.put("5", new Object[] {Double.toString(graphData[1][0]),
+                Double.toString(graphData[1][1]),Double.toString(graphData[1][2]),
+                Double.toString(graphData[1][3]),Double.toString(graphData[1][4]),
+                Double.toString(graphData[1][5]),Double.toString(graphData[1][6]),
+                Double.toString(graphData[1][7])});
 
         datax.put("6", new Object[] {"Average Session Rating"});
-        datax.put("7", new Object[] {Integer.toString(graphData[2][0])});
+        datax.put("7", new Object[] {Double.toString(graphData[2][0])});
 
-        datax.put("8", new Object[] {"Issues and Concern"});
-        int i = 9;
 
+
+        int i = 8;
+
+        for (int j = 0; j < dataDataToExcel.length(); j++) {
+            JSONObject temp = dataDataToExcel.getJSONObject(j);
+
+            datax.put(Integer.toString(i), new Object[] {"Other Session Topics Discussed"});
+            i++;
+
+//            datax.put(Integer.toString(i), new Object[] {temp.getString("full_name"),
+//                    temp.getString("other_text")});
+//            i++;
+
+
+            datax.put(Integer.toString(i), new Object[] {"All Action Steps"});
+            i++;
+
+            datax.put(Integer.toString(i), new Object[] {"Name","Action Step One","Action Step Two",
+                    "Action Step Three","Action Step Four","Action Step Five",
+                    "Action step Six"});
+            i++;
+
+            datax.put(Integer.toString(i), new Object[] {temp.getString("full_name"),
+                    temp.getString("action_one"),temp.getString("action_two"),
+                    temp.getString("action_three"),temp.getString("action_four"),
+                    temp.getString("action_five"),temp.getString("action_six")});
+            i++;
+            datax.put(Integer.toString(i), new Object[] {"Action Steps Completed"});
+            i++;
+
+            datax.put(Integer.toString(i), new Object[] {"Name","Action Step One Completed?","Action Step Two Completed?",
+                    "Action Step Three Completed?","Action Step Four Completed?","Action Step Five Completed?",
+                    "Action step Six Completed?"});
+            i++;
+            datax.put(Integer.toString(i), new Object[] {"1 for Yes 0 for No",
+                    temp.getString("bool_action_one"),temp.getString("bool_action_two"),
+                    temp.getString("bool_action_three"),temp.getString("bool_action_four"),
+                    temp.getString("bool_action_five"),temp.getString("bool_action_six")});
+            i++;
+        }
+
+
+        datax.put(Integer.toString(i), new Object[] {"Issues and Concern"});
+        i++;
+
+        datax.put(Integer.toString(i), new Object[] {"Name","Issues and Concern"});
+        i++;
 
         for (int j = 0; j < dataDataToExcel.length(); j++) {
             JSONObject temp = dataDataToExcel.getJSONObject(j);
@@ -2424,6 +2533,8 @@ public class CrudService {
 
 
         datax.put(Integer.toString(i), new Object[] {"Notes and Comments"});
+        i++;
+        datax.put(Integer.toString(i), new Object[] {"Name","Notes and Comments"});
         i++;
         for (int j = 0; j < dataDataToExcel.length(); j++) {
             JSONObject temp = dataDataToExcel.getJSONObject(j);

@@ -18,7 +18,7 @@ import java.util.List;
 public class ReportSessionServlet extends HttpServlet {
     private CrudService crud = new CrudService();
 
-    String menteeChosen = "";
+    //String menteeChosen = "";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
@@ -33,19 +33,19 @@ public class ReportSessionServlet extends HttpServlet {
 
 
 
-        //menteeChosen = "Aaron Ba";
-        menteeChosen =""; // The goal is to get the fullname here
-        req.setAttribute("mentee",menteeChosen);
-
-        HttpSession session = req.getSession();
-        session.setAttribute("mentee",menteeChosen);
-
-        //getServletContext().getRequestDispatcher("SessionFormReportServlet").forward(req,resp);
-
-
-        req.getRequestDispatcher("session_form.jsp").forward(req, resp);
-
-
+//        //menteeChosen = "Aaron Ba";
+//        menteeChosen =""; // The goal is to get the fullname here
+//        req.setAttribute("mentee",menteeChosen);
+//
+//        HttpSession session = req.getSession();
+//        session.setAttribute("mentee",menteeChosen);
+//
+//        //getServletContext().getRequestDispatcher("SessionFormReportServlet").forward(req,resp);
+//
+//
+//        req.getRequestDispatcher("session_form.jsp").forward(req, resp);
+//
+//
 
     }
 

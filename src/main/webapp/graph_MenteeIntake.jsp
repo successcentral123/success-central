@@ -216,6 +216,60 @@
 </script>
 
 
+
+
+<canvas id="pie-chart5" width="800" height="450"></canvas>
+<script>
+    var finalData = []
+
+    <%for (int i = 0; i < graphData[3].length; i++ ) {%>
+    finalData.push(<%=graphData[3][i]%>);
+    <%}%>
+
+    new Chart(document.getElementById("pie-chart5"), {
+        type: 'pie',
+        data: {
+            labels: ["Freshmen","Sophomore"],
+            datasets: [{
+                label: "",
+                backgroundColor: ["#3e95cd", "#8e5ea2"],
+                //data: [2478,5267,734,784,433]
+                data:finalData
+            }]
+        },
+
+        options: {
+            title: {
+                display: true,
+                text: 'Number of Freshmen and Sophomore'
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                        var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                        var total = meta.total;
+                        var currentValue = dataset.data[tooltipItem.index];
+                        var percentage = parseFloat((currentValue/total*100).toFixed(1));
+                        return currentValue + ' (' + percentage + '%)';
+                    },
+                    title: function(tooltipItem, data) {
+                        return data.labels[tooltipItem[0].index];
+                    }
+                }
+            }
+        }
+    });
+
+
+</script>
+
+
+
+
+
+
+
 <a class="btn btn-primary mb-2" href="IntakeReportMentee">Download Report</a>
 
 
