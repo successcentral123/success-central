@@ -30,7 +30,7 @@ public class SessionReportDwnLdServlet extends HttpServlet {
         FileInputStream fis = null;
         try {
             //excelfile = crud.excelReport_SessionForm("Mentee", "Geovanni Roberts","1","2");
-            excelfile = crud.excelReport_SessionForm();
+            excelfile = crud.excelReport_SessionForm("Geovanni Roberts");
         } catch (JSONException e) {
             e.printStackTrace();
         }
