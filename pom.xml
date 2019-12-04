@@ -7,7 +7,7 @@
 
   <groupId>edu.ccsu.cs530</groupId>
   <artifactId>success-central</artifactId>
-  <version>1</version>
+  <version>2</version>
 
 <!-- [START properties] -->
   <properties>
@@ -98,7 +98,8 @@
         <version>2.0.0</version>
         <configuration>
           <deploy.projectId>quick-geography-249615</deploy.projectId>
-          <deploy.version>foo1</deploy.version>
+          <deploy.version>foo2</deploy.version>
+          <deploy.promote>false</deploy.promote>
         </configuration>
       </plugin>
       <!-- [END cloudplugin] -->
