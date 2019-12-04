@@ -946,6 +946,7 @@ public class CrudService {
 
         try {
             PreparedStatement statement = con.prepareStatement("SELECT * FROM major");
+            System.out.println("Prepared Statement worked!");
             ResultSet results = statement.executeQuery();
 
             while (results.next()) {
@@ -1986,18 +1987,18 @@ public class CrudService {
             for (int i = 0; i < data.length(); i++) {
                 JSONObject temp = data.getJSONObject(i);
 
-                if (temp.getString("gender").equals("male") && temp.getString("gender").equals("male")) { male++; }
-                if (temp.getString("gender").equals("female")) { female++; }
-                if (temp.getString("gender").equals("other")) { otherGender++; }
+                if (temp.getString("gender").equalsIgnoreCase("male") && temp.getString("gender").equalsIgnoreCase("male")) { male++; }
+                if (temp.getString("gender").equalsIgnoreCase("female")) { female++; }
+                if (temp.getString("gender").equalsIgnoreCase("other")) { otherGender++; }
 
-                if (temp.getString("race").equals("White")) { white++; }
-                if (temp.getString("race").equals("Black/African Am.")) { black_AfricanAmerican++; }
-                if (temp.getString("race").equals("Hispanic")) { hispanic++; }
-                if (temp.getString("race").equals("Latinx")) { latino_Latina++; }
-                if (temp.getString("race").equals("Native American")) { nativeAmerican_American_Indian++; }
-                if (temp.getString("race").equals("Asian")) { asian++; }
-                if (temp.getString("race").equals("Pacific Islander")) { pacific_Islander++; }
-                if (temp.getString("race").equals("Other")) { otherRace++; }
+                if (temp.getString("race").equalsIgnoreCase("White")) { white++; }
+                if (temp.getString("race").equalsIgnoreCase("Black/African Am.")) { black_AfricanAmerican++; }
+                if (temp.getString("race").equalsIgnoreCase("Hispanic")) { hispanic++; }
+                if (temp.getString("race").equalsIgnoreCase("Latinx")) { latino_Latina++; }
+                if (temp.getString("race").equalsIgnoreCase("Native American")) { nativeAmerican_American_Indian++; }
+                if (temp.getString("race").equalsIgnoreCase("Asian")) { asian++; }
+                if (temp.getString("race").equalsIgnoreCase("Pacific Islander")) { pacific_Islander++; }
+                if (temp.getString("race").equalsIgnoreCase("Other")) { otherRace++; }
 
                 if (temp.getString("parent_education").equals("1")) { parentEd++; }
                 if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
@@ -2051,18 +2052,18 @@ public class CrudService {
             for (int i = 0; i < data.length(); i++) {
                 JSONObject temp = data.getJSONObject(i);
 
-                if (temp.getString("gender").equals("male") && temp.getString("gender").equals("male")) { male++; }
-                if (temp.getString("gender").equals("female")) { female++; }
-                if (temp.getString("gender").equals("other")) { otherGender++; }
+                if (temp.getString("gender").equalsIgnoreCase("male") && temp.getString("gender").equalsIgnoreCase("male")) { male++; }
+                if (temp.getString("gender").equalsIgnoreCase("female")) { female++; }
+                if (temp.getString("gender").equalsIgnoreCase("other")) { otherGender++; }
 
-                if (temp.getString("race").equals("White")) { white++; }
-                if (temp.getString("race").equals("Black/African Am.")) { black_AfricanAmerican++; }
-                if (temp.getString("race").equals("Hispanic")) { hispanic++; }
-                if (temp.getString("race").equals("Latinx")) { latino_Latina++; }
-                if (temp.getString("race").equals("Native American")) { nativeAmerican_American_Indian++; }
-                if (temp.getString("race").equals("Asian")) { asian++; }
-                if (temp.getString("race").equals("Pacific Islander")) { pacific_Islander++; }
-                if (temp.getString("race").equals("Other")) { otherRace++; }
+                if (temp.getString("race").equalsIgnoreCase("White")) { white++; }
+                if (temp.getString("race").equalsIgnoreCase("Black/African Am.")) { black_AfricanAmerican++; }
+                if (temp.getString("race").equalsIgnoreCase("Hispanic")) { hispanic++; }
+                if (temp.getString("race").equalsIgnoreCase("Latinx")) { latino_Latina++; }
+                if (temp.getString("race").equalsIgnoreCase("Native American")) { nativeAmerican_American_Indian++; }
+                if (temp.getString("race").equalsIgnoreCase("Asian")) { asian++; }
+                if (temp.getString("race").equalsIgnoreCase("Pacific Islander")) { pacific_Islander++; }
+                if (temp.getString("race").equalsIgnoreCase("Other")) { otherRace++; }
 
                 if (temp.getString("parent_education").equals("1")) { parentEd++; }
                 if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
