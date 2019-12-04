@@ -28,7 +28,7 @@ public class IntakeReportServlet extends HttpServlet {
         int[] s = new int[] {60,40};
         try {
             req.setAttribute("graph", crud.graphData_IntakeFormMentee());
-          //  req.setAttribute("report", crud.excelReport_IntakeFormMentee());
+            req.setAttribute("report", crud.excelReport_IntakeFormMentee());
         } catch (JSONException e) {
             e.printStackTrace();
         }
