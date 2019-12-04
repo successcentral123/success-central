@@ -7,7 +7,7 @@
 
   <groupId>edu.ccsu.cs530</groupId>
   <artifactId>success-central</artifactId>
-  <version>1</version>
+  <version>2</version>
 
 <!-- [START properties] -->
   <properties>
@@ -58,7 +58,21 @@
       <version>1.9.69</version>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>4.1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20190722</version>
+    </dependency>
     <dependency>
       <groupId>com.google.truth</groupId>
       <artifactId>truth</artifactId>
@@ -98,7 +112,8 @@
         <version>2.0.0</version>
         <configuration>
           <deploy.projectId>quick-geography-249615</deploy.projectId>
-          <deploy.version>foo1</deploy.version>
+          <deploy.version>foo2</deploy.version>
+          <deploy.promote>false</deploy.promote>
         </configuration>
       </plugin>
       <!-- [END cloudplugin] -->
