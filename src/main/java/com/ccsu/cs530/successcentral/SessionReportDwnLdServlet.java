@@ -11,8 +11,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//@WebServlet("/graph_MenteeIntake")
-@WebServlet(urlPatterns = "SessionReport")
+@WebServlet("/sessiondownload")
+//@WebServlet(urlPatterns = "SessionReport")
 public class SessionReportDwnLdServlet extends HttpServlet {
     private CrudService crud = new CrudService();
 
@@ -29,8 +29,8 @@ public class SessionReportDwnLdServlet extends HttpServlet {
         File excelfile = null;
         FileInputStream fis = null;
         try {
-            //excelfile = crud.excelReport_SessionForm("Mentee", "Geovanni Roberts","1","2");
-            excelfile = crud.excelReport_SessionForm();
+            excelfile = crud.excelReport_SessionForm((String) req.getParameter("fullname"));
+//            excelfile = crud.excelReport_SessionForm("Aaron Ba");
         } catch (JSONException e) {
             e.printStackTrace();
         }

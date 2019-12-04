@@ -223,8 +223,16 @@
 
 
 
+<% String name = (String)request.getParameter("fullname");%>
+<form action="/sessiondownload" method="get" target="_blank">
+    <input type="text" value="<%=name%>" style="display: none" id="fullname" name="fullname">
+    <input type="submit" class="btn btn-primary mb-2" value="Download Excel File">
+</form>
+<%--<a class="btn btn-primary mb-2" href="SessionReport>Download Report</a>--%>
 
-<a class="btn btn-primary mb-2" href="SessionReport">Download Report</a>
+<script>
+
+</script>
 
 <jsp:include page="includes/footer.jsp"/>
 </body>

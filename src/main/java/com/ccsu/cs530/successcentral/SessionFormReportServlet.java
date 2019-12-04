@@ -26,7 +26,7 @@ public class SessionFormReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
         try {
             req.setAttribute("graph", crud.graphData_SessionForm((String) req.getParameter("fullname")));
-
+            req.setAttribute("fullname", (String)req.getParameter("fullname"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
