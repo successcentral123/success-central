@@ -1987,9 +1987,9 @@ public class CrudService {
             for (int i = 0; i < data.length(); i++) {
                 JSONObject temp = data.getJSONObject(i);
 
-                if (temp.getString("gender").equalsIgnoreCase("male") && temp.getString("gender").equalsIgnoreCase("male")) { male++; }
-                if (temp.getString("gender").equalsIgnoreCase("female")) { female++; }
-                if (temp.getString("gender").equalsIgnoreCase("other")) { otherGender++; }
+                if (temp.getString("gender").equalsIgnoreCase("Male") && temp.getString("gender").equalsIgnoreCase("Male")) { male++; }
+                if (temp.getString("gender").equalsIgnoreCase("Female")) { female++; }
+                if (temp.getString("gender").equalsIgnoreCase("Other")) { otherGender++; }
 
                 if (temp.getString("race").equalsIgnoreCase("White")) { white++; }
                 if (temp.getString("race").equalsIgnoreCase("Black/African Am.")) { black_AfricanAmerican++; }
