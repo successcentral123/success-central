@@ -97,7 +97,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Number of Mentees per Gender'
+                text: 'Number of Mentors per Gender'
             },
             tooltips: {
                 callbacks: {
@@ -148,7 +148,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Number of Participant per Ethnic Group/Race'
+                text: 'Number of Participants per Ethnic Group/Race'
             },
             tooltips: {
                 callbacks: {

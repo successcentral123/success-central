@@ -2128,6 +2128,14 @@ public class CrudService {
                 if (temp.getString("scale")!= null) { scaleAvg+= Integer.parseInt(temp.getString("scale") ); }
 
 
+//                if (temp.getString("pre_action_one")!= null){ totalActStep++; }
+//                if (temp.getString("pre_action_two")!= null) { totalActStep++; }
+//                if (temp.getString("pre_action_three")!= null) { totalActStep++; }
+//                if (temp.getString("pre_action_four")!= null) { totalActStep++; }
+//                if (temp.getString("pre_action_five")!= null) { totalActStep++; }
+//                if (temp.getString("pre_action_six")!= null) { totalActStep++; }
+
+
 
                 if (temp.getString("pre_action_one")!= null && !temp.getString("pre_action_one").isEmpty()) { totalActStep++; }
                 if (temp.getString("pre_action_two")!= null && !temp.getString("pre_action_two").isEmpty()) { totalActStep++; }
@@ -2162,7 +2170,9 @@ public class CrudService {
 
         double result3[] = {scaleAvg/2};
 
-        double result[][] = {result1,result2,result3};
+        double result4[] = {totalActStep,actStpCmp};
+
+        double result[][] = {result1,result2,result3,result4};
         //int result[][] = {{},{},{56}};
 
         return result;
@@ -2460,8 +2470,8 @@ public class CrudService {
 
         datax.put("1", new Object[] {"Total Number of Action Step","Action Steps Completed"});
 
-        datax.put("2", new Object[] {Double.toString(graphData[0][0]),
-                Double.toString(graphData[0][1])});
+        datax.put("2", new Object[] {Double.toString(graphData[3][0]),
+                Double.toString(graphData[3][1])});
 
         datax.put("3", new Object[] {"Session Topics Discussed"});
 

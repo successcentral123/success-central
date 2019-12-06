@@ -85,7 +85,7 @@
     new Chart(document.getElementById("pie-chart2"), {
         type: 'pie',
         data: {
-            labels: ["Action Steps not Completed","Action Steps Completed"],
+            labels: ["Action Steps Not Completed","Action Steps Completed"],
             datasets: [{
                 label: "",
                 backgroundColor: ["#3e95cd", "#8e5ea2"],

@@ -66,7 +66,6 @@
 </div>
 <script>
     <%int[][] graphData = (int[][])request.getAttribute("graph"); %>;
-    <%File reportFile = (File) request.getAttribute("report"); %>;
 </script>
 
 

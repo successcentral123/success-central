@@ -144,7 +144,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Number of Participant per Ethnic Group/Race'
+                text: 'Number of Participants per Ethnic Group/Race'
             },
             tooltips: {
                 callbacks: {

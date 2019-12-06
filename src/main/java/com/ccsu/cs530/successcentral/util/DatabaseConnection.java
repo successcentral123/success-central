@@ -19,26 +19,26 @@ public class DatabaseConnection {
             return con;
         }
 
-        try {
-            HikariConfig config = new HikariConfig();
-
-             //Configure which instance and what database user to connect with.
-            config.setJdbcUrl(System.getenv("JDBC_URL"));
-
-            DataSource pool = new HikariDataSource(config);
-            con = pool.getConnection();
-            return con;
-
-        } catch (Exception e) {
-            System.out.println("Could not connect Booya");
-            return null;
-        }
 //        try {
-//            return ((DataSource) InitialContext.doLookup("java:/SCDB")).getConnection();
+//            HikariConfig config = new HikariConfig();
+//
+//             //Configure which instance and what database user to connect with.
+//            config.setJdbcUrl(System.getenv("JDBC_URL"));
+//
+//            DataSource pool = new HikariDataSource(config);
+//            con = pool.getConnection();
+//            return con;
+//
 //        } catch (Exception e) {
-//            System.out.println("Hey CCSU team. Could not connect to DB");
+//            System.out.println("Could not connect Booya");
 //            return null;
 //        }
+        try {
+            return ((DataSource) InitialContext.doLookup("java:/SCDB")).getConnection();
+        } catch (Exception e) {
+            System.out.println("Hey CCSU team. Could not connect to DB");
+            return null;
+        }
     }
 
     public void open() throws NamingException, SQLException {
