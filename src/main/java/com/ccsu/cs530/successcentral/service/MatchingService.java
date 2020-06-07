@@ -95,11 +95,17 @@ public class MatchingService {
 
         List<Mentor> mentors = crud.getApprovedMentors();
         for (Mentor mentor : mentors) {
-            Match match = new Match();
-            match.setMentee(mentee);
-            match.setMentor(mentor);
-            match.setCompatibility(evaluateMatch(mentor, mentee));
-            matches.add(match);
+
+            if(mentor.getMatchingStatus()){
+                System.out.println(mentor.getMatchingStatus());
+                Match match = new Match();
+                match.setMentee(mentee);
+                match.setMentor(mentor);
+                match.setCompatibility(evaluateMatch(mentor, mentee));
+                matches.add(match);
+
+            }
+
         }
 
         Collections.sort(matches);
@@ -118,11 +124,15 @@ public class MatchingService {
 
         List<Mentee> myMentees = crud.getMyMentees(mentor.getEmail());
         for (Mentee mentee : myMentees) {
-            Match match = new Match();
-            match.setMentee(mentee);
-            match.setMentor(mentor);
-            match.setCompatibility(evaluateMatch(mentor, mentee));
-            matches.add(match);
+            if(mentor.getMatchingStatus()){
+                Match match = new Match();
+                match.setMentee(mentee);
+                match.setMentor(mentor);
+                match.setCompatibility(evaluateMatch(mentor, mentee));
+                matches.add(match);
+
+            }
+
         }
 
         Collections.sort(matches);
@@ -136,11 +146,16 @@ public class MatchingService {
 
         List<Mentor> mentors = crud.getApprovedMentors();
         for (Mentor mentor : mentors) {
-            Match match = new Match();
-            match.setMentee(mentee);
-            match.setMentor(mentor);
-            match.setCompatibility(evaluateMatch(mentor, mentee));
-            matches.add(match);
+
+            if(mentor.getMatchingStatus()){
+                Match match = new Match();
+                match.setMentee(mentee);
+                match.setMentor(mentor);
+                match.setCompatibility(evaluateMatch(mentor, mentee));
+                matches.add(match);
+
+            }
+
         }
 
         Collections.sort(matches);

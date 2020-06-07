@@ -18,6 +18,8 @@ public class User {
    private String race;
    private String gender;
    private Boolean isAdmin;
+   private String yearRegistered;
+
 
 
 
@@ -226,4 +228,10 @@ public class User {
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
+    public String getYearRegistered(){return this.yearRegistered;}
+
+    public void  setYearRegistered(String year) {this.yearRegistered = year;}
+
+
 }

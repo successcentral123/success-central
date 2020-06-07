@@ -6,6 +6,7 @@ public class Mentee extends User {
     private String whyMentor;
     private Mentor mentor;
 
+
     public Mentee() {}
 
     public String getLookingForward() {
@@ -31,4 +32,6 @@ public class Mentee extends User {
     public void setMentor(Mentor mentor) {
         this.mentor = mentor;
     }
+
+
 }

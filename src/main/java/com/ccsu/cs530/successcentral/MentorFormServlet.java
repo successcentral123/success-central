@@ -42,6 +42,8 @@ public class MentorFormServlet extends HttpServlet {
         // Instantiate mentor and then save him/her to database
         if (valemail) {
             Mentor mentor = new Mentor();
+            mentor.setMatchingStatus(true);
+
             if (req.getParameter("firstname") != null) {
                 mentor.setFirstName(req.getParameter("firstname"));
             }
@@ -70,6 +72,11 @@ public class MentorFormServlet extends HttpServlet {
             if (req.getParameter("ccsuid") != null) {
                 mentor.setStudentId(req.getParameter("ccsuid"));
             }
+            if (req.getParameter("registeredYear") != null) {
+                mentor.setYearRegistered(req.getParameter("registeredYear"));
+            }
+
+
             if (req.getParameter("year") != null) {
                 mentor.setYear(req.getParameter("year"));
             }

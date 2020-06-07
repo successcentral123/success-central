@@ -335,6 +335,7 @@ public class CrudService {
                 mentor.setForSuccessfulFirstYear(results.getString("for_successful_1st_year"));
                 mentor.setApproved(results.getBoolean("is_approved"));
                 mentor.setSeniorMentor(results.getBoolean("is_senior_mentor"));
+                mentor.setMatchingStatus(results.getBoolean("matching_status"));
             }
         } catch (Exception e) {
             System.out.println("Could not get the mentee");
@@ -424,14 +425,23 @@ public class CrudService {
         return sessionnum;
     }
 
-    public List<SessionForm> getSessionForms(int first, int total, String search, String sortBy) {
+
+
+
+
+
+
+
+
+
+    public List<SessionForm> getSessionFormsMentor(int first, int total, String search, String sortBy,String name) {
         List<SessionForm> sessionformlist = new ArrayList<>();
         String tmpQry = "";
 
         try {
-            String qry = "SELECT * FROM session_form ";
+            String qry = "SELECT * FROM session_form where mentor="+"'"+name+"'";
             if(search != null){
-                qry += "WHERE mentor like '%"+search+"%' OR full_name like '%"+search+ "%' ";
+                qry += "and mentor like '%"+search+"%' OR full_name like '%"+search+ "%' ";
             }
             if(sortBy != null && !sortBy.equals("")){
                 if(sortBy.equals("day_0")){
@@ -446,7 +456,6 @@ public class CrudService {
             qry += " LIMIT ?,?";
 
             tmpQry = qry;
-
             PreparedStatement statement = con.prepareStatement(qry);
             statement.setInt(1, first);
             statement.setInt(2, total);
@@ -505,6 +514,101 @@ public class CrudService {
 
         return sessionformlist;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public List<SessionForm> getSessionForms(int first, int total, String search, String sortBy) {
+        List<SessionForm> sessionformlist = new ArrayList<>();
+        String tmpQry = "";
+
+        try {
+            String qry = "SELECT * FROM session_form ";
+            if(search != null){
+                qry += "WHERE mentor like '%"+search+"%' OR full_name like '%"+search+ "%' ";
+            }
+            if(sortBy != null && !sortBy.equals("")){
+                if(sortBy.equals("day_0")){
+                    qry += " ORDER BY day DESC, session_number DESC  ";
+                } else if(sortBy.equals("day_1")){
+                    qry += " ORDER BY day ASC, session_number ASC ";
+                }else{
+                    qry += " ORDER BY " + sortBy + ", session_number ASC ";
+                }
+            }
+
+            qry += " LIMIT ?,?";
+
+            tmpQry = qry;
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setInt(1, first);
+            statement.setInt(2, total);
+            ResultSet results = statement.executeQuery();
+
+            while (results.next()) {
+                SessionForm sessionform = new SessionForm();
+//                sessionform.setMentor(getMentor(results.getString("mentor")));
+                sessionform.setMentor(results.getString("mentor"));
+                sessionform.setFullName(results.getString("full_name"));
+//                sessionform.setFirstName(results.getString("first_name"));
+//                sessionform.setLastName(results.getString("last_name"));
+                sessionform.setSessionNum(results.getInt("session_number"));
+                sessionform.setDate(results.getString("day"));
+
+                sessionform.setPreActionOne(results.getString("pre_action_one"));
+                sessionform.setBoolActionOne(results.getBoolean("bool_action_one"));
+                sessionform.setPreActionTwo(results.getString("pre_action_two"));
+                sessionform.setBoolActionTwo(results.getBoolean("bool_action_two"));
+                sessionform.setPreActionThree(results.getString("pre_action_three"));
+                sessionform.setBoolActionThree(results.getBoolean("bool_action_three"));
+                sessionform.setPreActionFour(results.getString("pre_action_four"));
+                sessionform.setBoolActionFour(results.getBoolean("bool_action_four"));
+                sessionform.setPreActionFive(results.getString("pre_action_five"));
+                sessionform.setBoolActionFive(results.getBoolean("bool_action_five"));
+                sessionform.setPreActionSix(results.getString("pre_action_six"));
+                sessionform.setBoolActionSix(results.getBoolean("bool_action_six"));
+
+                sessionform.setScale(results.getInt("scale"));
+
+                sessionform.setCampusInvolement(results.getBoolean("campus_involvement"));
+                sessionform.setMeaningfulRelationships(results.getBoolean("meaningful_relationships"));
+                sessionform.setFinancialManagement(results.getBoolean("financial_management"));
+                sessionform.setOutsideResponsibilities(results.getBoolean("outside_responsibilities"));
+                sessionform.setStudyTimeManagement(results.getBoolean("study_time_management"));
+                sessionform.setAcademicEngagement(results.getBoolean("academic_engagement"));
+                sessionform.setHealthWellness(results.getBoolean("health_wellness"));
+                sessionform.setOther(results.getBoolean("other_bool"));
+                sessionform.setOtherText(results.getString("other_text"));
+
+                sessionform.setIssuesConcerns(results.getString("issues_concerns"));
+                sessionform.setNotesComments(results.getString("notes_comments"));
+
+                sessionform.setFirstActionStep(results.getString("action_one"));
+                sessionform.setSecondActionStep(results.getString("action_two"));
+                sessionform.setThirdActionStep(results.getString("action_three"));
+                sessionform.setFourthActionStep(results.getString("action_four"));
+                sessionform.setFifthActionStep(results.getString("action_five"));
+                sessionform.setSixthActionStep(results.getString("action_six"));
+
+                sessionformlist.add(sessionform);
+            }
+        } catch (Exception e) {
+            System.out.println("Could not get the session form "+tmpQry +"\n" +e);
+        }
+
+        return sessionformlist;
+    }
+
 
 
     /**
@@ -574,6 +678,64 @@ public class CrudService {
 
         return mentees;
     }
+
+
+
+
+
+
+    public List<Mentee> getAllMenteesByRegisteredYear(String year) {
+        List<Mentee> mentees = new ArrayList<>();
+        try {
+            String qry="";
+            if(year.equals("Overall")){
+                qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id ";
+
+            }
+            else{
+                qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id " +
+                        "where user.year_registered="+"'"+year+"'";
+
+            }
+
+
+            PreparedStatement statement = this.con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
+                Mentee mentee = new Mentee();
+                mentee.setEmail(results.getString("email"));
+                mentee.setPassword(results.getString("password"));
+                mentee.setFirstName(results.getString("first_name"));
+                mentee.setLastName(results.getString("last_name"));
+                mentee.setStudentId(results.getString("student_id"));
+                mentee.setMajor(results.getString("name"));
+                mentee.setGrade(results.getString("grade"));
+                mentee.setYear(results.getString("year"));
+                mentee.setHobbies(results.getString("hobbies"));
+                mentee.setCtHometown(results.getString("ct_hometown"));
+                mentee.setOtherHometown(results.getString("other_hometown"));
+                mentee.setParentEducation(results.getBoolean("parent_education"));
+                mentee.setLanguage(results.getString("language"));
+                mentee.setRace(results.getString("race"));
+                mentee.setGender(results.getString("gender"));
+                mentee.setLookingForward(results.getString("looking_forward"));
+                mentee.setWhyMentor(results.getString("why_mentor"));
+                mentee.setMentor(getMentor(results.getString("mentor")));
+
+                mentees.add(mentee);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not get the mentors"+ e);
+        }
+
+        return mentees;
+    }
+
+
+
+
+
 
     public List<Mentee> getAllMentees() {
         List<Mentee> mentees = new ArrayList<>();
@@ -907,6 +1069,7 @@ public class CrudService {
                 mentor.setApproved(results.getBoolean("is_approved"));
                 mentor.setSeniorMentor(results.getBoolean("is_senior_mentor"));
                 mentor.setMenteeCount(results.getInt("mentee_count"));
+                mentor.setMatchingStatus(results.getBoolean("matching_status"));
 
                 mentors.add(mentor);
             }
@@ -1168,6 +1331,20 @@ public class CrudService {
             PreparedStatement statement = con.prepareStatement(qry);
             //            statement.setInt(5, mentor.getApproved() ? 1 : 0);
             statement.setInt(1, mentor.getSeniorMentor() ? 0 : 1);
+            statement.setString(2, mentor.getEmail());
+            statement.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Could not update the mentor");
+        }
+    }
+    //update mentor matching status in the db
+    public void updateMentorMatchingStatus(Mentor mentor) {
+        try {
+            String qry = "UPDATE mentor SET matching_status=? WHERE email = ?";
+            PreparedStatement statement = con.prepareStatement(qry);
+            //            statement.setInt(5, mentor.getApproved() ? 1 : 0);
+            statement.setInt(1, mentor.getMatchingStatus() ? 0 : 1);
             statement.setString(2, mentor.getEmail());
             statement.executeUpdate();
 
@@ -1710,6 +1887,102 @@ public class CrudService {
 
 
 
+    public JSONObject userTableMentee(String year){
+
+
+        JSONObject finalJObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        try {
+            String qry = "";
+            if ( year.equals("Overall")){
+                qry = "select * from user join mentee on user.email = mentee.email";
+            }
+            else{
+                qry = "select * from user join mentee on user.email = mentee.email" +
+                        " where year_registered ='" + year+"'";
+
+
+            }
+
+            PreparedStatement statement = con.prepareStatement(qry);
+            ResultSet results = statement.executeQuery();
+
+            JSONArray jArray = new JSONArray();
+            while (results.next()) {
+
+                String  email_json=results.getString("email");
+                String  password_json=results.getString("password");
+                String  first_name_json=results.getString("first_name");
+                String  last_name_json=results.getString("last_name");
+                String  student_id_json=results.getString("student_id");
+                String  major_json=results.getString("major");
+                String  grade_json=results.getString("grade");
+                String  year_json=results.getString("year");
+                String  hobbies_json=results.getString("hobbies");
+                String  ct_hometown_json=results.getString("ct_hometown");
+                String  other_hometown_json=results.getString("other_hometown");
+                String  parent_education_json=results.getString("parent_education");
+                String  language_json=results.getString("language");
+                String  race_json=results.getString("race");
+                String  gender_json=results.getString("gender");
+                String is_admin_json=results.getString("is_admin");
+
+
+
+                JSONObject jobj = new JSONObject();
+
+                jobj.put("email",email_json);
+                jobj.put("password",password_json);
+                jobj.put("first_name",first_name_json);
+                jobj.put("last_name",last_name_json);
+                jobj.put("student_id",student_id_json);
+                jobj.put("major",major_json);
+                jobj.put("grade",grade_json);
+                jobj.put("year",year_json);
+                jobj.put("hobbies",hobbies_json);
+                jobj.put("ct_hometown",ct_hometown_json);
+                jobj.put("other_hometown",other_hometown_json);
+                jobj.put("parent_education",parent_education_json);
+                jobj.put("language",language_json);
+                jobj.put("race",race_json);
+                jobj.put("gender",gender_json);
+                jobj.put("is_admin",is_admin_json);
+
+                jArray.put(jobj);
+
+            }
+
+            finalJObject.put("data", jArray);
+
+        } catch (Exception e) {
+            System.out.println("There was a problem querying user table in database ");
+        }
+        return finalJObject;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public JSONObject userTableMentee(){
@@ -1781,15 +2054,26 @@ public class CrudService {
 
 
 
-    public JSONObject userTableMentor(){
+    public JSONObject userTableMentor(String year){
 
 
         JSONObject finalJObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
 
         try {
-            //String qry = "select * from user where is_admin = 0";
-            String qry = "select * from user join mentor on user.email = mentor.email";
+            String qry = "";
+
+            if ( year.equals("Overall")){
+                qry = "select * from user join mentor on user.email = mentor.email";
+            }
+            else {
+                qry = "select * from user join mentor on user.email = mentor.email" +
+                        " where year_registered ='" + year + "'";
+
+            }
+
+
+
             PreparedStatement statement = con.prepareStatement(qry);
             ResultSet results = statement.executeQuery();
 
@@ -1959,8 +2243,8 @@ public class CrudService {
 
 
 
-    public int[] [] graphData_IntakeFormMentee() throws JSONException {
-        JSONObject json = userTableMentee();
+    public int[] [] graphData_IntakeFormMentee(String year) throws JSONException {
+        JSONObject json = userTableMentee(year);
 
         JSONArray data = json.getJSONArray("data");
         int female = 0;
@@ -2027,8 +2311,8 @@ public class CrudService {
 
 
 
-    public int[] [] graphData_IntakeFormMentor() throws JSONException {
-        JSONObject json = userTableMentor();
+    public int[] [] graphData_IntakeFormMentor(String year) throws JSONException {
+        JSONObject json = userTableMentor(year);
 
         JSONArray data = json.getJSONArray("data");
         int female = 0;
@@ -2185,8 +2469,8 @@ public class CrudService {
 
 
 
-    public File excelReport_IntakeFormMentee() throws JSONException, FileNotFoundException, UnsupportedEncodingException {
-        int [][] graphData = graphData_IntakeFormMentee();
+    public File excelReport_IntakeFormMentee(String year) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+        int [][] graphData = graphData_IntakeFormMentee(year);
 
         JSONObject jsonLookingForward =  data_MenteeOpenEndReport();
         JSONArray dataLookingForward = jsonLookingForward.getJSONArray("data");
@@ -2301,8 +2585,8 @@ public class CrudService {
 
 
 
-    public File excelReport_IntakeFormMentor() throws JSONException, FileNotFoundException, UnsupportedEncodingException {
-        int [][] graphData = graphData_IntakeFormMentor();
+    public File excelReport_IntakeFormMentor(String year) throws JSONException, FileNotFoundException, UnsupportedEncodingException {
+        int [][] graphData = graphData_IntakeFormMentor(year);
 
         JSONObject jsonMentorReq =  data_MentorOpenEndReport();
         JSONArray dataMentorReq = jsonMentorReq.getJSONArray("data");

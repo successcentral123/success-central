@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: clarkpeterson
+  User: clarkpeterson and Geovanni Roberts
   Date: 10/21/19
   Time: 7:16 PM This is a test for the Commit
   To change this template use File | Settings | File Templates.
@@ -15,6 +15,15 @@
 <jsp:include page="includes/header.jsp">
     <jsp:param name="title" value="Intake Form Report"/>
 </jsp:include>
+<style>
+    #button1 , #button2 {
+        display:inline-block;
+        /**other codes**/
+    }
+    #container{
+        text-align: center;
+    }
+</style>
 <body>
 <jsp:include page="includes/navbar.jsp"/>
 
@@ -37,8 +46,40 @@
                  width="150"/>
         </div>
         <div class="col">
-            <a href="graph_MenteeIntake" class="btn btn-primary mb-2">Mentee Intake Form Report</a>
-            <a href="graph_MentorIntake" class="btn btn-primary mb-2">Mentor Intake Form Report</a>
+
+            <form action="" method="post" id = "myForm">
+                <input type = "hidden" name="year" id="schoolYear" value="" />
+
+
+<%--                <form  action="graph_MenteeIntake" method="post">--%>
+<%--                    <button type="submit"  onclick="passYear()" class="btn btn-primary mb-2">Mentee Intake Form Report</button>--%>
+<%--                    <button form = "mentorIntake" type="submit"  onclick="passYear()" class="btn btn-primary mb-2">Mentor Intake Form Report</button>--%>
+<%--                </form>--%>
+<%--                <form  id="mentorIntake" action="graph_MenteeIntake" method="post">--%>
+
+<%--                </form>--%>
+
+                <button name="mentee" type="submit"  onclick="passYear()" class="btn btn-primary mb-2">Mentee Intake Form Report</button>
+                <button name="mentor" type="submit"  onclick="passYear()" class="btn btn-primary mb-2">Mentor Intake Form Report</button>
+
+
+
+
+<%--                <a href="graph_MenteeIntake" onclick="passYear()" class="btn btn-primary mb-2">Mentee Intake Form Report</a>--%>
+<%--                <a href="graph_MentorIntake" class="btn btn-primary mb-2">Mentor Intake Form Report</a>--%>
+                <select name= "ddlYears" id="ddlYears">
+                    <option value="Overall">Overall</option>
+                </select>
+
+
+<%--                <button  type="submit"  onclick="passYear()" class="btn btn-primary mb-2">Mentor Intake Form Report</button>--%>
+
+
+
+            </form>
+
+
+
         </div>
     </div>
 
@@ -87,5 +128,60 @@
         document.getElementById('subforPie4').hidden = false;
     }
 </script>
+
+
+
+
+<script type="text/javascript">
+    window.onload = function () {
+
+
+        //Reference the DropDownList.
+        var ddlYears = document.getElementById("ddlYears");
+
+        //Determine the Current Year.
+        var currentYear = (new Date()).getFullYear();
+
+        //Loop and add the Year values to DropDownList.
+        for (var i = 2017; i <= currentYear; i++) {
+            var option = document.createElement("OPTION");
+            var year = i.toString()
+            var nextYear = i + 1;
+            nextYear = nextYear.toString().substr(2)
+            year = year+"/"+nextYear;
+            option.innerHTML = year;
+            option.value = year;
+            ddlYears.appendChild(option);
+        }
+
+
+    };
+</script>
+
+
+<script type="text/javascript">
+    function passYear() {
+        var ddlYears = document.getElementById("ddlYears");
+        result = ddlYears.options[ddlYears.selectedIndex].value;
+
+
+        localStorage.setItem("storageName",result);
+
+        document.getElementById("schoolYear").value = result;
+
+        document.forms.myForm.submit();
+    }
+
+
+
+
+
+</script>
+
+
+
+
+
+
 </body>
 </html>

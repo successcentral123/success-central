@@ -20,7 +20,12 @@
     String reg_email = request.getParameter("reg_email");
     String returnPage = request.getParameter("returnPage");
 
+
+
+
+
     if(returnPage.equals("mentor_info")) returnPage +="?mentorEmail="+mentorEmail;
+
 
     if(work.equals("delete")){
         service.deleteMentor(mentor);
@@ -44,6 +49,16 @@
 %>
 <script>
     alert('Mentor <%= mentor.getFirstName()%> <%= mentor.getLastName()%> has been accepted.');
+    location.replace('<%=returnPage %>');
+</script>
+<%
+
+} else if(work.equals("matchStatus")){
+        service.updateMentorMatchingStatus(mentor);
+
+%>
+<script>
+    alert('Mentor <%= mentor.getFirstName()%> <%= mentor.getLastName()%> matching status has been changed.');
     location.replace('<%=returnPage %>');
 </script>
 <%

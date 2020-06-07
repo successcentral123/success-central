@@ -101,13 +101,35 @@
                                         <%}%>
                                     </div>
                                 </div>
-                            <%--Display buttons--%>
+
+                                <%--Display buttons--%>
+
+
+                                <form name="mentor_matchingStatus" action="mentor_update" method="post">
+                                    <input type="hidden" name="mentorEmail" value="<%= mentorEmail %>">
+                                    <input type="hidden" id="matching" name="work" value="">
+                                    <input type="hidden" name="returnPage" value="mentor_info">
+
+                                    <%if(mentor.getMatchingStatus() && mentor.getApproved()){ %>
+                                    <button type="submit" type="button" class="btn btn-sm btn-danger smbutton" onClick="return confirm_matchStatus()">Disable Matching Status</button>
+                                    <%}
+                                    else if(!mentor.getMatchingStatus() && mentor.getApproved()) {%>
+                                    <button type="submit" type="button" class="btn btn-sm btn-success smbutton" onClick="return confirm_matchStatus()">Enable Matching Status</button>
+                                    <%}%>
+                                </form>
+
+
+
+
                                 <div class="my-3">
                                     <form action="mentor_update" name="update_mentor" method="post">
                                         <div>
                                             <input type="hidden" name="mentorEmail" value="<%= mentorEmail %>">
                                             <input type="hidden" id="todo" name="work" value="">
                                             <input type="hidden" name="returnPage" value="mentor_info">
+
+
+
                                             <button type="submit" class="btn btn-sm btn-danger smbutton" name="delete" value="" onClick="return confirm_del()">Delete</button>
                                             <%if((!mentor.getSeniorMentor()) && mentor.getApproved()){ %>
                                             <input type="hidden" name="new_is_senior_mentor" value="1">
@@ -118,6 +140,7 @@
                                             <%}%>
                                             <button type="button" type="button" class="btn btn-sm btn-primary smbutton" onClick="location.href='mentor_list'">To the List</button>
                                         </div>
+
                                     </form>
                                 </div>
                             </div>
@@ -193,6 +216,17 @@
             </div>
         </div>
         <script>
+
+            function confirm_matchStatus(){
+                var result = confirm('Do you really want to change the status of this mentor?');
+                if(result == true) {
+                    document.mentor_matchingStatus.elements['work'].value = 'matchStatus';
+                    console.log("changing match status")
+                } else {
+                    return false;
+                }
+            }
+
             function confirm_del(){
                 var result = confirm('Do you really want to delete this mentor?');
                 if(result == true) {

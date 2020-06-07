@@ -64,8 +64,19 @@
 
 
 </div>
+
+<form action="">
+    <input type="hidden" name="schoolYear" id="schoolYear" value="" />
+</form>
 <script>
+    //document.getElementById('schoolYear').value = localStorage.getItem("storageName");
+
+
+
     <%int[][] graphData = (int[][])request.getAttribute("graph"); %>;
+
+    console.log((localStorage.getItem("storageName")));
+
 </script>
 
 
@@ -73,6 +84,7 @@
 
 
 <script>
+
     var finalData = []
     <%for (int i = 0; i < graphData[0].length; i++ ) {%>
     finalData.push(<%=graphData[0][i]%>);
@@ -122,6 +134,7 @@
 
 
 <script>
+
     var finalData = []
 
     <%for (int i = 0; i < graphData[1].length; i++ ) {%>
@@ -144,7 +157,7 @@
         options: {
             title: {
                 display: true,
-                text: 'Number of Participant per Ethnic Group/Race'
+                text: 'Number of Participants per Ethnic Group/Race'
             },
             tooltips: {
                 callbacks: {

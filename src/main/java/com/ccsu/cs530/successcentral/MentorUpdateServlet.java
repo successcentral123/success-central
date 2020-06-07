@@ -27,6 +27,8 @@ public class MentorUpdateServlet extends HttpServlet {
             String returnPage = req.getParameter("returnPage");
             String reg_email = req.getParameter("reg_email");
 
+
+
             Mentor mentor = crud.getMentor(mentorEmail);
             User user = crud.getUser(mentorEmail);
 
@@ -37,6 +39,8 @@ public class MentorUpdateServlet extends HttpServlet {
             req.setAttribute("user",user);
             req.setAttribute("mentorEmail",mentorEmail);
             req.setAttribute("reg_email",reg_email);
+
+
 
             req.getRequestDispatcher("mentor_update.jsp").forward(req, resp);
         } else {

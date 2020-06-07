@@ -40,12 +40,16 @@
                  width="150"/>
         </div>
         <div class="col">
+
+<%--            <form action="" method="get" name = "ACTION" value="nothing" id = "myForm">--%>
+<%--                <input type = "hidden" name="year" id="schoolYear" value="" />--%>
+
             <legend>Session Information:</legend>
             <% List<Mentee> Mentees = (List<Mentee>) request.getAttribute("Mentees") ;%>
             <!-- Name -->
             <label><span style="color:red">*</span> Student Name:</label>
             <br>
-            <form action="/graph_SessionForm" method="get">
+            <form action="/graph_SessionForm" method="get" >
                 <select class="form-control" name="fullname" id="fullSelect" required="">
                     <option value="Mentee" selected>Mentee</option>
                     <%  for (int i = 0; i < Mentees.size(); i++) {
@@ -56,8 +60,19 @@
                     <% } %>
                 </select>
             <br>
-            <input type="submit" class="btn btn-primary mb-2" value="Session Report" onclick="return menteecheck()">
+            <input type="submit" class="btn btn-primary mb-2" name="ACTION" value="Session Report" onclick="return menteecheck()">
             </form>
+            <form id="selectionform" method="post">
+                <select name= "ddlYears" id="ddlYears" onchange="selectionChange()">
+                    <option value="Overall">Overall</option>
+                    <option value="Overall">Overall</option>
+                </select>
+            </form>
+
+
+
+
+
         </div>
     </div>
 </div>
@@ -78,5 +93,57 @@
         document.getElementById('ccsuLogo').hidden = true;
     }
 </script>
+
+
+
+<script type="text/javascript">
+    window.onload = function () {
+
+
+        //Reference the DropDownList.
+        var ddlYears = document.getElementById("ddlYears");
+
+        //Determine the Current Year.
+        var currentYear = (new Date()).getFullYear();
+
+        //Loop and add the Year values to DropDownList.
+        for (var i = 2017; i <= currentYear; i++) {
+            var option = document.createElement("OPTION");
+            var year = i.toString()
+            var nextYear = i + 1;
+            nextYear = nextYear.toString().substr(2)
+            year = year+"/"+nextYear;
+            option.innerHTML = year;
+            option.value = year;
+            ddlYears.appendChild(option);
+        }
+
+
+    };
+</script>
+
+
+<script type="text/javascript">
+    function passYear() {
+        var ddlYears = document.getElementById("ddlYears");
+        result = ddlYears.options[ddlYears.selectedIndex].value;
+
+
+        localStorage.setItem("storageName",result);
+
+        document.getElementById("schoolYear").value = result;
+
+        document.forms.myForm.submit();
+    }
+
+</script>
+
+<script>
+    function selectionChange(){
+        document.getElementById("selectionform").submit();
+    }
+</script>
+
+
 </body>
 </html>

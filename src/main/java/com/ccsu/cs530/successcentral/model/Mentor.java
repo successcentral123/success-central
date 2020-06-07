@@ -8,6 +8,8 @@ public class Mentor extends User {
     private String forSuccessfulFirstYear;
     private Boolean isApproved;
     private Boolean isSeniorMentor;
+    private Boolean matchingStatus;
+
 
 
 
@@ -71,6 +73,12 @@ public class Mentor extends User {
     public void setMenteeCount(Integer menteeCount) {
         this.menteeCount = menteeCount;
     }
+
+    public Boolean getMatchingStatus(){return this.matchingStatus;}
+
+    public void setMatchingStatus(Boolean matchingStatus){this.matchingStatus = matchingStatus;}
+
+
 
 
 }

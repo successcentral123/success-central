@@ -173,6 +173,14 @@
             <fieldset>
                 <legend>Questionnaire:</legend>
 
+                <!-- Registered Year -->
+                <label><span style="color:red">*</span> Current School Year</label>
+                <select class="form-control" id="registeredYear" name="registeredYear" required="">
+                    <option value="year" id="selectedYear" selected>Starter </option>
+
+                </select>
+                <br />
+
                 <!-- Year -->
                 <label><span style="color:red">*</span> What year are you?</label>
                 <select class="form-control" id="year" name="year" required="">
@@ -457,5 +465,23 @@ function valChecked()
     else return true;
 }
 </script>
+
+<script type="text/javascript">
+    window.onload = function () {
+
+        var ddlYears = document.getElementById("registeredYear");
+        var currentYear = (new Date()).getFullYear();
+        var nextYear = currentYear + 1;
+        nextYear = nextYear.toString().substr(2)
+
+        var yearToChange = document.getElementById("selectedYear");
+        var cY = currentYear.toString()+"/"+nextYear;
+        yearToChange.textContent = cY
+
+
+
+    };
+</script>
+
 </body>
 </html>

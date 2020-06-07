@@ -1,5 +1,6 @@
 package com.ccsu.cs530.successcentral;
 
+import com.ccsu.cs530.successcentral.model.Mentor;
 import com.ccsu.cs530.successcentral.service.CrudService;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,8 @@ public class LoginServlet extends HttpServlet {
                 HttpSession newSession = req.getSession(true);
                 newSession.setAttribute("email", email);
                 newSession.setAttribute("isAdmin", crud.isAdmin(email)?"true":"false");
+                Mentor mentor = crud.getMentor(email);
+                newSession.setAttribute("mentorFullName",mentor.getFirstName()+" "+mentor.getLastName());
                 if (newSession.getAttribute("isAdmin").equals("true")) {
                     resp.sendRedirect("mentor_list");
                 } else {
