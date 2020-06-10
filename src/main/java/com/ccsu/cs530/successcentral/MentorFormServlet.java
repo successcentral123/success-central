@@ -3,6 +3,7 @@ package com.ccsu.cs530.successcentral;
 import com.ccsu.cs530.successcentral.model.Mentor;
 import com.ccsu.cs530.successcentral.service.CrudService;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,6 +76,7 @@ public class MentorFormServlet extends HttpServlet {
             if (req.getParameter("registeredYear") != null) {
                 mentor.setYearRegistered(req.getParameter("registeredYear"));
             }
+
 
 
             if (req.getParameter("year") != null) {

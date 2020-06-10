@@ -461,6 +461,7 @@ function valChecked()
         var yearToChange = document.getElementById("selectedYear");
         var cY = currentYear.toString()+"/"+nextYear;
         yearToChange.textContent = cY
+        document.getElementById("selectedYear").value = cY;
 
 
 

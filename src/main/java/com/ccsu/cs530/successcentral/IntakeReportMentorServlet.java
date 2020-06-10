@@ -29,12 +29,14 @@ public class IntakeReportMentorServlet extends HttpServlet {
             HttpSession session = req.getSession();
             String year = (String) session.getAttribute("year");
 
+
             req.setAttribute("graph", crud.graphData_IntakeFormMentor(year));
             //req.setAttribute("report", crud.excelReport_IntakeFormMentee());
+            req.getRequestDispatcher("graph_MentorIntake.jsp").forward(req, resp);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        req.getRequestDispatcher("graph_MentorIntake.jsp").forward(req, resp);
+        //req.getRequestDispatcher("graph_MentorIntake.jsp").forward(req, resp);
     }
 
 

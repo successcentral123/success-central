@@ -68,6 +68,9 @@ public class MenteeFormServlet extends HttpServlet {
             if (req.getParameter("ccsuid") != null) {
                 mentee.setStudentId(req.getParameter("ccsuid"));
             }
+            if (req.getParameter("registeredYear") != null) {
+                mentee.setYearRegistered(req.getParameter("registeredYear"));
+            }
             if (req.getParameter("year") != null) {
                 mentee.setYear(req.getParameter("year"));
             }

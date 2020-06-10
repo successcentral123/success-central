@@ -64,7 +64,7 @@
             </form>
             <form id="selectionform" method="post">
                 <select name= "ddlYears" id="ddlYears" onchange="selectionChange()">
-                    <option value="Overall">Overall</option>
+                    <option value="Overall" >Overall</option>
                     <option value="Overall">Overall</option>
                 </select>
             </form>
@@ -105,9 +105,14 @@
 
         //Determine the Current Year.
         var currentYear = (new Date()).getFullYear();
+        var lastMonth = (new Date()).getMonth()
+        if(lastMonth < 4){
+            currentYear = currentYear - 1
+        }
+
 
         //Loop and add the Year values to DropDownList.
-        for (var i = 2017; i <= currentYear; i++) {
+        for (var i = 2019; i <= currentYear; i++) {
             var option = document.createElement("OPTION");
             var year = i.toString()
             var nextYear = i + 1;
@@ -122,6 +127,7 @@
     };
 </script>
 
+<% String index = "null"; %>
 
 <script type="text/javascript">
     function passYear() {
@@ -140,9 +146,13 @@
 
 <script>
     function selectionChange(){
+
         document.getElementById("selectionform").submit();
     }
 </script>
+
+
+
 
 
 </body>

@@ -43,7 +43,7 @@ public class CrudService {
                 throw new Exception();
             }
 
-            String qry = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String qry = "INSERT INTO user VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(qry);
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
@@ -61,6 +61,7 @@ public class CrudService {
             statement.setString(14, user.getRace());
             statement.setString(15, user.getGender());
             statement.setString(16, "0"); //USER IS NOT AN ADMIN
+            statement.setString(17,user.getYearRegistered());
 
             statement.executeUpdate();
 
@@ -89,7 +90,7 @@ public class CrudService {
     public void createMentor(Mentor mentor) {
         try {
             // Create the mentor
-            String qry = "INSERT INTO mentor VALUES (?,?,?,?,?,?,?)";
+            String qry = "INSERT INTO mentor VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement statement = con.prepareStatement(qry);
             statement.setString(1, mentor.getEmail());
             statement.setString(2, mentor.getMentorReq());
@@ -98,6 +99,7 @@ public class CrudService {
             statement.setString(5, mentor.getForSuccessfulFirstYear());
             statement.setObject(6, mentor.getApproved());
             statement.setObject(7, mentor.getSeniorMentor());
+            statement.setObject(8,mentor.getMatchingStatus());
 
             statement.executeUpdate();
 
@@ -1732,7 +1734,7 @@ public class CrudService {
 
 
     public JSONObject sessionFormTable(String mentee){
-        System.out.println("There was a problem querying session_form table in databa");
+
 
         JSONObject finalJObject = new JSONObject();
         try {

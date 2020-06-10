@@ -37,12 +37,13 @@ public class IntakeReportServlet extends HttpServlet {
 
             req.setAttribute("graph", crud.graphData_IntakeFormMentee(year));
            // req.setAttribute("report", crud.excelReport_IntakeFormMentee());
+            req.getRequestDispatcher("graph_MenteeIntake.jsp").forward(req, resp);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        req.getRequestDispatcher("graph_MenteeIntake.jsp").forward(req, resp);
+//        req.getRequestDispatcher("graph_MenteeIntake.jsp").forward(req, resp);
     }
 
 

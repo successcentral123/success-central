@@ -29,10 +29,11 @@ public class ReportSessionServlet extends HttpServlet {
 //            String year = (String) session.getAttribute("year");
 
             String action = req.getParameter("ACTION");
-            System.out.println(action);
+
+
 
             if("Session Report".equals(action)){
-                System.out.println("loo kerhereeee");
+
                 List<Mentee> Mentees = crud.getAllMentees();
                 req.setAttribute("Mentees", Mentees);
                 req.getRequestDispatcher("report_session.jsp").forward(req, resp);
@@ -71,14 +72,13 @@ public class ReportSessionServlet extends HttpServlet {
 
         if (req.getSession().getAttribute("email") != null && req.getSession().getAttribute("isAdmin").equals("true")) {
 
-//            HttpSession session = req.getSession();
-//            String year = (String) session.getAttribute("year");
+            HttpSession session = req.getSession();
+
+//            String index = (String) session.getAttribute("year");
             String year = req.getParameter("ddlYears");
 
+
             String action = req.getParameter("ACTION");
-            System.out.println(action);
-            System.out.println("Below should be year value");
-            System.out.println(year);
 
             List<Mentee> Mentees = crud.getAllMenteesByRegisteredYear(year);
             req.setAttribute("Mentees", Mentees);

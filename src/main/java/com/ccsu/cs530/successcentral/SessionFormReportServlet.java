@@ -27,10 +27,11 @@ public class SessionFormReportServlet extends HttpServlet {
         try {
             req.setAttribute("graph", crud.graphData_SessionForm((String) req.getParameter("fullname")));
             req.setAttribute("fullname", (String)req.getParameter("fullname"));
+            req.getRequestDispatcher("graph_SessionForm.jsp").forward(req, resp);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        req.getRequestDispatcher("graph_SessionForm.jsp").forward(req, resp);
+//        req.getRequestDispatcher("graph_SessionForm.jsp").forward(req, resp);
     }
 
 

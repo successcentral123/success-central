@@ -97,7 +97,6 @@ public class MatchingService {
         for (Mentor mentor : mentors) {
 
             if(mentor.getMatchingStatus()){
-                System.out.println(mentor.getMatchingStatus());
                 Match match = new Match();
                 match.setMentee(mentee);
                 match.setMentor(mentor);
@@ -124,14 +123,13 @@ public class MatchingService {
 
         List<Mentee> myMentees = crud.getMyMentees(mentor.getEmail());
         for (Mentee mentee : myMentees) {
-            if(mentor.getMatchingStatus()){
-                Match match = new Match();
-                match.setMentee(mentee);
-                match.setMentor(mentor);
-                match.setCompatibility(evaluateMatch(mentor, mentee));
-                matches.add(match);
+            Match match = new Match();
+            match.setMentee(mentee);
+            match.setMentor(mentor);
+            match.setCompatibility(evaluateMatch(mentor, mentee));
+            matches.add(match);
 
-            }
+
 
         }
 

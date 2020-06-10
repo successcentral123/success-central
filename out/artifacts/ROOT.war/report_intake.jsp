@@ -142,8 +142,13 @@
         //Determine the Current Year.
         var currentYear = (new Date()).getFullYear();
 
+        var lastMonth = (new Date()).getMonth()
+        if(lastMonth < 10){
+            currentYear = currentYear - 1
+        }
+
         //Loop and add the Year values to DropDownList.
-        for (var i = 2017; i <= currentYear; i++) {
+        for (var i = 2019; i <= currentYear; i++) {
             var option = document.createElement("OPTION");
             var year = i.toString()
             var nextYear = i + 1;
