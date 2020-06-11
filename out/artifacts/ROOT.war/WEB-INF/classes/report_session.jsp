@@ -106,7 +106,7 @@
         //Determine the Current Year.
         var currentYear = (new Date()).getFullYear();
         var lastMonth = (new Date()).getMonth()
-        if(lastMonth < 10){
+        if(lastMonth < 4){
             currentYear = currentYear - 1
         }
 

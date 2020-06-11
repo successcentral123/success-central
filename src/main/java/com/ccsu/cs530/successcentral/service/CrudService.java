@@ -6,6 +6,7 @@ import com.ccsu.cs530.successcentral.model.User;
 import com.ccsu.cs530.successcentral.model.SessionForm;
 import com.ccsu.cs530.successcentral.util.DatabaseConnection;
 
+
 import java.io.*;
 import java.net.BindException;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
 
 
 import java.sql.ResultSetMetaData;
@@ -691,12 +693,13 @@ public class CrudService {
         try {
             String qry="";
             if(year.equals("Overall")){
-                qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id ";
+                qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id" +
+                        " order by user.last_name ASC";
 
             }
             else{
                 qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id " +
-                        "where user.year_registered="+"'"+year+"'";
+                        "where user.year_registered="+"'"+year+"' order by user.last_name ASC";
 
             }
 
@@ -742,7 +745,8 @@ public class CrudService {
     public List<Mentee> getAllMentees() {
         List<Mentee> mentees = new ArrayList<>();
         try {
-            String qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id ";
+            //String qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id ";
+            String qry = "SELECT * FROM user NATURAL JOIN mentee JOIN major ON user.major = major.id order by user.last_name ASC";
 
             PreparedStatement statement = this.con.prepareStatement(qry);
             ResultSet results = statement.executeQuery();
@@ -1739,7 +1743,8 @@ public class CrudService {
         JSONObject finalJObject = new JSONObject();
         try {
 
-            String countQry = "select count(*) from session_form where full_name = '" +mentee+"'";
+            //String countQry = "select count(*) from session_form where full_name = '" +mentee+"'";
+            String countQry = "select max(session_number)  from session_form where full_name = '" +mentee+"'";
             PreparedStatement statementx = con.prepareStatement(countQry);
             ResultSet rs = statementx.executeQuery();
             int count = 0;
@@ -1757,31 +1762,32 @@ public class CrudService {
                 qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
 
             }
-            else if(count == 3){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
-
-            }
-            else if(count == 4){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
-            }
-            else if(count == 5){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
-
-            }
-            else if(count == 6){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
-
-            }
-            else if(count == 7){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
-
-            }
-            else if(count == 8){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 7 or session_number = 8)";
-
-            }
+//            else if(count == 3){
+//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
+//
+//            }
+//            else if(count == 4){
+//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
+//            }
+//            else if(count == 5){
+//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
+//
+//            }
+//            else if(count == 6){
+//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
+//
+//            }
+//            else if(count == 7){
+//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
+//
+//            }
+//            else if(count == 8){
+//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 7 or session_number = 8)";
+//
+//            }
             else{
-                qry = "select * from session_form where full_name = '" +mentee+"'";
+                qry = "select * from session_form where full_name = '" +mentee+ "' and (session_number = '"+count+"' or session_number ='"+(count-1)+"')";
+                        //+"'and (session_number = '"+count+"' or session_number = '"+count-1+"')";
             }
 
 
@@ -1899,9 +1905,10 @@ public class CrudService {
             String qry = "";
             if ( year.equals("Overall")){
                 qry = "select * from user join mentee on user.email = mentee.email";
+
             }
             else{
-                qry = "select * from user join mentee on user.email = mentee.email" +
+                qry = "select * from user join mentee on user.email = mentee.email  " +
                         " where year_registered ='" + year+"'";
 
 
@@ -2066,10 +2073,10 @@ public class CrudService {
             String qry = "";
 
             if ( year.equals("Overall")){
-                qry = "select * from user join mentor on user.email = mentor.email";
+                qry = "select * from user join mentor on user.email = mentor.email ";
             }
             else {
-                qry = "select * from user join mentor on user.email = mentor.email" +
+                qry = "select * from user join mentor on user.email = mentor.email " +
                         " where year_registered ='" + year + "'";
 
             }
@@ -2081,6 +2088,7 @@ public class CrudService {
 
             JSONArray jArray = new JSONArray();
             while (results.next()) {
+
 
                 String  email_json=results.getString("email");
                 String  password_json=results.getString("password");
@@ -2248,6 +2256,7 @@ public class CrudService {
     public int[] [] graphData_IntakeFormMentee(String year) throws JSONException {
         JSONObject json = userTableMentee(year);
 
+
         JSONArray data = json.getJSONArray("data");
         int female = 0;
         int male = 0;
@@ -2286,8 +2295,23 @@ public class CrudService {
                 if (temp.getString("race").equalsIgnoreCase("Pacific Islander")) { pacific_Islander++; }
                 if (temp.getString("race").equalsIgnoreCase("Other")) { otherRace++; }
 
-                if (temp.getString("parent_education").equals("1")) { parentEd++; }
-                if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
+                try{
+                    if (temp.getString("parent_education").equals("1")) { parentEd++; }
+                }
+                catch (Exception e){
+                    System.out.println("This mentee had no input for parents education "+e);
+                }
+
+                try{
+                    if (temp.getString("parent_education").equals("0")) { nonParentEd++; }
+
+                }
+                catch (Exception e){
+                    System.out.println("This mentee had no input for parents education "+e);
+
+                }
+
+
 
                 if (temp.getString("year").equals("1")) { freshman++; }
                 if (temp.getString("year").equals("2")) { sophomore++; }

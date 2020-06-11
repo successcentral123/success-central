@@ -26,7 +26,6 @@ public class IntakeReportServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        int[] s = new int[] {60,40};
         try {
 
             HttpSession session = req.getSession();
@@ -36,8 +35,11 @@ public class IntakeReportServlet extends HttpServlet {
 
 
             req.setAttribute("graph", crud.graphData_IntakeFormMentee(year));
+
            // req.setAttribute("report", crud.excelReport_IntakeFormMentee());
-            req.getRequestDispatcher("graph_MenteeIntake.jsp").forward(req, resp);
+            //req.setAttribute("graph", crud.graphData_IntakeFormMentor(year));
+            req.getRequestDispatcher("graph_MentorIntake.jsp").forward(req, resp);
+            //req.getRequestDispatcher("graph_MenteeIntake.jsp").forward(req, resp);
         } catch (JSONException e) {
             e.printStackTrace();
         }

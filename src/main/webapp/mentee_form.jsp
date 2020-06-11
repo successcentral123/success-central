@@ -274,6 +274,7 @@
                             id="exampleRadios5"
                             value="Yes"
                             name="generation"
+                            required=""
                     />
                     <label class="form-check-label" for="exampleRadios5">Yes </label></div>
                 <div class="form-check" >
@@ -283,6 +284,7 @@
                             id="exampleRadios6"
                             value="No"
                             name="generation"
+                            required=""
                     />
                     <label class="form-check-label" for="exampleRadios6"
                     >No </label>
@@ -455,6 +457,11 @@ function valChecked()
 
         var ddlYears = document.getElementById("registeredYear");
         var currentYear = (new Date()).getFullYear();
+        var lastMonth = (new Date()).getMonth()
+        if(lastMonth < 3){
+            currentYear = currentYear - 1
+        }
+
         var nextYear = currentYear + 1;
         nextYear = nextYear.toString().substr(2)
 
