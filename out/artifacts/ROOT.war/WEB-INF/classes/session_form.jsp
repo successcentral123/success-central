@@ -27,11 +27,14 @@
     <% request.getSession().setAttribute("message", null);} %>
 
     <div class="mx-5">
+        <input id="isRefresh" name="isRefresh" type="hidden" value="<%=request.getAttribute("isRefresh")%>"    >
+<%--        <%request.getAttribute("isRefresh");%>--%>
         <h1 class="text-center">Mentorship Session Form</h1>
         <form action="session_form" method="post" onsubmit="return valChecked(this)">
 
             <!-- Basic info -->
             <fieldset>
+
 
                 <legend>Session Information:</legend>
                 <%  List<Mentee> myMentees = (List<Mentee>) request.getAttribute("myMentees") ;
@@ -45,12 +48,14 @@
                 <br />
                 <select class="form-control" name="fullname" id="fullSelect"
                         onchange="refreshpage()" required="">
-                    <option value="Mentee" selected>Mentee</option>
+                    <option value="Mentee" >Mentee</option>
+<%--                    <option value="Mentee" selected>Mentee</option>--%>
                     <%  for (int i = 0; i < myMentees.size(); i++) {
                         String first = myMentees.get(i).getFirstName();
                         String last = myMentees.get(i).getLastName();
                         String full = first + " "+ last;%>
-                    <option value="<%= full %>" <%if(full.equals(request.getAttribute("fullname"))) {%>selected<%}%>><%= full %></option>
+                    <option value="<%= full %>" ><%= full %></option>
+<%--                    <option value="<%= full %>" <%if(full.equals(request.getAttribute("fullname"))) {%>selected<%}%>><%= full %></option>--%>
                     <% } %>
                 </select>
                 <br /><br/>
@@ -397,6 +402,21 @@
         var name = document.getElementById("fullSelect").value
         window.location.href="?fullname="+name
     }
+
+    window.onload = function() {
+        if( document.getElementById("isRefresh").value === "0"){
+            var selItem = "Mentee";
+        }else {
+            var selItem = sessionStorage.getItem("SelItem");
+        }
+        $('#fullSelect').val(selItem);
+    }
+
+    $('#fullSelect').change(function() {
+        var selVal = $(this).val();
+        sessionStorage.setItem("SelItem", selVal);
+    });
+
 </script>
 </body>
 </html>

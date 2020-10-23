@@ -348,16 +348,31 @@ public class CrudService {
     }
 
     // Get a specfic Session From from the DB with a firstname lastname and session#
-    public SessionForm getSessionForm(String fullname, int sessionnumber) {
+    public SessionForm getSessionForm(String fullname, int sessionnumber, String mentorEmail) {
         SessionForm sessionform = new SessionForm();
+        String mentorName = "";
+        try {
+            String qry = "select concat(first_name, ' ' ,last_name) as fullname from user  where email = ? ;";
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setString(1, mentorEmail);
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                mentorName = results.getString("fullname");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not get the mentor name\n" +e);
+        }
         try {
             if (fullname == null) { // todo what about no session number?
                 throw new Exception();
             }
-            String qry = "SELECT * FROM session_form WHERE full_name = ? AND session_number = ?";
+            String qry = "SELECT * FROM session_form WHERE full_name = ? AND session_number = ?" +
+                    " AND mentor = ?";
             PreparedStatement statement = con.prepareStatement(qry);
             statement.setString(1, fullname);
             statement.setInt(2, sessionnumber);
+            statement.setString(3,mentorName);
             ResultSet results = statement.executeQuery();
 
             if (results.next()) {
@@ -411,12 +426,125 @@ public class CrudService {
         return sessionform;
     }
 
+
+
+
+
+
+    public SessionForm getSessionFormAdmin(String fullname, int sessionnumber, String date) {
+        SessionForm sessionform = new SessionForm();
+        try {
+            if (fullname == null) { // todo what about no session number?
+                throw new Exception();
+            }
+            String qry = "SELECT * FROM session_form WHERE full_name = ? AND session_number = ?" +
+                    " AND day = ?";
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setString(1, fullname);
+            statement.setInt(2, sessionnumber);
+            statement.setString(3,date);
+            ResultSet results = statement.executeQuery();
+
+            if (results.next()) {
+//                sessionform.setMentor(getMentor(results.getString("mentor")));
+                sessionform.setMentor(results.getString("mentor"));
+                sessionform.setFullName(results.getString("full_name"));
+//                sessionform.setFirstName(results.getString("first_name"));
+//                sessionform.setLastName(results.getString("last_name"));
+                sessionform.setSessionNum(results.getInt("session_number"));
+                sessionform.setDate(results.getString("day"));
+
+                sessionform.setPreActionOne(results.getString("pre_action_one"));
+                sessionform.setBoolActionOne(results.getBoolean("bool_action_one"));
+                sessionform.setPreActionTwo(results.getString("pre_action_two"));
+                sessionform.setBoolActionTwo(results.getBoolean("bool_action_two"));
+                sessionform.setPreActionThree(results.getString("pre_action_three"));
+                sessionform.setBoolActionThree(results.getBoolean("bool_action_three"));
+                sessionform.setPreActionFour(results.getString("pre_action_four"));
+                sessionform.setBoolActionFour(results.getBoolean("bool_action_four"));
+                sessionform.setPreActionFive(results.getString("pre_action_five"));
+                sessionform.setBoolActionFive(results.getBoolean("bool_action_five"));
+                sessionform.setPreActionSix(results.getString("pre_action_six"));
+                sessionform.setBoolActionSix(results.getBoolean("bool_action_six"));
+
+                sessionform.setScale(results.getInt("scale"));
+
+                sessionform.setCampusInvolement(results.getBoolean("campus_involvement"));
+                sessionform.setMeaningfulRelationships(results.getBoolean("meaningful_relationships"));
+                sessionform.setFinancialManagement(results.getBoolean("financial_management"));
+                sessionform.setOutsideResponsibilities(results.getBoolean("outside_responsibilities"));
+                sessionform.setStudyTimeManagement(results.getBoolean("study_time_management"));
+                sessionform.setAcademicEngagement(results.getBoolean("academic_engagement"));
+                sessionform.setHealthWellness(results.getBoolean("health_wellness"));
+                sessionform.setOther(results.getBoolean("other_bool"));
+                sessionform.setOtherText(results.getString("other_text"));
+
+                sessionform.setIssuesConcerns(results.getString("issues_concerns"));
+                sessionform.setNotesComments(results.getString("notes_comments"));
+
+                sessionform.setFirstActionStep(results.getString("action_one"));
+                sessionform.setSecondActionStep(results.getString("action_two"));
+                sessionform.setThirdActionStep(results.getString("action_three"));
+                sessionform.setFourthActionStep(results.getString("action_four"));
+                sessionform.setFifthActionStep(results.getString("action_five"));
+                sessionform.setSixthActionStep(results.getString("action_six"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("could not get Session Form \n" + e);
+        }
+        return sessionform;
+    }
+
+
+
+
+
+
+
+
+
+
     public int getMaxSessionNumber(String name) {
         int sessionnum = 1;
         try {
             String qry = "SELECT MAX(session_number) FROM session_form WHERE full_name like ?";
             PreparedStatement statement = con.prepareStatement(qry);
             statement.setString(1, name);
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                sessionnum = results.getInt("MAX(session_number)");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not get the session number\n" +e);
+        }
+
+        return sessionnum;
+    }
+
+    public int getMaxSessionNumberX(String name,String mentorEmail) {
+        int sessionnum = 1;
+        String mentorName = "";
+        try {
+            String qry = "select concat(first_name, ' ' ,last_name) as fullname from user  where email = ? ;";
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setString(1, mentorEmail);
+            ResultSet results = statement.executeQuery();
+            if (results.next()) {
+                mentorName = results.getString("fullname");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Could not get the mentor name\n" +e);
+        }
+
+        try {
+            String qry = "SELECT MAX(session_number) FROM session_form WHERE full_name = ? " +
+                    "and mentor = ?";
+            PreparedStatement statement = con.prepareStatement(qry);
+            statement.setString(1, name);
+            statement.setString(2, mentorName);
             ResultSet results = statement.executeQuery();
             if (results.next()) {
                 sessionnum = results.getInt("MAX(session_number)");
@@ -1743,52 +1871,10 @@ public class CrudService {
         JSONObject finalJObject = new JSONObject();
         try {
 
-            //String countQry = "select count(*) from session_form where full_name = '" +mentee+"'";
-            String countQry = "select max(session_number)  from session_form where full_name = '" +mentee+"'";
-            PreparedStatement statementx = con.prepareStatement(countQry);
-            ResultSet rs = statementx.executeQuery();
-            int count = 0;
-            if(rs.next()) //Expecting one row.
-            {
-                count = rs.getInt(1);
-            }
 
-            String qry = "";
-            if(count == 1){
-                qry = "select * from session_form where full_name = '" +mentee+"' and session_number = 1 ";
+            String qry = "select * from session_form where full_name = '" +mentee+ "' and " +
+                    "day= (select max(day) from session_form where full_name = '" +mentee+ "' ) ";
 
-            }
-            else if(count == 2 ){
-                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
-
-            }
-//            else if(count == 3){
-//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 1 or session_number = 2)";
-//
-//            }
-//            else if(count == 4){
-//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
-//            }
-//            else if(count == 5){
-//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 3 or session_number = 4)";
-//
-//            }
-//            else if(count == 6){
-//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
-//
-//            }
-//            else if(count == 7){
-//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 5 or session_number = 6)";
-//
-//            }
-//            else if(count == 8){
-//                qry = "select * from session_form where full_name = '" +mentee+"' and (session_number = 7 or session_number = 8)";
-//
-//            }
-            else{
-                qry = "select * from session_form where full_name = '" +mentee+ "' and (session_number = '"+count+"' or session_number ='"+(count-1)+"')";
-                        //+"'and (session_number = '"+count+"' or session_number = '"+count-1+"')";
-            }
 
 
 

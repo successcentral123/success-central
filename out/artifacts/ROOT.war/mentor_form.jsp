@@ -471,6 +471,11 @@ function valChecked()
 
         var ddlYears = document.getElementById("registeredYear");
         var currentYear = (new Date()).getFullYear();
+        var lastMonth = (new Date()).getMonth()
+        if(lastMonth < 3){
+            currentYear = currentYear - 1
+        }
+
         var nextYear = currentYear + 1;
         nextYear = nextYear.toString().substr(2)
 

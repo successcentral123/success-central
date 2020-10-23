@@ -21,9 +21,10 @@ public class SessionFormInfoServlet extends HttpServlet {
         if (req.getSession().getAttribute("email") != null) {
             String fullname = req.getParameter("fullName");
             int sessionNum = Integer.parseInt(req.getParameter("seshNum"));
+            String date = req.getParameter("date");
 
-
-            SessionForm sessionform = crud.getSessionForm(fullname, sessionNum);
+            String myEmail = (String)req.getSession().getAttribute("email");
+            SessionForm sessionform = crud.getSessionFormAdmin(fullname, sessionNum,date);
 
             // populate the request object to send to the jsp
             req.setAttribute("session_form", sessionform);

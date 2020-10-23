@@ -65,7 +65,7 @@
             <form id="selectionform" method="post">
                 <select name= "ddlYears" id="ddlYears" onchange="selectionChange()">
                     <option value="Overall" >Overall</option>
-                    <option value="Overall">Overall</option>
+<%--                    <option value="Overall">Overall</option>--%>
                 </select>
             </form>
 
@@ -106,7 +106,7 @@
         //Determine the Current Year.
         var currentYear = (new Date()).getFullYear();
         var lastMonth = (new Date()).getMonth()
-        if(lastMonth < 4){
+        if(lastMonth < 3){
             currentYear = currentYear - 1
         }
 

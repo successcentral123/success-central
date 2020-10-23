@@ -29,14 +29,25 @@ public class SessionFormServlet extends HttpServlet {
         List<Mentee> myMentees = crud.getMyMentees(myEmail);
         if (req.getParameter("fullname") != null) {
             String fullname = (String) req.getParameter("fullname");
-            int maxSession = crud.getMaxSessionNumber(fullname);
-            SessionForm preSession = crud.getSessionForm(fullname, maxSession);
+            //int maxSession = crud.getMaxSessionNumber(fullname);
+            int maxSession = crud.getMaxSessionNumberX(fullname,myEmail);
+            SessionForm preSession = crud.getSessionForm(fullname, maxSession,myEmail);
             req.setAttribute("preSession", preSession);
             req.setAttribute("fullname", fullname);
             req.setAttribute("myMentees", myMentees);
         }
         else
             req.setAttribute("myMentees", myMentees);
+
+        if (req.getParameter("fullname") != null && req.getParameter("fullname").equals("Mentee")) {
+            req.setAttribute("isRefresh", 0);
+        }
+        else if(req.getParameter("fullname") == null){
+            req.setAttribute("isRefresh", 0);
+        }
+        else {
+            req.setAttribute("isRefresh", 1);
+        }
         req.getRequestDispatcher("session_form.jsp").forward(req, resp);
     }
 
@@ -53,6 +64,8 @@ public class SessionFormServlet extends HttpServlet {
         sessionform.setMentor(mentorName);
         List<Mentee> menteelist = new ArrayList<>();
         menteelist = crud.getMyMentees(mentorEmail);
+
+        req.setAttribute("isRefresh", 0);
 
 //        if (req.getParameter("firstname") != null) {
 //

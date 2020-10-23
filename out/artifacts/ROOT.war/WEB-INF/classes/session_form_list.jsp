@@ -102,7 +102,7 @@
 <%--                <td><%= sessionform.getLastName() %></td>--%>
 <%--                 todo link for the session number--%>
                 <td scope="row"><a
-                        href="session_form_info?fullName=<%=sessionform.getFullName()%>&seshNum=<%=sessionform.getSessionNum()%>"><%= sessionform.getSessionNum() %></a></td>
+                        href="session_form_info?fullName=<%=sessionform.getFullName()%>&seshNum=<%=sessionform.getSessionNum()%>&date=<%=sessionform.getDate()%>"><%= sessionform.getSessionNum() %></a></td>
                 <td><%=sessionform.getDate()%></td>
             </tr>
             <% } %>

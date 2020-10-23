@@ -143,7 +143,7 @@
         var currentYear = (new Date()).getFullYear();
 
         var lastMonth = (new Date()).getMonth()
-        if(lastMonth < 4){
+        if(lastMonth < 3){
             currentYear = currentYear - 1
         }
 

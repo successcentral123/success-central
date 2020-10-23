@@ -207,7 +207,7 @@
                         var meta = dataset._meta[Object.keys(dataset._meta)[0]];
                         var total = meta.total;
                         var currentValue = dataset.data[tooltipItem.index];
-                        var percentage = parseFloat((currentValue/total*100).toFixed(1));
+                        var percentage = parseFloat((currentValue/5*100).toFixed(1));
                         return currentValue + ' (' + percentage + '%)';
                     },
                     title: function(tooltipItem, data) {
